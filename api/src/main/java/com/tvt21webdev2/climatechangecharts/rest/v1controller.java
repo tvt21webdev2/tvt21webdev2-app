@@ -18,36 +18,6 @@ public class v1controller {
     @Autowired
     private v1repo v1repo; 
 
-    // @GetMapping("/v1")
-    // public List<v1> getData() {
-    //     return v1repo.findAll();
-    // }
-
-    @GetMapping("v1/type/{type}")
-    public List<v1> getByType(@PathVariable String type) {
-        return v1repo.findByType(type);
-    }
-    
-    @GetMapping("v1/location/{location}")
-    public List<v1> getByLocation(@PathVariable String location) {
-        return v1repo.findByLocation(location);
-    }
-
-    @GetMapping("v1/year/{year}")
-    public List<v1> getByYear(@PathVariable String year) {
-        return v1repo.findByYear(year);
-    }
-
-    @GetMapping("v1/search/{type}/{location}")
-    public List<v1> getByQuery(@PathVariable String type, @PathVariable String location) {
-        return v1repo.findByTypeAndLocationOrderByYear(type, location);
-    }
-
-    @GetMapping("v1/search/{type}/{location}/{year}")
-    public List<v1> getByQuery(@PathVariable String type, @PathVariable String location, @PathVariable String year) {
-        return v1repo.findByTypeAndLocationAndYear(type, location, year);
-    }
-
     // http://localhost:8080/v1?type=monthly&location=global&year=2022-01
     @GetMapping("/v1")
     public List<v1> getData(@RequestParam(defaultValue = "empty") String type, @RequestParam(defaultValue = "empty") String location, @RequestParam(defaultValue = "empty") String year) {
