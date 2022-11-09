@@ -23,7 +23,7 @@ public class v1 {
 
     public v1() {}
 
-    public v1(Long id, String year, double anomaly, String type, String location) {
+    public v1(String year, double anomaly, String type, String location) {
         this.year = year;
         this.anomaly = anomaly;
         this.type = type;

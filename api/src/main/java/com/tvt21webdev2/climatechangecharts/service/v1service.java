@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tvt21webdev2.climatechangecharts.data.v1;
-import com.tvt21webdev2.climatechangecharts.repo.v1repo;
+import com.tvt21webdev2.climatechangecharts.repository.v1repo;
 
 @Service
 public class v1service {

@@ -1,4 +1,4 @@
-package com.tvt21webdev2.climatechangecharts.rest;
+package com.tvt21webdev2.climatechangecharts.controller;
 
 import java.util.List;
 
