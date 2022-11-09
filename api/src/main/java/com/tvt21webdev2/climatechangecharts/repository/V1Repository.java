@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.tvt21webdev2.climatechangecharts.data.v1;
 
-public interface v1repo extends JpaRepository<v1, Long> {
+public interface V1Repository extends JpaRepository<v1, Long> {
     
     List<v1> findByType(String type);
 

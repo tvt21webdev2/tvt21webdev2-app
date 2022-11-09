@@ -2,9 +2,12 @@ package com.tvt21webdev2.climatechangecharts.service;
 
 import java.util.List;
 
-import com.tvt21webdev2.climatechangecharts.data.V3;
-import com.tvt21webdev2.climatechangecharts.repo.V3Repository;
+import org.springframework.stereotype.Service;
 
+import com.tvt21webdev2.climatechangecharts.data.V3;
+import com.tvt21webdev2.climatechangecharts.repository.V3Repository;
+
+@Service
 public class V3Service {
 
   private final V3Repository repository;

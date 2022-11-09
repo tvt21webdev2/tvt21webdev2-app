@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tvt21webdev2.climatechangecharts.data.v1;
-import com.tvt21webdev2.climatechangecharts.repository.v1repo;
+import com.tvt21webdev2.climatechangecharts.repository.V1Repository;
 
 @Service
 public class v1service {
 
     @Autowired
-    v1repo v1repo;
+    V1Repository v1repo;
 
     public List<v1> getAll() {
         return v1repo.findAll();

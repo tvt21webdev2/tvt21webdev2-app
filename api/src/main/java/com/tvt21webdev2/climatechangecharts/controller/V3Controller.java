@@ -1,13 +1,15 @@
-package com.tvt21webdev2.climatechangecharts.rest;
+package com.tvt21webdev2.climatechangecharts.controller;
 
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.tvt21webdev2.climatechangecharts.data.V3;
 import com.tvt21webdev2.climatechangecharts.service.V3Service;
 
+@RestController
 public class V3Controller {
 
   private final V3Service service;
