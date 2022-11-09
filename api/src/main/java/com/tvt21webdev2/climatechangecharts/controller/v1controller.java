@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tvt21webdev2.climatechangecharts.data.v1;
-import com.tvt21webdev2.climatechangecharts.service.v1service;
+import com.tvt21webdev2.climatechangecharts.data.V1;
+import com.tvt21webdev2.climatechangecharts.service.V1Service;
 
 @RestController
-public class v1controller {
+public class V1Controller {
 
   @Autowired
-  private v1service v1service;
+  private V1Service V1Service;
 
   // http://localhost:8080/v1?type=monthly&location=global&year=2022-01
   @GetMapping("/v1")

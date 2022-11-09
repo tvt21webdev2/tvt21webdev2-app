@@ -5,36 +5,36 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tvt21webdev2.climatechangecharts.data.v1;
+import com.tvt21webdev2.climatechangecharts.data.V1;
 import com.tvt21webdev2.climatechangecharts.repository.V1Repository;
 
 @Service
-public class v1service {
+public class V1service {
 
     @Autowired
-    V1Repository v1repo;
+    V1Repository V1repo;
 
-    public List<v1> getAll() {
-        return v1repo.findAll();
+    public List<V1> getAll() {
+        return V1repo.findAll();
     }
 
-    public List<v1> getDataByTypeLocationYear(String type, String location, String year) {
-        return v1repo.findByTypeAndLocationAndYear(type, location, year);
+    public List<V1> getDataByTypeLocationYear(String type, String location, String year) {
+        return V1repo.findByTypeAndLocationAndYear(type, location, year);
     }
 
-    public List<v1> getDataByTypeAndLocation(String type, String location) {
-        return v1repo.findByTypeAndLocationOrderByYear(type, location);
+    public List<V1> getDataByTypeAndLocation(String type, String location) {
+        return V1repo.findByTypeAndLocationOrderByYear(type, location);
     }
 
-    public List<v1> getByType(String type) {
-        return v1repo.findByType(type);
+    public List<V1> getByType(String type) {
+        return V1repo.findByType(type);
     }
     
-    public List<v1> getByLocation(String location) {
-        return v1repo.findByLocation(location);
+    public List<V1> getByLocation(String location) {
+        return V1repo.findByLocation(location);
     }
 
-    public List<v1> getByYear(String year) {
-        return v1repo.findByYear(year);
+    public List<V1> getByYear(String year) {
+        return V1repo.findByYear(year);
     }
 }
