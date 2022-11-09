@@ -1,4 +1,4 @@
-package com.tvt21webdev2.climatechangecharts.repo;
+package com.tvt21webdev2.climatechangecharts.repository;
 
 import java.util.List;
 
