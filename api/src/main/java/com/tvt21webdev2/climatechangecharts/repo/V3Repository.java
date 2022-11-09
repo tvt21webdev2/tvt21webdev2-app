@@ -1,0 +1,14 @@
+package com.tvt21webdev2.climatechangecharts.repo;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.tvt21webdev2.climatechangecharts.data.V3;
+
+public interface V3Repository extends JpaRepository<V3, Long> {
+
+    List<V3> findByType(String type);
+
+}
