@@ -1,4 +1,4 @@
-package com.tvt21webdev2.climatechangecharts;
+package com.tvt21webdev2.climatechangecharts.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
