@@ -16,27 +16,27 @@ public class V1Service {
     this.repository = repository;
   }
 
-  public List<V1> getAll() {
+  public List<V1> findAll() {
     return repository.findAll();
   }
 
-  public List<V1> getDataByTypeLocationYear(String type, String location, String year) {
+  public List<V1> findDataByTypeLocationYear(String type, String location, String year) {
     return repository.findByTypeAndLocationAndYear(type, location, year);
   }
 
-  public List<V1> getDataByTypeAndLocation(String type, String location) {
+  public List<V1> findDataByTypeAndLocation(String type, String location) {
     return repository.findByTypeAndLocationOrderByYear(type, location);
   }
 
-  public List<V1> getByType(String type) {
+  public List<V1> findByType(String type) {
     return repository.findByType(type);
   }
 
-  public List<V1> getByLocation(String location) {
+  public List<V1> findByLocation(String location) {
     return repository.findByLocation(location);
   }
 
-  public List<V1> getByYear(String year) {
+  public List<V1> findByYear(String year) {
     return repository.findByYear(year);
   }
 }

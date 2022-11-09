@@ -16,11 +16,11 @@ public class V2Service {
     this.repository = repository;
   }
 
-  public List<V2> getAll() {
+  public List<V2> findAll() {
     return repository.findAll();
   }
 
-  public List<V2> getDataByYear(int year) {
+  public List<V2> findDataByYear(int year) {
     return repository.findByYear(year);
   }
 }

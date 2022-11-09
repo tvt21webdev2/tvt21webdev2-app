@@ -21,7 +21,7 @@ public class V2Controller {
   @GetMapping("/v2")
   public List<V2> getData(@RequestParam(defaultValue = "empty") String year) {
     if (!year.equals("empty"))
-      return service.getDataByYear(Integer.parseInt(year));
-    return service.getAll();
+      return service.findDataByYear(Integer.parseInt(year));
+    return service.findAll();
   }
 }
