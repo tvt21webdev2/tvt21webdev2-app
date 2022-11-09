@@ -23,15 +23,15 @@ public class V1Controller {
   public List<V1> getData(@RequestParam(defaultValue = "empty") String type,
       @RequestParam(defaultValue = "empty") String location, @RequestParam(defaultValue = "empty") String year) {
     if (!type.equals("empty") && !location.equals("empty") && !year.equals("empty"))
-      return service.getDataByTypeLocationYear(type, location, year);
+      return service.findDataByTypeLocationYear(type, location, year);
     if (!type.equals("empty") && !location.equals("empty"))
-      return service.getDataByTypeAndLocation(type, location);
+      return service.findDataByTypeAndLocation(type, location);
     if (!type.equals("empty"))
-      return service.getByType(type);
+      return service.findByType(type);
     if (!location.equals("empty"))
-      return service.getByLocation(location);
+      return service.findByLocation(location);
     if (!year.equals("empty"))
-      return service.getByYear(year);
-    return service.getAll();
+      return service.findByYear(year);
+    return service.findAll();
   }
 }
