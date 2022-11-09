@@ -52,7 +52,7 @@ public class V3 {
   }
 
   public String getType() {
-    return year;
+    return type;
   }
 
   public void setType(String type) {
