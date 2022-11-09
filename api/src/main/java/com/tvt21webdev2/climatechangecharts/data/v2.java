@@ -7,44 +7,45 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class v2 {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name="year")
-    private int year;
-    @Column(name="temp_anomaly_k")
-    private double anomaly;
+public class V2 {
 
-    public v2() {}
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  @Column(name = "year")
+  private int year;
+  @Column(name = "temp_anomaly_k")
+  private double anomaly;
 
-    public v2(int year, double anomaly) {
-        this.year = year;
-        this.anomaly = anomaly;
-    }
+  public V2() {
+  }
 
-    public Long getId() {
-        return this.id;
-    }
+  public V2(int year, double anomaly) {
+    this.year = year;
+    this.anomaly = anomaly;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return this.id;
+  }
 
-    public int getYear() {
-        return this.year;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
+  public int getYear() {
+    return this.year;
+  }
 
-    public double getAnomaly() {
-        return this.anomaly;
-    }
+  public void setYear(int year) {
+    this.year = year;
+  }
 
-    public void setAnomaly(double anomaly) {
-        this.anomaly = anomaly;
-    }
+  public double getAnomaly() {
+    return this.anomaly;
+  }
+
+  public void setAnomaly(double anomaly) {
+    this.anomaly = anomaly;
+  }
 }

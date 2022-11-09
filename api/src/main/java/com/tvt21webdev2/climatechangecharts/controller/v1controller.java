@@ -2,34 +2,36 @@ package com.tvt21webdev2.climatechangecharts.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tvt21webdev2.climatechangecharts.data.v1;
-import com.tvt21webdev2.climatechangecharts.service.v1service;
+import com.tvt21webdev2.climatechangecharts.data.V1;
+import com.tvt21webdev2.climatechangecharts.service.V1Service;
 
 @RestController
-public class v1controller {
+public class V1Controller {
 
-  @Autowired
-  private v1service v1service;
+  private final V1Service service;
+
+  public V1Controller(V1Service service) {
+    this.service = service;
+  }
 
   // http://localhost:8080/v1?type=monthly&location=global&year=2022-01
   @GetMapping("/v1")
-  public List<v1> getData(@RequestParam(defaultValue = "empty") String type,
+  public List<V1> getData(@RequestParam(defaultValue = "empty") String type,
       @RequestParam(defaultValue = "empty") String location, @RequestParam(defaultValue = "empty") String year) {
     if (!type.equals("empty") && !location.equals("empty") && !year.equals("empty"))
-      return v1service.getDataByTypeLocationYear(type, location, year);
+      return service.getDataByTypeLocationYear(type, location, year);
     if (!type.equals("empty") && !location.equals("empty"))
-      return v1service.getDataByTypeAndLocation(type, location);
+      return service.getDataByTypeAndLocation(type, location);
     if (!type.equals("empty"))
-      return v1service.getByType(type);
+      return service.getByType(type);
     if (!location.equals("empty"))
-      return v1service.getByLocation(location);
+      return service.getByLocation(location);
     if (!year.equals("empty"))
-      return v1service.getByYear(year);
-    return v1service.getAll();
+      return service.getByYear(year);
+    return service.getAll();
   }
 }

@@ -2,39 +2,41 @@ package com.tvt21webdev2.climatechangecharts.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tvt21webdev2.climatechangecharts.data.v1;
+import com.tvt21webdev2.climatechangecharts.data.V1;
 import com.tvt21webdev2.climatechangecharts.repository.V1Repository;
 
 @Service
-public class v1service {
+public class V1Service {
 
-    @Autowired
-    V1Repository v1repo;
+  private final V1Repository repository;
 
-    public List<v1> getAll() {
-        return v1repo.findAll();
-    }
+  public V1Service(final V1Repository repository) {
+    this.repository = repository;
+  }
 
-    public List<v1> getDataByTypeLocationYear(String type, String location, String year) {
-        return v1repo.findByTypeAndLocationAndYear(type, location, year);
-    }
+  public List<V1> getAll() {
+    return repository.findAll();
+  }
 
-    public List<v1> getDataByTypeAndLocation(String type, String location) {
-        return v1repo.findByTypeAndLocationOrderByYear(type, location);
-    }
+  public List<V1> getDataByTypeLocationYear(String type, String location, String year) {
+    return repository.findByTypeAndLocationAndYear(type, location, year);
+  }
 
-    public List<v1> getByType(String type) {
-        return v1repo.findByType(type);
-    }
-    
-    public List<v1> getByLocation(String location) {
-        return v1repo.findByLocation(location);
-    }
+  public List<V1> getDataByTypeAndLocation(String type, String location) {
+    return repository.findByTypeAndLocationOrderByYear(type, location);
+  }
 
-    public List<v1> getByYear(String year) {
-        return v1repo.findByYear(year);
-    }
+  public List<V1> getByType(String type) {
+    return repository.findByType(type);
+  }
+
+  public List<V1> getByLocation(String location) {
+    return repository.findByLocation(location);
+  }
+
+  public List<V1> getByYear(String year) {
+    return repository.findByYear(year);
+  }
 }

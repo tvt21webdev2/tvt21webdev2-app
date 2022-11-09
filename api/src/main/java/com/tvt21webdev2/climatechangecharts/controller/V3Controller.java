@@ -14,7 +14,7 @@ public class V3Controller {
 
   private final V3Service service;
 
-  public V3Controller(V3Service service) {
+  public V3Controller(final V3Service service) {
     this.service = service;
   }
 
