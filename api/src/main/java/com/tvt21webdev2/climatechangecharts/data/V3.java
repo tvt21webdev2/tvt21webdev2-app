@@ -8,20 +8,20 @@ import javax.persistence.Id;
 
 @Entity
 public class V3 {
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Column(name="year")
+  @Column(name = "year")
   private String year;
-  @Column(name="average")
+  @Column(name = "average")
   private double average;
-  @Column(name="type")
+  @Column(name = "type")
   private String type;
 
+  public V3() {
+  }
 
-  public V3() {}
-  
   public V3(String year, double average) {
     this.year = year;
     this.average = average;
@@ -52,7 +52,7 @@ public class V3 {
   }
 
   public String getType() {
-    return year;
+    return type;
   }
 
   public void setType(String type) {

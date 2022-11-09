@@ -23,4 +23,5 @@ public class V2Service {
   public List<V2> findDataByYear(int year) {
     return repository.findByYear(year);
   }
+
 }
