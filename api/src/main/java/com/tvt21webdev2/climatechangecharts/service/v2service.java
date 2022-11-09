@@ -5,20 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tvt21webdev2.climatechangecharts.data.v2;
-import com.tvt21webdev2.climatechangecharts.repository.v2repo;
+import com.tvt21webdev2.climatechangecharts.data.V2;
+import com.tvt21webdev2.climatechangecharts.repository.V2Repository;
 
 @Service
-public class v2service {
+public class V2Service {
     
     @Autowired
-    v2repo v2repo;
+    V2Repository v2repo;
 
-    public List<v2> getAll() {
+    public List<V2> getAll() {
         return v2repo.findAll();
     }
 
-    public List<v2> getDataByYear(int year) {
+    public List<V2> getDataByYear(int year) {
         return v2repo.findByYear(year);
     }
 }

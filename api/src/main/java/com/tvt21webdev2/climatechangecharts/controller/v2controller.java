@@ -12,14 +12,14 @@ import com.tvt21webdev2.climatechangecharts.service.v2service;
 
 @RestController
 public class v2controller {
-    
-    @Autowired
-    v2service v2service;
 
-    @GetMapping("/v2")
-    public List<v2> getData(@RequestParam(defaultValue = "empty") String year) {
-        if(!year.equals("empty"))
-            return v2service.getDataByYear(Integer.parseInt(year));
-        return v2service.getAll();
-    }
+  @Autowired
+  v2service v2service;
+
+  @GetMapping("/v2")
+  public List<v2> getData(@RequestParam(defaultValue = "empty") String year) {
+    if (!year.equals("empty"))
+      return v2service.getDataByYear(Integer.parseInt(year));
+    return v2service.getAll();
+  }
 }
