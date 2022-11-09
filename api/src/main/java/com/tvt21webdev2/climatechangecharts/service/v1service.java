@@ -39,4 +39,5 @@ public class V1Service {
   public List<V1> getByYear(String year) {
     return repository.findByYear(year);
   }
+
 }

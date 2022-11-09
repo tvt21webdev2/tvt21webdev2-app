@@ -22,4 +22,5 @@ public interface V1Repository extends JpaRepository<V1, Long> {
 
   @Query("SELECT v FROM v1 v WHERE v.year>=?1")
   List<V1> findByYear(String year);
+
 }
