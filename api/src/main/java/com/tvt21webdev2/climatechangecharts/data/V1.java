@@ -70,4 +70,5 @@ public class V1 {
   public void setLocation(String location) {
     this.location = location;
   }
+  
 }

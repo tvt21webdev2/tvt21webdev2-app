@@ -7,22 +7,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class V2 {
-
+public class V4 {
+  
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Column(name = "year")
+  @Column(name = "mean_air_age_year_a_d")
   private int year;
-  @Column(name = "temp_anomaly_k")
-  private double anomaly;
+  @Column(name = "co2_mixing_ratio_ppm")
+  private double co2;
+  @Column(name = "set")
+  private int set;
 
-  public V2() {
-  }
+  public V4() {}
 
-  public V2(int year, double anomaly) {
+  public V4(int year, double co2, int set) {
     this.year = year;
-    this.anomaly = anomaly;
+    this.co2 = co2;
+    this.set = set;
   }
 
   public Long getId() {
@@ -41,12 +43,20 @@ public class V2 {
     this.year = year;
   }
 
-  public double getAnomaly() {
-    return this.anomaly;
+  public double getCo2() {
+    return this.co2;
   }
 
-  public void setAnomaly(double anomaly) {
-    this.anomaly = anomaly;
+  public void setCo2(double co2) {
+    this.co2 = co2;
+  }
+
+  public int getSet() {
+    return this.set;
+  }
+
+  public void setSet(int set) {
+    this.set = set;
   }
   
 }

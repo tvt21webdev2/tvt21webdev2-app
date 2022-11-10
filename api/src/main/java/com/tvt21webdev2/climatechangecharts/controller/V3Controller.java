@@ -25,4 +25,5 @@ public class V3Controller {
       return service.findByType(type);
     return service.findAll();
   }
+  
 }
