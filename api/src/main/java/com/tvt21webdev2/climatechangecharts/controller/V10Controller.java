@@ -24,4 +24,5 @@ public class V10Controller {
       return service.findDataByYear(Integer.parseInt(year));
     return service.findAll();
   }
+  
 }
