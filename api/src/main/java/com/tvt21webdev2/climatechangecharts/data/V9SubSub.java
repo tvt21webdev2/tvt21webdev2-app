@@ -59,4 +59,5 @@ public class V9SubSub {
   public void setGreenhouseEmissions(double greenhouseEmissions) {
     this.greenhouseEmissions = greenhouseEmissions;
   }
+  
 }

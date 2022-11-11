@@ -9,17 +9,19 @@ import com.tvt21webdev2.climatechangecharts.repository.V10Repository;
 
 @Service
 public class V10Service {
-    private final V10Repository repository;
+  
+  private final V10Repository repository;
 
-    public V10Service(final V10Repository repository) {
-        this.repository = repository;
-    }
+  public V10Service(final V10Repository repository) {
+    this.repository = repository;
+  }
 
-    public List<V10> findAll() {
-        return repository.findAll();
-    }
+  public List<V10> findAll() {
+    return repository.findAll();
+  }
 
-    public List<V10> findDataByYear(int year) {
-        return repository.findByYear(year);
-    }
+  public List<V10> findDataByYear(int year) {
+    return repository.findByYear(year);
+  }
+
 }
