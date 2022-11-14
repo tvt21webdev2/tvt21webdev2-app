@@ -24,4 +24,5 @@ public class V7Controller {
       return service.findByYearBp(Integer.parseInt(yearBp));
     return service.findAll();
   }
+  
 }

@@ -16,6 +16,6 @@ public interface V7Repository extends JpaRepository<V7, Long> {
   List<V7> findAll();
 
   @Query("SELECT v FROM V7 v WHERE v.year_bp >= ?1 ORDER BY v.year_bp")
-  List<V7> findByYearBp(int year);
+  List<V7> findByYearBp(int yearBp);
 
 }

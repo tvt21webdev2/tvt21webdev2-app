@@ -20,8 +20,8 @@ public class V7Service {
     return repository.findAll();
   }
 
-  public List<V7> findByYearBp(int year) {
-    return repository.findByYearBp(year);
+  public List<V7> findByYearBp(int yearBp) {
+    return repository.findByYearBp(yearBp);
   }
 
 }
