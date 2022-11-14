@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 public class V9 {
+  
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "sector_id")
