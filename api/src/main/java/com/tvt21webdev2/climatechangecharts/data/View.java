@@ -18,6 +18,26 @@ public class View {
   private String url;
   private boolean v1, v2, v3, v4, v5, v6, v7, v8, v9, v10;
 
+  public View() {
+  }
+
+  public View(Long id, Long userId, String url, boolean v1, boolean v2, boolean v3, boolean v4, boolean v5, boolean v6,
+      boolean v7, boolean v8, boolean v9, boolean v10) {
+    this.id = id;
+    this.userId = userId;
+    this.url = url;
+    this.v1 = v1;
+    this.v2 = v2;
+    this.v3 = v3;
+    this.v4 = v4;
+    this.v5 = v5;
+    this.v6 = v6;
+    this.v7 = v7;
+    this.v8 = v8;
+    this.v9 = v9;
+    this.v10 = v10;
+  }
+
   public Long getId() {
     return id;
   }
