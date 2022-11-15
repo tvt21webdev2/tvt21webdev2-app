@@ -20,8 +20,4 @@ public class V9Service {
     return repository.findAll();
   }
 
-  public List<V9> findBySector(String sector) {
-    return repository.findBySector(sector);
-  }
-
 }

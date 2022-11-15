@@ -9,7 +9,5 @@ import com.tvt21webdev2.climatechangecharts.data.V9;
 
 @Repository
 public interface V9Repository extends JpaRepository<V9, Long> {
-
-  List<V9> findBySector(String sector);
-
+  List<V9> findAll();
 }

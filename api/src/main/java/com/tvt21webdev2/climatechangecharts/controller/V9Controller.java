@@ -8,7 +8,6 @@ import com.tvt21webdev2.climatechangecharts.service.V9Service;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class V9Controller {
@@ -20,9 +19,7 @@ public class V9Controller {
   }
 
   @GetMapping("/v9")
-  public List<V9> getData(@RequestParam(defaultValue = "empty") String sector) {
-    if (!sector.equals("empty"))
-      return service.findBySector(sector);
+  public List<V9> getData() {
     return service.findAll();
   }
 
