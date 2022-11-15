@@ -12,10 +12,10 @@ import com.tvt21webdev2.climatechangecharts.data.V7;
 public interface V7Repository extends JpaRepository<V7, Long> {
 
   @Override
-  @Query("SELECT v FROM V7 v ORDER BY v.year_bp")
+  @Query("SELECT v FROM V7 v ORDER BY v.yearBp")
   List<V7> findAll();
 
-  @Query("SELECT v FROM V7 v WHERE v.year_bp >= ?1 ORDER BY v.year_bp")
+  @Query("SELECT v FROM V7 v WHERE v.yearBp >= ?1 ORDER BY v.yearBp")
   List<V7> findByYearBp(int yearBp);
 
 }

@@ -19,9 +19,9 @@ public class V8Controller {
   }
 
   @GetMapping("/v8")
-  public List<V8> getData(@RequestParam(defaultValue = "empty") String year) {
-    if (!year.equals("empty"))
-      return service.findByYear(Integer.parseInt(year));
+  public List<V8> getData(@RequestParam(defaultValue = "empty") String country) {
+    if (!country.equals("empty"))
+      return service.findByCountry(country);
     return service.findAll();
   }
 }

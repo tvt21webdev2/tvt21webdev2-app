@@ -37,7 +37,7 @@ public class V8 {
     return this.year;
   }
 
-  public void setYearBp(int year) {
+  public void setYear(int year) {
     this.year = year;
   }
 

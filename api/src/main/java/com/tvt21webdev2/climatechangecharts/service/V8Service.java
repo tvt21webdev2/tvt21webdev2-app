@@ -20,8 +20,8 @@ public class V8Service {
     return repository.findAll();
   }
 
-  public List<V8> findByYear(int year) {
-    return repository.findByYear(year);
+  public List<V8> findByCountry(String country) {
+    return repository.findByCountry(country);
   }
 
 }
