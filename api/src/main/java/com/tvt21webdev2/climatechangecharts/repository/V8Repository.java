@@ -15,7 +15,7 @@ public interface V8Repository extends JpaRepository<V8, Long> {
   @Query("SELECT v FROM V8 v ORDER BY v.year")
   List<V8> findAll();
 
-  @Query("SELECT v FROM V8 v WHERE v.country = ?1 ORDER BY v.country")
+  @Query("SELECT v FROM V8 v WHERE v.country = ?1 ORDER BY v.year")
   List<V8> findByCountry(String country);
 
 }
