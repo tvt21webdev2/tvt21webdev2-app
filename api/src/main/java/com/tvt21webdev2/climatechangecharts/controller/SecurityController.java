@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tvt21webdev2.climatechangecharts.data.User;
 import com.tvt21webdev2.climatechangecharts.service.SecurityService;
+import com.tvt21webdev2.climatechangecharts.service.UserService;
 
 @RestController
 public class SecurityController {
-  
+
   private final SecurityService service;
 
-  public SecurityController(final SecurityService service) {
+  public SecurityController(final UserService userService, final SecurityService service) {
     this.service = service;
   }
 
@@ -29,11 +30,16 @@ public class SecurityController {
 
   @PostMapping("/login")
   public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-    String token = service.login(username, password);
+    User user = service.checkIfUserExists(username);
+    if (user != null) {
+      if (!service.validateUser(user, password)) {
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+      }
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
-    if (token == null)
-      return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-      
+    String token = service.generateJwt(user);
     return new ResponseEntity<>(token, HttpStatus.OK);
   }
 

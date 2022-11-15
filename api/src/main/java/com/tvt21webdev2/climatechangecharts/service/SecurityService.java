@@ -36,22 +36,27 @@ public class SecurityService {
     return u;
   }
 
-  public String login(String username, String password) {
+  public User checkIfUserExists(String username) {
     List<User> users = repository.findByUsername(username);
-
     try {
       User user = users.size() > 0 ? users.get(0) : null;
-
-      if (user == null || !service.matches(password, user.getPassword()))
-        return null;
-
-      Algorithm alg = Algorithm.HMAC256(jwtKey);
-      return JWT.create().withSubject(user.getUsername()).sign(alg);
+      return user;
     } catch (IndexOutOfBoundsException e) {
       e.printStackTrace();
+      return null;
     }
+  }
 
-    return null;
+  public boolean validateUser(User user, String password) {
+    if (!service.matches(password, user.getPassword())) {
+      return false;
+    }
+    return true;
+  }
+
+  public String generateJwt(User user) {
+    Algorithm alg = Algorithm.HMAC256(jwtKey);
+    return JWT.create().withSubject(user.getUsername()).sign(alg);
   }
 
   public String validateJwt(String jwtToken) {
