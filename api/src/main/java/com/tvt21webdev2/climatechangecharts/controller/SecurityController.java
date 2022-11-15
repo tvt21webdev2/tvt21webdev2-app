@@ -24,7 +24,7 @@ public class SecurityController {
     User u = service.register(username, password);
 
     if (u == null)
-      return new ResponseEntity<>("Username or password not valid", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("Username already exists", HttpStatus.BAD_REQUEST);
     return new ResponseEntity<>(u.getUsername() + " registered succesfully", HttpStatus.OK);
   }
 
