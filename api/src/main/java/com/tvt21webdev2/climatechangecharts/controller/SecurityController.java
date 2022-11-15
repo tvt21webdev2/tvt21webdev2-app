@@ -21,7 +21,10 @@ public class SecurityController {
   @PostMapping("/register")
   public ResponseEntity<String> register(@RequestParam String username, @RequestParam String password) {
     User u = service.register(username, password);
-    return new ResponseEntity<>(u.getUsername() + "registered", HttpStatus.OK);
+
+    if (u == null)
+      return new ResponseEntity<>("Username or password not valid", HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(u.getUsername() + " registered succesfully", HttpStatus.OK);
   }
 
   @PostMapping("/login")
