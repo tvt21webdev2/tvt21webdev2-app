@@ -14,7 +14,7 @@ public class V7 {
   private Long id;
   @Column(name = "year_bp")
   private int yearBp;
-  @Column(name = "estimate_97_5%")
+  @Column(name = "estimate_50")
   private double tempChange;
 
   public V7() {
