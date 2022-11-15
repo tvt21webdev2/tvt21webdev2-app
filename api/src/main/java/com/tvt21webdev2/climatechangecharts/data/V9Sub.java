@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "v9_sub")
 public class V9Sub {
+  
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "sub_sector_id")
