@@ -30,10 +30,10 @@ public class SecurityController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-    User user = service.checkIfUserExists(username);
+  public ResponseEntity<String> login(@RequestBody User paramUser) {
+    User user = service.checkIfUserExists(paramUser.getUsername());
     if (user != null) {
-      if (!service.validateUser(user, password)) {
+      if (!service.validateUser(user, paramUser.getPassword())) {
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
       }
     } else {
