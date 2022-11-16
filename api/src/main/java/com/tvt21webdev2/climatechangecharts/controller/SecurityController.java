@@ -3,29 +3,30 @@ package com.tvt21webdev2.climatechangecharts.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tvt21webdev2.climatechangecharts.data.User;
 import com.tvt21webdev2.climatechangecharts.service.SecurityService;
-import com.tvt21webdev2.climatechangecharts.service.UserService;
 
 @RestController
 public class SecurityController {
 
   private final SecurityService service;
 
-  public SecurityController(final UserService userService, final SecurityService service) {
+  public SecurityController(final SecurityService service) {
     this.service = service;
   }
 
   @PostMapping("/register")
-  public ResponseEntity<String> register(@RequestParam String username, @RequestParam String password) {
-    User u = service.register(username, password);
+  public ResponseEntity<String> saveUser(@RequestBody User user) {
 
-    if (u == null)
+    User userAfterSave = service.saveUser(user);
+
+    if (userAfterSave == null)
       return new ResponseEntity<>("Username already exists", HttpStatus.BAD_REQUEST);
-    return new ResponseEntity<>(u.getUsername() + " registered succesfully", HttpStatus.OK);
+    return new ResponseEntity<>(userAfterSave.getUsername() + " registered succesfully", HttpStatus.OK);
   }
 
   @PostMapping("/login")

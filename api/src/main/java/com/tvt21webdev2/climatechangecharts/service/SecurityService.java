@@ -27,13 +27,13 @@ public class SecurityService {
     this.service = service;
   }
 
-  public User register(String username, String password) {
-    if (repository.existsByUsername(username))
+  public User saveUser(User user) {
+    if (repository.existsByUsername(user.getUsername()))
       return null;
 
-    User u = new User(username, service.encode(password));
-    repository.save(u);
-    return u;
+    user.setPassword(service.encode(user.getPassword()));
+    repository.save(user);
+    return user;
   }
 
   public User checkIfUserExists(String username) {
