@@ -26,7 +26,7 @@ public class SecurityController {
 
     if (userAfterSave == null)
       return new ResponseEntity<>("Username already exists", HttpStatus.BAD_REQUEST);
-    return new ResponseEntity<>(userAfterSave.getUsername() + " registered succesfully", HttpStatus.OK);
+    return new ResponseEntity<>(userAfterSave.getUsername() + " registered successfully", HttpStatus.CREATED);
   }
 
   @PostMapping("/login")
