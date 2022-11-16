@@ -53,7 +53,6 @@ public class SecurityService {
       e.printStackTrace();
       return false;
     }
-
   }
 
   public String generateJwt(User user) {
