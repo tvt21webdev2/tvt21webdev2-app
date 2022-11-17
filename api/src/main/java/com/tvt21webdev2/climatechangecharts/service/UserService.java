@@ -29,8 +29,8 @@ public class UserService {
     return repository.findById(id);
   }
 
-  public boolean deleteUser(String username) {
-    return repository.deleteUser(username);
+  public void deleteByUsername(String username) {
+    repository.deleteByUsername(username);
   }
 
 }

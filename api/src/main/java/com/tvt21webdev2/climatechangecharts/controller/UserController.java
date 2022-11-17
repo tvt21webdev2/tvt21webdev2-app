@@ -35,9 +35,13 @@ public class UserController {
 
   @PostMapping("/user/delete")
   public ResponseEntity<String> deleteUser(@RequestBody Map<String, String> userMap) {
-    if(secService.validateJwt(userMap.get("token")) == null || !secService.validateJwt(userMap.get("token")).equals(userMap.get("username"))) {
-      return new ResponseEntity<>("Token/username not valid", HttpStatus.UNAUTHORIZED);
+    if (secService.validateJwt(userMap.get("token")) == null) {
+      return new ResponseEntity<>("Token not valid", HttpStatus.UNAUTHORIZED);
     }
+    if (!secService.validateJwt(userMap.get("token")).equals(userMap.get("username"))) {
+      return new ResponseEntity<>("Username not valid", HttpStatus.UNAUTHORIZED);
+    }
+    service.deleteByUsername(userMap.get("username"));
     return new ResponseEntity<>("User deleted", HttpStatus.OK);
   }
 }

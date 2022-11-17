@@ -69,7 +69,7 @@ public class SecurityService {
     } catch (JWTVerificationException e) {
       e.printStackTrace();
     }
-
+    
     return null;
   }
 }
