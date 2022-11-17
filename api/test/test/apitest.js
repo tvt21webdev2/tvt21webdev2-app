@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const url = "http://localhost:8080";
 
 describe("api tests", () => {
-  let username = "username" + Math.round(Math.random() * 100);
+  let username = "username" + Math.round(Math.random() * 1000);
   let psword = "Password123!?";
 
   describe("register a new user", () => {
