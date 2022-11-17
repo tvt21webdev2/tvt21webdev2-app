@@ -1,6 +1,7 @@
 package com.tvt21webdev2.climatechangecharts.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +34,8 @@ public class UserController {
   }
 
   @PostMapping("/user/delete")
-  public ResponseEntity<String> deleteUser(@RequestBody String token, String username) {
-    if(secService.validateJwt(token) == null || !secService.validateJwt(token).equals(username)) {
+  public ResponseEntity<String> deleteUser(@RequestBody Map<String, String> userMap) {
+    if(secService.validateJwt(userMap.get("token")) == null || !secService.validateJwt(userMap.get("token")).equals(userMap.get("username"))) {
       return new ResponseEntity<>("Token/username not valid", HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity<>("User deleted", HttpStatus.OK);
