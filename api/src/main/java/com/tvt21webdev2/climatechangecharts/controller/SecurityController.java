@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tvt21webdev2.climatechangecharts.data.User;
 import com.tvt21webdev2.climatechangecharts.service.SecurityService;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 public class SecurityController {
@@ -20,14 +22,21 @@ public class SecurityController {
 
   @PostMapping("/register")
   public ResponseEntity<String> saveUser(@RequestBody User user) {
+    Pattern passwordRegex = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+    Pattern usernameRegex = Pattern.compile("^[a-zA-Z0-9]{4,16}$");
+    Matcher passwordMatcher = passwordRegex.matcher(user.getPassword());
+    Matcher usernameMatcher = usernameRegex.matcher(user.getUsername());
+    if (!usernameMatcher.find()) {
+      return new ResponseEntity<>("Username should contain 4 to 16 alphanumeric characters", HttpStatus.BAD_REQUEST);
+    }
     if (service.checkIfUserExists(user)) {
       return new ResponseEntity<>("Username already exists", HttpStatus.BAD_REQUEST);
     }
-    //if (password is asdasd)
-    //if (username is asdsad)
-
-    User userAfterSave = service.saveUser(user);
-    return new ResponseEntity<>(userAfterSave.getUsername() + " registered successfully", HttpStatus.CREATED);
+    if (!passwordMatcher.find()) {
+      return new ResponseEntity<>("Password should contain at least 8 characters and at least 1 letter and number", HttpStatus.BAD_REQUEST);
+    }
+    service.saveUser(user);
+    return new ResponseEntity<>(user.getUsername() + " registered successfully", HttpStatus.CREATED);
   }
 
   @PostMapping("/login")
