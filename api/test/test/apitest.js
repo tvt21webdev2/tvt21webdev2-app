@@ -13,7 +13,7 @@ describe("api tests", () => {
   let token;
 
   describe("register a new user", () => {
-    it("should reject request if username has under 3 characters", (done) => {
+    it("should reject request if username has less than 3 characters", (done) => {
       chai
         .request(url)
         .post("/register")
@@ -27,7 +27,7 @@ describe("api tests", () => {
           done();
         });
     });
-    it("should reject request if username has over 16 characters", (done) => {
+    it("should reject request if username has more than 16 characters", (done) => {
       chai
         .request(url)
         .post("/register")
@@ -188,7 +188,7 @@ describe("api tests", () => {
         });
     });
   });
-  
+
   describe("delete user", () => {
     it("should reject request if token is right but username is wrong", (done) => {
       chai
@@ -196,7 +196,7 @@ describe("api tests", () => {
         .post("/user/delete")
         .send({
           username: "idontexistinyourdb",
-          token: token
+          token: token,
         })
         .end((err, res) => {
           expect(err).to.be.null;
@@ -238,7 +238,7 @@ describe("api tests", () => {
         .post("/user/delete")
         .send({
           username: username,
-          token: token
+          token: token,
         })
         .end((err, res) => {
           expect(err).to.be.null;
@@ -247,5 +247,4 @@ describe("api tests", () => {
         });
     });
   });
-
 });
