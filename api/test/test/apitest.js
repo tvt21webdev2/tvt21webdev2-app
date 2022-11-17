@@ -10,6 +10,7 @@ const url = "http://localhost:8080";
 describe("api tests", () => {
   let username = "username" + Math.round(Math.random() * 1000);
   let psword = "Password123!?";
+  let token;
 
   describe("register a new user", () => {
     it("should reject request if username has under 3 characters", (done) => {
@@ -180,10 +181,71 @@ describe("api tests", () => {
           password: psword,
         })
         .end((err, res) => {
+          token = res.text;
           expect(err).to.be.null;
           expect(res).to.have.status(200);
           done();
         });
     });
   });
+  
+  describe("delete user", () => {
+    it("should reject request if token is right but username is wrong", (done) => {
+      chai
+        .request(url)
+        .post("/user/delete")
+        .send({
+          username: "idontexistinyourdb",
+          token: token
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          done();
+        });
+    });
+    it("should reject request if username is right but token is wrong", (done) => {
+      chai
+        .request(url)
+        .post("/user/delete")
+        .send({
+          username: username,
+          token: "dfhsfdhgsagsde",
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          done();
+        });
+    });
+    it("should reject request if username does not exist in database", (done) => {
+      chai
+        .request(url)
+        .post("/user/delete")
+        .send({
+          username: "idontexistinyourdb",
+          token: token,
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          done();
+        });
+    });
+    it("should return status ok if user deleted successfully", (done) => {
+      chai
+        .request(url)
+        .post("/user/delete")
+        .send({
+          username: username,
+          token: token
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          done();
+        });
+    });
+  });
+
 });
