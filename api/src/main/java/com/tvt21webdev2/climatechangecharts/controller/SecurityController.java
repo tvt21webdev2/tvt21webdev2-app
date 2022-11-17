@@ -22,7 +22,7 @@ public class SecurityController {
 
   @PostMapping("/register")
   public ResponseEntity<String> saveUser(@RequestBody User user) {
-    Pattern passwordRegex = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+    Pattern passwordRegex = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$");
     Pattern usernameRegex = Pattern.compile("^[a-zA-Z0-9]{4,16}$");
     Matcher passwordMatcher = passwordRegex.matcher(user.getPassword());
     Matcher usernameMatcher = usernameRegex.matcher(user.getUsername());
@@ -33,7 +33,7 @@ public class SecurityController {
       return new ResponseEntity<>("Username already exists", HttpStatus.BAD_REQUEST);
     }
     if (!passwordMatcher.find()) {
-      return new ResponseEntity<>("Password should contain at least 8 characters and at least 1 letter and number", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("Password should contain at least 8 characters, including one uppercase letter, one lowercase letter and one number", HttpStatus.BAD_REQUEST);
     }
     service.saveUser(user);
     return new ResponseEntity<>(user.getUsername() + " registered successfully", HttpStatus.CREATED);
