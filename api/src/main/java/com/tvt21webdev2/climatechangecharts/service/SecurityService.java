@@ -27,10 +27,9 @@ public class SecurityService {
     this.service = service;
   }
 
-  public User saveUser(User user) {
+  public void saveUser(User user) {
     user.setPassword(service.encode(user.getPassword()));
     repository.save(user);
-    return user;
   }
 
   public boolean checkIfUserExists(User user) {
