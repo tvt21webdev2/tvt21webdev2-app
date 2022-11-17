@@ -16,4 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   boolean existsByUsername(String username);
 
+  @Query("DELETE FROM User v WHERE v.username = ?1")
+  boolean deleteUser(String username);
+
 }
