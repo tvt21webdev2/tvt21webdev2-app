@@ -27,31 +27,32 @@ public class SecurityService {
     this.service = service;
   }
 
-  public User register(String username, String password) {
-    if (repository.existsByUsername(username))
-      return null;
-
-    User u = new User(username, service.encode(password));
-    repository.save(u);
-    return u;
+  public User saveUser(User user) {
+    user.setPassword(service.encode(user.getPassword()));
+    repository.save(user);
+    return user;
   }
 
-  public User checkIfUserExists(String username) {
-    List<User> users = repository.findByUsername(username);
+  public boolean checkIfUserExists(User user) {
+    if (repository.existsByUsername(user.getUsername())) {
+      return true;
+    }
+    return false;
+  }
+
+  public boolean validateUser(User user) {
+
+    List<User> users = repository.findByUsername(user.getUsername());
     try {
-      User user = users.size() > 0 ? users.get(0) : null;
-      return user;
+      User userFromRepo = users.size() > 0 ? users.get(0) : null;
+      if (userFromRepo == null || !service.matches(user.getPassword(), userFromRepo.getPassword())) {
+        return false;
+      }
+      return true;
     } catch (IndexOutOfBoundsException e) {
       e.printStackTrace();
-      return null;
-    }
-  }
-
-  public boolean validateUser(User user, String password) {
-    if (!service.matches(password, user.getPassword())) {
       return false;
     }
-    return true;
   }
 
   public String generateJwt(User user) {
