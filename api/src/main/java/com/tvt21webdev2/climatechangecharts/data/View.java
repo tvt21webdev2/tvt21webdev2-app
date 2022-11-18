@@ -19,12 +19,15 @@ public class View {
   @Column(name = "url")
   private String url;
   private boolean v1, v2, v3, v4, v5, v6, v7, v8, v9, v10;
-
+  @Column(name = "description")
+  private String description;
+  @Column(name = "stacked")
+  private boolean stacked;
   public View() {
   }
 
   public View(Long id, Long userId, String url, boolean v1, boolean v2, boolean v3, boolean v4, boolean v5, boolean v6,
-      boolean v7, boolean v8, boolean v9, boolean v10) {
+              boolean v7, boolean v8, boolean v9, boolean v10, String description, boolean stacked) {
     this.id = id;
     this.userId = userId;
     this.url = url;
@@ -38,6 +41,8 @@ public class View {
     this.v8 = v8;
     this.v9 = v9;
     this.v10 = v10;
+    this.description = description;
+    this.stacked = stacked;
   }
 
   public Long getId() {
@@ -142,6 +147,22 @@ public class View {
 
   public void setV10(boolean v10) {
     this.v10 = v10;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public boolean isStacked() {
+    return stacked;
+  }
+
+  public void setStacked(boolean stacked) {
+    this.stacked = stacked;
   }
 
   public String createUrl() {
