@@ -32,4 +32,8 @@ public class ViewService {
     view.setUrl(view.createUrl());
     repository.save(view);
   }
+
+  public void deleteById(Long id) {
+    repository.deleteById(id);
+  }
 }

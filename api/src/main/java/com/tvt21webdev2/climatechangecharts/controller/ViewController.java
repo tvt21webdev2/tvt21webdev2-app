@@ -38,4 +38,10 @@ public class ViewController {
     return new ResponseEntity<>(view.getUrl() + " created successfully", HttpStatus.OK);
   }
 
+  @PostMapping("/view/delete")
+  public ResponseEntity<String> deleteView(@RequestParam(defaultValue = "empty") String id) {
+    
+    service.deleteById(Long.parseLong(id));
+    return new ResponseEntity<>("View deleted", HttpStatus.OK);
+  }
 }
