@@ -2,6 +2,7 @@ package com.tvt21webdev2.climatechangecharts.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ public class V1Controller {
   }
 
   // http://localhost:8080/v1?type=monthly&location=global&year=2022-01
+  @CrossOrigin(origins = "http://localhost:3000")
   @GetMapping("/v1")
   public List<V1> getData(@RequestParam(defaultValue = "empty") String type,
       @RequestParam(defaultValue = "empty") String location, @RequestParam(defaultValue = "empty") String year) {
