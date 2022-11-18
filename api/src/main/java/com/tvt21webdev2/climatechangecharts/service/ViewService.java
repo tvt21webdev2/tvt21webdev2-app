@@ -29,6 +29,7 @@ public class ViewService {
   }
 
   public void saveView(View view) {
+    view.setUrl(view.createUrl());
     repository.save(view);
   }
 }
