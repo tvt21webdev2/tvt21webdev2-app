@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Chart } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
+import { DateTime } from 'luxon'
 
 const urlAnnualGlobal = 'http://localhost:8080/v1?type=annual&location=global'
 const urlAnnualNorthern = 'http://localhost:8080/v1?type=annual&location=northern'
@@ -59,6 +60,7 @@ export default function V1() {
         temp.push(element)
       });
       setV1DataMonthlyGlobal(temp)
+      console.log(temp);
     }).catch(err => {
       console.log(err);
     })
@@ -88,84 +90,84 @@ export default function V1() {
 
   const data = {
     datasets: [
-      {
-        label: "Annual global",
-        data: [...v1DataAnnualGlobal],
-        borderColor: "rgb(0, 0, 0)",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        xAxisID: "x",
-        yAxisID: "y",
-        parsing: {
-          xAxisKey: "year",
-          yAxisKey: "anomaly",
-        },
-        pointRadius: 1,
-      },
+      // {
+      //   label: "Annual global",
+      //   data: [...v1DataAnnualGlobal],
+      //   borderColor: "rgb(0, 0, 0)",
+      //   backgroundColor: "rgba(0, 0, 0, 0.5)",
+      //   xAxisID: "x",
+      //   yAxisID: "y",
+      //   parsing: {
+      //     xAxisKey: "year",
+      //     yAxisKey: "anomaly",
+      //   },
+      //   pointRadius: 1,
+      // },
       {
         label: "Monthly global",
         data: [...v1DataMonthlyGlobal],
         borderColor: "rgb(0, 0, 0)",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        xAxisID: "x",
-        yAxisID: "y",
+        xAxisID: "xAxis",
+        yAxisID: "yAxis",
         parsing: {
           xAxisKey: "year",
           yAxisKey: "anomaly",
         },
         pointRadius: 1,
       },
-      {
-        label: "Annual northern",
-        data: [...v1DataAnnualNorthern],
-        borderColor: "rgb(255, 0, 0)",
-        backgroundColor: "rgba(255, 0, 0, 0.3)",
-        xAxisID: "x",
-        yAxisID: "y",
-        parsing: {
-          xAxisKey: "year",
-          yAxisKey: "anomaly",
-        },
-        pointRadius: 1,
-      },
-      {
-        label: "Monthly northern",
-        data: [...v1DataMonthlyNorthern],
-        borderColor: "rgb(255, 0, 0)",
-        backgroundColor: "rgba(255, 0, 0, 0.3)",
-        xAxisID: "x",
-        yAxisID: "y",
-        parsing: {
-          xAxisKey: "year",
-          yAxisKey: "anomaly",
-        },
-        pointRadius: 1,
-      },
-      {
-        label: "Annual southern",
-        data: [...v1DataAnnualSouthern],
-        borderColor: "rgb(0, 0, 255)",
-        backgroundColor: "rgba(0, 0, 255, 0.3)",
-        xAxisID: "x",
-        yAxisID: "y",
-        parsing: {
-          xAxisKey: "year",
-          yAxisKey: "anomaly",
-        },
-        pointRadius: 1,
-      },
-      {
-        label: "Monthly southern",
-        data: [...v1DataMonthlySouthern],
-        borderColor: "rgb(0, 0, 255)",
-        backgroundColor: "rgba(0, 0, 255, 0.3)",
-        xAxisID: "x",
-        yAxisID: "y",
-        parsing: {
-          xAxisKey: "year",
-          yAxisKey: "anomaly",
-        },
-        pointRadius: 1,
-      },
+      // {
+      //   label: "Annual northern",
+      //   data: [...v1DataAnnualNorthern],
+      //   borderColor: "rgb(255, 0, 0)",
+      //   backgroundColor: "rgba(255, 0, 0, 0.3)",
+      //   xAxisID: "x",
+      //   yAxisID: "y",
+      //   parsing: {
+      //     xAxisKey: "year",
+      //     yAxisKey: "anomaly",
+      //   },
+      //   pointRadius: 1,
+      // },
+      // {
+      //   label: "Monthly northern",
+      //   data: [...v1DataMonthlyNorthern],
+      //   borderColor: "rgb(255, 0, 0)",
+      //   backgroundColor: "rgba(255, 0, 0, 0.3)",
+      //   xAxisID: "x",
+      //   yAxisID: "y",
+      //   parsing: {
+      //     xAxisKey: "year",
+      //     yAxisKey: "anomaly",
+      //   },
+      //   pointRadius: 1,
+      // },
+      // {
+      //   label: "Annual southern",
+      //   data: [...v1DataAnnualSouthern],
+      //   borderColor: "rgb(0, 0, 255)",
+      //   backgroundColor: "rgba(0, 0, 255, 0.3)",
+      //   xAxisID: "x",
+      //   yAxisID: "y",
+      //   parsing: {
+      //     xAxisKey: "year",
+      //     yAxisKey: "anomaly",
+      //   },
+      //   pointRadius: 1,
+      // },
+      // {
+      //   label: "Monthly southern",
+      //   data: [...v1DataMonthlySouthern],
+      //   borderColor: "rgb(0, 0, 255)",
+      //   backgroundColor: "rgba(0, 0, 255, 0.3)",
+      //   xAxisID: "x",
+      //   yAxisID: "y",
+      //   parsing: {
+      //     xAxisKey: "year",
+      //     yAxisKey: "anomaly",
+      //   },
+      //   pointRadius: 1,
+      // },
     ],
   };
 
@@ -181,20 +183,25 @@ export default function V1() {
       },
     },
     scales: {
-      y: {
+      yAxis: {
         type: "linear",
         display: true,
         position: "right",
       },
-      x: {
+      xAxis: [ {
+        display: true,
         type: 'time',
         time: {
+          parser: 'YYYY-MM',
+          tooltipFormat: 'YYYY MMM',
           unit: 'year',
+          unitStepSize: 1,
           displayFormats: {
-            year: 'MMM YYYY'
+            'day': 'MM/YYYY'
           }
         }
       }
+    ],
     },
   };
 
