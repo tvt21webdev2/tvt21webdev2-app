@@ -1,5 +1,7 @@
 package com.tvt21webdev2.climatechangecharts.data;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -140,6 +142,12 @@ public class View {
 
   public void setV10(boolean v10) {
     this.v10 = v10;
+  }
+
+  public String createUrl() {
+    UUID uuid = UUID.randomUUID();
+    String urlString = uuid.toString();
+    return urlString;
   }
 
 }
