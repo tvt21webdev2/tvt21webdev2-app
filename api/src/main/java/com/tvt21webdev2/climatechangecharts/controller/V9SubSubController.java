@@ -2,6 +2,7 @@ package com.tvt21webdev2.climatechangecharts.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tvt21webdev2.climatechangecharts.data.V9SubSub;
 import com.tvt21webdev2.climatechangecharts.service.V9SubSubService;
 
+@CrossOrigin
 @RestController
 public class V9SubSubController {
   

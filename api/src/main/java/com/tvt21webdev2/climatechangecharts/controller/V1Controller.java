@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tvt21webdev2.climatechangecharts.data.V1;
 import com.tvt21webdev2.climatechangecharts.service.V1Service;
 
+@CrossOrigin
 @RestController
 public class V1Controller {
 
