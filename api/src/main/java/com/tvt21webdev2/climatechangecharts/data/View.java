@@ -145,9 +145,8 @@ public class View {
   }
 
   public String createUrl() {
-    String baseURL = "http://localhost:8080";
     UUID uuid = UUID.randomUUID();
-    String urlString = baseURL + "/" + uuid;
+    String urlString = uuid.toString();
     return urlString;
   }
 
