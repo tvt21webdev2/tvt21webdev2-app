@@ -1,5 +1,6 @@
 package com.tvt21webdev2.climatechangecharts.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tvt21webdev2.climatechangecharts.data.V6;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
+@CrossOrigin
 @RestController
 public class V6Controller {
 
