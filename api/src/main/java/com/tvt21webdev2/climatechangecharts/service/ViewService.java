@@ -28,4 +28,7 @@ public class ViewService {
     return repository.findByUrl(url);
   }
 
+  public void saveView(View view) {
+    repository.save(view);
+  }
 }
