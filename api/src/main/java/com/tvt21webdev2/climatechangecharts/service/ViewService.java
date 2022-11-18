@@ -28,4 +28,12 @@ public class ViewService {
     return repository.findByUrl(url);
   }
 
+  public void saveView(View view) {
+    view.setUrl(view.createUrl());
+    repository.save(view);
+  }
+
+  public void deleteById(Long id) {
+    repository.deleteById(id);
+  }
 }
