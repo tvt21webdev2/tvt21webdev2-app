@@ -32,7 +32,7 @@ public class ViewController {
     return service.findAll();
   }
 
-  @PostMapping("/createview")
+  @PostMapping("/view/create")
   public ResponseEntity<String> createView(@RequestBody View view) {
     service.saveView(view);
     return new ResponseEntity<>(view.getUrl() + " created successfully", HttpStatus.OK);
