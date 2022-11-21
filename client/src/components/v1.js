@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Chart } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
+import "chartjs-adapter-luxon";
 // import { DateTime } from 'luxon'
 
 const urlAnnualGlobal = 'http://localhost:8080/v1?type=annual&location=global'
@@ -124,27 +125,14 @@ export default function V1() {
   const data = {
     datasets: [
       {
-        label: "2000 year temperatures",
-        data: v2Data,
-        borderColor: "rgba(255, 0, 0, 1)",
-        backgroundColor: "rgba(255, 0, 0, 0.2)",
-        xAxisID: "date2k",
-        yAxisID: "temp",
-        parsing: {
-          xAxisKey: "year",
-          yAxisKey: "anomaly",
-        },
-        pointRadius: 2,
-      },
-      {
         label: "Monthly global",
         data: v1DataMonthlyGlobal,
         borderColor: "rgba(0, 0, 0, 0.5)",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        xAxisID: "date",
-        yAxisID: "temp",
+        // xAxisID: "date",
+        // yAxisID: "temp",
         parsing: {
-          xAxisKey: "parsedDate",
+          xAxisKey: "year",
           yAxisKey: "anomaly",
         },
         pointRadius: 2,
@@ -154,10 +142,10 @@ export default function V1() {
         data: v1DataMonthlyNorthern,
         borderColor: "rgba(0, 0, 255, 0.5)",
         backgroundColor: "rgba(0, 0, 255, 0.4)",
-        xAxisID: "date",
-        yAxisID: "temp",
+        // xAxisID: "date",
+        // yAxisID: "temp",
         parsing: {
-          xAxisKey: "parsedDate",
+          xAxisKey: "year",
           yAxisKey: "anomaly",
         },
         pointRadius: 2,
@@ -167,10 +155,10 @@ export default function V1() {
         data: v1DataMonthlySouthern,
         borderColor: "rgba(255, 0, 0, 0.5)",
         backgroundColor: "rgba(255, 0, 0, 0.4)",
-        xAxisID: "date",
-        yAxisID: "temp",
+        // xAxisID: "date",
+        // yAxisID: "temp",
         parsing: {
-          xAxisKey: "parsedDate",
+          xAxisKey: "year",
           yAxisKey: "anomaly",
         },
         pointRadius: 2,
@@ -180,10 +168,10 @@ export default function V1() {
         data: v1DataAnnualGlobal,
         borderColor: "rgba(0, 0, 0, 0.3)",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        xAxisID: "date",
-        yAxisID: "temp",
+        // xAxisID: "date",
+        // yAxisID: "temp",
         parsing: {
-          xAxisKey: "parsedDate",
+          xAxisKey: "year",
           yAxisKey: "anomaly",
         },
         pointRadius: 2,
@@ -193,10 +181,10 @@ export default function V1() {
         data: v1DataAnnualNorthern,
         borderColor: "rgba(0, 0, 255, 0.5)",
         backgroundColor: "rgba(0, 0, 255, 0.4)",
-        xAxisID: "date",
-        yAxisID: "temp",
+        // xAxisID: "date",
+        // yAxisID: "temp",
         parsing: {
-          xAxisKey: "parsedDate",
+          xAxisKey: "year",
           yAxisKey: "anomaly",
         },
         pointRadius: 2,
@@ -206,10 +194,23 @@ export default function V1() {
         data: v1DataAnnualSouthern,
         borderColor: "rgba(255, 0, 0, 0.5)",
         backgroundColor: "rgba(255, 0, 0, 0.4)",
-        xAxisID: "date",
-        yAxisID: "temp",
+        // xAxisID: "date",
+        // yAxisID: "temp",
         parsing: {
-          xAxisKey: "parsedDate",
+          xAxisKey: "year",
+          yAxisKey: "anomaly",
+        },
+        pointRadius: 2,
+      },
+      {
+        label: "2000 year temperatures",
+        data: v2Data,
+        borderColor: "rgba(255, 0, 0, 1)",
+        backgroundColor: "rgba(255, 0, 0, 0.2)",
+        // xAxisID: "xdate2k",
+        // yAxisID: "temp2k",
+        parsing: {
+          xAxisKey: "year",
           yAxisKey: "anomaly",
         },
         pointRadius: 2,
@@ -232,20 +233,43 @@ export default function V1() {
       },
     },
     scales: {
-      temp: {
-        type: "linear",
-        display: true,
-        position: "right",
+      x: {
+        type: "time",
+        time: {
+          unit: "year",
+        },
+        position: 'bottom',
+        title: {
+          display: true,
+          text: "Date",
+        },
       },
-      // date: {
+      y: {
+        type: "linear",
+        position: "right",
+        title: {
+          display: true,
+          text: "Temperature change",
+        },
+      },
+      // y: {
+      //   type: "linear",
+      //   display: true,
+      //   position: "right",
+      //   title: {
+      //     display: true,
+      //     text: "Temperature change",
+      //   },
+      // },
+      // x: {
+      //   // type: "linear",
       //   display: true,
       //   position: 'bottom',
+      //   title: {
+      //     display: true,
+      //     text: "Date",
+      //   },
       // },
-      date2k: {
-        type: "linear",
-        display: true,
-        position: "bottom",
-      },
     },
   };
 
@@ -257,7 +281,7 @@ export default function V1() {
     )
   } else {
     return (
-      <div style={{ width: "1500px" }}>
+      <div style={{ width: "1000px" }}>
         <Line options={options} data={data}/>
       </div>
     )
