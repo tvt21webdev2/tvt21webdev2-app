@@ -107,8 +107,7 @@ export default function V1() {
       .then(response => {
         let temp = []
         response.data.forEach(element => {
-          // let parsed = new Date(element.year).toDateString().split(' ')
-          // element.parsedDate = parsed[1] + ' ' + parsed[3]
+          element.year = element.year + "-01"
           temp.push(element)
         });
         setV2Data(temp)
@@ -236,7 +235,7 @@ export default function V1() {
       x: {
         type: "time",
         time: {
-          unit: "year",
+          unit: "month",
         },
         position: 'bottom',
         title: {
