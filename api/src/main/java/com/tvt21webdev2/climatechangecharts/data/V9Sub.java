@@ -10,15 +10,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "v9_sub")
 public class V9Sub {
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "sub_sector_id")
   private Long id;
-  @Column(name = "sector_id")
-  private Long sectorId;
-  @Column(name = "sub_sector")
-  private String subSector;
+  @Column(name = "belongs_to")
+  private Long belongsTo;
+  @Column(name = "label")
+  private String label;
   @Column(name = "share_of_global_greenhouse_gas_emissions_perc")
   private double emissionsPercentage;
 
@@ -33,20 +32,20 @@ public class V9Sub {
     this.id = id;
   }
 
-  public Long getSectorId() {
-    return sectorId;
+  public Long getBelongsTo() {
+    return belongsTo;
   }
 
-  public void setSectorId(Long sectorId) {
-    this.sectorId = sectorId;
+  public void setBelongsTo(Long belongsTo) {
+    this.belongsTo = belongsTo;
   }
 
-  public String getSubSector() {
-    return subSector;
+  public String getLabel() {
+    return label;
   }
 
-  public void setSubSector(String subSector) {
-    this.subSector = subSector;
+  public void setLabel(String label) {
+    this.label = label;
   }
 
   public double getEmissionsPercentage() {
@@ -56,5 +55,5 @@ public class V9Sub {
   public void setEmissionsPercentage(double emissionsPercentage) {
     this.emissionsPercentage = emissionsPercentage;
   }
-  
+
 }
