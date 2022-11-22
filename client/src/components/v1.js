@@ -116,8 +116,6 @@ export default function V1() {
     }
   }, [])
   
-  console.log(v2Data);
-  
   const data = {
     datasets: [
       {
@@ -218,18 +216,18 @@ export default function V1() {
           pinch: {
             enabled: true
           },
-          mode: 'xy',
+          mode: 'x',
         }
       },
       title: {
         display: true,
-        text: "Global historical surface temperature anomalies from January 1850 onwards",
+        text: "Global historical surface temperature anomalies from January 1850 onwards and Northern Hemisphere 2,000-year temperature reconstruction",
       },
     },
     scales: {
       x: {
         ticks: {
-          min: '0001',
+          min: 'tammi 17'
         },
         type: "time",
         time: {
@@ -260,7 +258,7 @@ export default function V1() {
     )
   } else {
     return (
-      <div style={{ width: "1000px" }}>
+      <div>
         <Line options={options} data={data}/>
       </div>
     )
