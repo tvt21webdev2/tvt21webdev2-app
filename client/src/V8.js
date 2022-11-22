@@ -1,0 +1,83 @@
+import axios from "axios";
+import {useState, useEffect} from "react";
+import {Line} from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
+function V8() {
+  const [data, setData] = useState({});
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    (async function () {
+      const response = await axios.get("http://localhost:8080/v8");
+      setData(formatData(response.data));
+      setLoaded(true);
+    })();
+  }, []);
+
+  function formatData(data) {
+    const countries = [...new Set(data.map(item => item.country))];
+    const years = [...new Set(data.map(item => item.year))];
+
+    return {
+      labels: years,
+      datasets: countries.map(country => {
+        return {
+          label: country,
+          data: data.filter(item => country === item.country).map(item => item.emissions),
+          borderColor: randomizeColor(),
+          backgroundColor: randomizeColor(),
+        }
+      })
+    }
+  }
+
+  function randomizeColor() {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    return "rgb(" + r + "," + g + "," + b + ")";
+  }
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "asdgfafgsdfg",
+      },
+    },
+    scales: {
+      co2: {
+        type: "linear",
+        display: true,
+        position: "left",
+      },
+    },
+  };
+
+  return (
+    <div>
+      {loaded &&
+        <Line data={data} options={options}/>
+      }
+    </div>
+  );
+}
+
+export default V8;
