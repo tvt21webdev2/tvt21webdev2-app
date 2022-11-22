@@ -19,7 +19,7 @@ public class V9SubSub {
   @Column(name = "label")
   private String label;
   @Column(name = "share_of_global_greenhouse_gas_emissions_perc")
-  private double greenhouseEmissions;
+  private double emissionsPercentage;
 
   public V9SubSub() {
   }
@@ -48,12 +48,12 @@ public class V9SubSub {
     this.label = label;
   }
 
-  public double getGreenhouseEmissions() {
-    return this.greenhouseEmissions;
+  public double getEmissionsPercentage() {
+    return this.emissionsPercentage;
   }
 
-  public void setGreenhouseEmissions(double greenhouseEmissions) {
-    this.greenhouseEmissions = greenhouseEmissions;
+  public void setEmissionsPercentage(double emissionsPercentage) {
+    this.emissionsPercentage = emissionsPercentage;
   }
-  
+
 }

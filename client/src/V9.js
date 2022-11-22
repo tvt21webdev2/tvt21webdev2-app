@@ -11,26 +11,40 @@ function V9() {
 
   const [data, setData] = useState({});
   const [loaded, setLoaded] = useState(false);
-  const [level, setLevel] = useState(1);
+  const [chartLevel, setChartLevel] = useState(1);
+  const [sectorId, setSectorId] = useState(null);
+  const [previousSectorId, setPreviousSectorId] = useState(null);
 
   const chartRef = useRef();
 
   useEffect(() => {
-    fetchAndSetData("v9");
-  }, []);
+    (async function () {
+      const endpoint = getEndpoint();
+      const response = await axios.get(baseUrl + endpoint);
+      setData(formatData(response.data));
+      setLoaded(true);
+    })();
+  }, [chartLevel]);
 
-  async function fetchAndSetData(endpoint) {
-    const response = await axios.get(baseUrl + endpoint);
-    setData(formatData(response.data));
-    setLoaded(true);
+  function getEndpoint() {
+    if (chartLevel === 1) {
+      return "v9";
+    } else if (chartLevel === 2) {
+      return `v9sub?belongsTo=${sectorId}`
+    } else if (chartLevel === 3) {
+      return `v9subsub?belongsTo=${sectorId}`
+    }
   }
 
   function formatData(data) {
     return {
-      labels: data.map(item => item.sector),
+      labels: data.map(item => item.label),
       datasets: [{
         label: "% of emissions",
-        data: data.map(item => item.emissionsPercentage),
+        data: data.map(item => {
+            return {value: item.emissionsPercentage, id: item.id}
+          }
+        ),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -49,25 +63,31 @@ function V9() {
   }
 
   function handleClick(event) {
-    if (getElementAtEvent(chartRef.current, event).length) {
-      const id = getElementAtEvent(chartRef.current, event)[0].index + 1;
-      let endpoint;
-      if (level === 1) {
-        endpoint = `v9sub?sectorId=${id}`;
-        setLevel(2);
-      }
-      if (level === 2) {
-        endpoint = `v9subsub?subSectorId=${id}`;
-        setLevel(3);
-      }
-      console.log(fetchAndSetData(endpoint));
+    if (getElementAtEvent(chartRef.current, event).length && event.type === "click") {
+      setPreviousSectorId(sectorId);
+      const elementId = getElementAtEvent(chartRef.current, event)[0].element.$context.raw.id;
+      setSectorId(elementId);
+      setChartLevel(chartLevel + 1)
+      setLoaded(false);
+    }
+    if (event.type === "contextmenu") {
+      event.preventDefault();
+      setSectorId(previousSectorId);
+      setChartLevel(chartLevel - 1);
+      setLoaded(false);
     }
   }
 
-
   return (
     <div>
-      {loaded && <Doughnut data={data} ref={chartRef} onClick={handleClick}/>}
+      {loaded &&
+        <Doughnut
+          data={data}
+          options={{responsive: true, maintainAspectRatio: true}}
+          ref={chartRef}
+          onClick={chartLevel < 3 ? handleClick : null}
+          onContextMenu={chartLevel > 1 ? handleClick : null}
+        />}
     </div>
   );
 }
