@@ -4,6 +4,7 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
 import zoomPlugin from 'chartjs-plugin-zoom';
+import { DateTime } from 'luxon';
 
 Chart.register(zoomPlugin);
 
@@ -207,8 +208,6 @@ export default function V1() {
           mode: 'xy',
         },
         limits: {
-          x: {
-          },
           y: {min:-2, max: 2}
         },
         zoom: {
@@ -248,7 +247,8 @@ export default function V1() {
       },
     },
   };
-
+  console.log(v2Data);
+  console.log(v1DataMonthlyGlobal);
   if (!isLoaded) {
     return (
       <div>
