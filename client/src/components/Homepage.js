@@ -6,6 +6,7 @@ export default function Homepage() {
     <div>
       Homepage
       <Link to='/v1'>V1 CHART</Link> 
+      <Link to='/v5'>V5 CHART</Link>
     </div>
   )
 }

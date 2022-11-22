@@ -207,6 +207,8 @@ export default function V1() {
           mode: 'xy',
         },
         limits: {
+          x: {
+          },
           y: {min:-2, max: 2}
         },
         zoom: {
@@ -226,9 +228,6 @@ export default function V1() {
     },
     scales: {
       x: {
-        ticks: {
-          min: 'tammi 17'
-        },
         type: "time",
         time: {
           unit: "month",
