@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Chart } from "chart.js/auto";
+import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
-// import { DateTime } from 'luxon'
+import zoomPlugin from 'chartjs-plugin-zoom';
+
+Chart.register(zoomPlugin);
 
 const urlAnnualGlobal = 'http://localhost:8080/v1?type=annual&location=global'
 const urlAnnualNorthern = 'http://localhost:8080/v1?type=annual&location=northern'
@@ -29,8 +31,6 @@ export default function V1() {
       .then(response => {
         let temp = []
         response.data.forEach(element => {
-          let parsed = new Date(element.year).toDateString().split(' ')
-          element.parsedDate = parsed[1] + ' ' + parsed[3];
           temp.push(element)
         });
         setV1DataAnnualGlobal(temp)
@@ -42,8 +42,6 @@ export default function V1() {
       .then(response => {
         let temp = []
         response.data.forEach(element => {
-          let parsed = new Date(element.year).toDateString().split(' ')
-          element.parsedDate = parsed[1] + ' ' + parsed[3]
           temp.push(element)
         });
         setV1DataAnnualNorthern(temp)
@@ -55,8 +53,6 @@ export default function V1() {
       .then(response => {
         let temp = []
         response.data.forEach(element => {
-          let parsed = new Date(element.year).toDateString().split(' ')
-          element.parsedDate = parsed[1] + ' ' + parsed[3]
           temp.push(element)
         });
         setV1DataAnnualSouthern(temp)
@@ -68,8 +64,6 @@ export default function V1() {
       .then(response => {
         let temp = []
         response.data.forEach(element => {
-          let parsed = new Date(element.year).toDateString().split(' ')
-          element.parsedDate = parsed[1] + ' ' + parsed[3]
           temp.push(element)
         });
         setV1DataMonthlyGlobal(temp)
@@ -81,8 +75,6 @@ export default function V1() {
       .then(response => {
         let temp = []
         response.data.forEach(element => {
-          let parsed = new Date(element.year).toDateString().split(' ')
-          element.parsedDate = parsed[1] + ' ' + parsed[3]
           temp.push(element)
         });
         setV1DataMonthlyNorthern(temp)
@@ -94,8 +86,6 @@ export default function V1() {
       .then(response => {
         let temp = []
         response.data.forEach(element => {
-          let parsed = new Date(element.year).toDateString().split(' ')
-          element.parsedDate = parsed[1] + ' ' + parsed[3]
           temp.push(element)
         });
         setV1DataMonthlySouthern(temp)
@@ -107,6 +97,13 @@ export default function V1() {
       .then(response => {
         let temp = []
         response.data.forEach(element => {
+          if (element.year < 10)
+            element.year = "000" + element.year
+          else if (element.year < 100)
+            element.year = "00" + element.year
+          else if (element.year < 1000)
+            element.year = "0" + element.year
+
           element.year = element.year + "-01"
           temp.push(element)
         });
@@ -126,10 +123,8 @@ export default function V1() {
       {
         label: "Monthly global",
         data: v1DataMonthlyGlobal,
-        borderColor: "rgba(0, 0, 0, 0.5)",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        // xAxisID: "date",
-        // yAxisID: "temp",
+        borderColor: "rgba(46, 49, 49, 0.8)",
+        backgroundColor: "rgba(46, 49, 49, 0.5)",
         parsing: {
           xAxisKey: "year",
           yAxisKey: "anomaly",
@@ -139,10 +134,8 @@ export default function V1() {
       {
         label: "Monthly northern hemisphere",
         data: v1DataMonthlyNorthern,
-        borderColor: "rgba(0, 0, 255, 0.5)",
-        backgroundColor: "rgba(0, 0, 255, 0.4)",
-        // xAxisID: "date",
-        // yAxisID: "temp",
+        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.4)",
         parsing: {
           xAxisKey: "year",
           yAxisKey: "anomaly",
@@ -152,10 +145,8 @@ export default function V1() {
       {
         label: "Monthly southern hemisphere",
         data: v1DataMonthlySouthern,
-        borderColor: "rgba(255, 0, 0, 0.5)",
-        backgroundColor: "rgba(255, 0, 0, 0.4)",
-        // xAxisID: "date",
-        // yAxisID: "temp",
+        borderColor: "rgba(150, 4, 45, 0.8)",
+        backgroundColor: "rgba(150, 4, 45, 0.4)",
         parsing: {
           xAxisKey: "year",
           yAxisKey: "anomaly",
@@ -165,10 +156,8 @@ export default function V1() {
       {
         label: "Annual global",
         data: v1DataAnnualGlobal,
-        borderColor: "rgba(0, 0, 0, 0.3)",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        // xAxisID: "date",
-        // yAxisID: "temp",
+        borderColor: "rgba(46, 49, 49, 0.8)",
+        backgroundColor: "rgba(46, 49, 49, 0.5)",
         parsing: {
           xAxisKey: "year",
           yAxisKey: "anomaly",
@@ -178,10 +167,8 @@ export default function V1() {
       {
         label: "Annual northern hemisphere",
         data: v1DataAnnualNorthern,
-        borderColor: "rgba(0, 0, 255, 0.5)",
-        backgroundColor: "rgba(0, 0, 255, 0.4)",
-        // xAxisID: "date",
-        // yAxisID: "temp",
+        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.4)",
         parsing: {
           xAxisKey: "year",
           yAxisKey: "anomaly",
@@ -191,10 +178,8 @@ export default function V1() {
       {
         label: "Annual southern hemisphere",
         data: v1DataAnnualSouthern,
-        borderColor: "rgba(255, 0, 0, 0.5)",
-        backgroundColor: "rgba(255, 0, 0, 0.4)",
-        // xAxisID: "date",
-        // yAxisID: "temp",
+        borderColor: "rgba(150, 4, 45, 0.8)",
+        backgroundColor: "rgba(150, 4, 45, 0.4)",
         parsing: {
           xAxisKey: "year",
           yAxisKey: "anomaly",
@@ -204,10 +189,8 @@ export default function V1() {
       {
         label: "2000 year temperatures",
         data: v2Data,
-        borderColor: "rgba(255, 0, 0, 1)",
-        backgroundColor: "rgba(255, 0, 0, 0.2)",
-        // xAxisID: "xdate2k",
-        // yAxisID: "temp2k",
+        borderColor: "rgba(210, 4, 45, 0.8)",
+        backgroundColor: "rgba(210, 4, 45, 0.4)",
         parsing: {
           xAxisKey: "year",
           yAxisKey: "anomaly",
@@ -220,19 +203,34 @@ export default function V1() {
   const options = {
     responsive: true,
     plugins: {
-      legend: {
-        labels: {
-          usePointStyle: true,
-          pointStyle: "rectRounded",
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'xy',
+        },
+        limits: {
+          y: {min:-2, max: 2}
+        },
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true
+          },
+          mode: 'xy',
         }
       },
       title: {
         display: true,
-        text: "Demo Temperature Change Plot",
+        text: "Global historical surface temperature anomalies from January 1850 onwards",
       },
     },
     scales: {
       x: {
+        ticks: {
+          min: '0001',
+        },
         type: "time",
         time: {
           unit: "month",
@@ -251,24 +249,6 @@ export default function V1() {
           text: "Temperature change",
         },
       },
-      // y: {
-      //   type: "linear",
-      //   display: true,
-      //   position: "right",
-      //   title: {
-      //     display: true,
-      //     text: "Temperature change",
-      //   },
-      // },
-      // x: {
-      //   // type: "linear",
-      //   display: true,
-      //   position: 'bottom',
-      //   title: {
-      //     display: true,
-      //     text: "Date",
-      //   },
-      // },
     },
   };
 
