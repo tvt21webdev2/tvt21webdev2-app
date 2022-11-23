@@ -20,6 +20,18 @@ export default function V5() {
     }
   }
 
+  const handleZoomIn = () => {
+    if (chartRef && chartRef.current) {
+      chartRef.current.zoom({x: 1.1});
+    }
+  }
+
+  const handleZoomOut = () => {
+    if (chartRef && chartRef.current) {
+      chartRef.current.zoom({x: 0.9});
+    }
+  }
+
   const handlePanLeft = () => {
     if (chartRef && chartRef.current) {
       chartRef.current.pan({x: 250}, undefined, 'default');
@@ -67,10 +79,6 @@ export default function V5() {
   const options = {
     responsive: true,
     plugins: {
-      title: {
-        display: true,
-        text: "V5 Vostok Ice Core CO2 measurement",
-      },
       zoom: {
         pan: {
           enabled: true,
@@ -89,6 +97,24 @@ export default function V5() {
           },
           mode: 'x',
         },
+      },
+      title: {
+        display: true,
+        text: "V5 Vostok Ice Core CO2 measurement",
+      },
+      legend: {
+        onClick: function(e, legendItem, legend) {
+          const index = legendItem.datasetIndex;
+          const ci = legend.chart;
+          if (ci.isDatasetVisible(index)) {
+              ci.hide(index);
+              legendItem.hidden = true;
+          } else {
+              ci.show(index);
+              legendItem.hidden = false;
+          }
+          handleResetZoom()
+        }
       }
     },
     scales: {
@@ -131,9 +157,11 @@ export default function V5() {
       <div id='container'>
         <Line ref={chartRef} options={options} data={data}/>
         <div id='buttons'>
-          <button onClick={handlePanLeft}>Pan left 100px</button>
+          <button onClick={handlePanLeft}>Pan left</button>
+          <button onClick={handleZoomOut}>Zoom out</button>
           <button onClick={handleResetZoom}>Reset Zoom</button>
-          <button onClick={handlePanRight}>Pan right 100px</button>
+          <button onClick={handleZoomIn}>Zoom in</button>
+          <button onClick={handlePanRight}>Pan right</button>
         </div>
         <p id='description'>
           Northern Hemisphere temperature reconstruction for the past 2,000 years by combining low-resolution proxies with tree-ring data, using a wavelet transform technique to achieve timescale-dependent processing of the data.
