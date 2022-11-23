@@ -26,6 +26,7 @@ export default function V1() {
   const [v1DataMonthlySouthern, setV1DataMonthlySouthern] = useState([])
   const [v2Data, setV2Data] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
+  const [v2DataVisible, setv2DataVisible] = useState(true)
   const chartRef = React.useRef(null);
 
   const handleResetZoom = () => {
@@ -243,6 +244,10 @@ export default function V1() {
           mode: 'xy',
         },
         limits: {
+          x: {
+            min: v2DataVisible ? new Date('0001-01-01T00:00:00').valueOf() : new Date('1850-01-01T00:00:00').valueOf(),
+            max: new Date('2022-09-01T00:00:00').valueOf()
+          },
           y: {min:-2, max: 2}
         },
         zoom: {
@@ -264,9 +269,13 @@ export default function V1() {
           const index = legendItem.datasetIndex;
           const ci = legend.chart;
           if (ci.isDatasetVisible(index)) {
+              if (index === 6) {
+                setv2DataVisible(false)
+              }
               ci.hide(index);
               legendItem.hidden = true;
           } else {
+              setv2DataVisible(true)
               ci.show(index);
               legendItem.hidden = false;
           }
@@ -309,11 +318,11 @@ export default function V1() {
       <div id='container'>
         <Line ref={chartRef} options={options} data={data}/>
         <div id='buttons'>
-          <button onClick={handlePanLeft}>Pan left 100px</button>
+          <button onClick={handlePanLeft}>Pan left</button>
           <button onClick={handleZoomOut}>Zoom out</button>
           <button onClick={handleResetZoom}>Reset Zoom</button>
           <button onClick={handleZoomIn}>Zoom in</button>
-          <button onClick={handlePanRight}>Pan right 100px</button>
+          <button onClick={handlePanRight}>Pan right</button>
         </div>
         <p id='description'>
         The gridded data are a blend of the CRUTEM5 land-surface air temperature dataset and the HadSST4 sea-surface temperature (SST) dataset. The dataset is presented in two ways. First, as with the previous version of the data set, HadCRUT4, data are averaged onto a regular grid with no value provided in grid cells containing no observations. Second, a statistical method has been used to extend coverage in data sparse areas and provide a more globally complete data set.
