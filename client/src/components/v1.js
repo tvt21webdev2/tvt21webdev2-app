@@ -287,6 +287,10 @@ export default function V1() {
           <button onClick={handleResetZoom}>Reset Zoom</button>
           <button onClick={handlePanRight}>Pan right 100px</button>
         </div>
+        <p id='description'>
+        The gridded data are a blend of the CRUTEM5 land-surface air temperature dataset and the HadSST4 sea-surface temperature (SST) dataset. The dataset is presented in two ways. First, as with the previous version of the data set, HadCRUT4, data are averaged onto a regular grid with no value provided in grid cells containing no observations. Second, a statistical method has been used to extend coverage in data sparse areas and provide a more globally complete data set.
+          <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank">Source</a>
+        </p>
       </div>
     )
   }
