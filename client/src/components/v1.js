@@ -283,7 +283,7 @@ export default function V1() {
           }
           handleResetZoom()
         }
-      }
+      },
     },
     scales: {
       x: {
