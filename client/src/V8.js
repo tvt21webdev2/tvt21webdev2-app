@@ -1,18 +1,8 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
 import {Line} from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js';
-
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+import {Chart} from "chart.js/auto";
+import generateRandomColor from "./utils";
 
 function V8() {
   const [data, setData] = useState({});
@@ -27,27 +17,22 @@ function V8() {
   }, []);
 
   function formatData(data) {
-    const countries = [...new Set(data.map(item => item.country))];
+    const countries = [...new Set(data.map(item => item.country))].sort();
     const years = [...new Set(data.map(item => item.year))];
 
     return {
       labels: years,
       datasets: countries.map(country => {
+        const color = generateRandomColor();
         return {
           label: country,
           data: data.filter(item => country === item.country).map(item => item.emissions),
-          borderColor: randomizeColor(),
-          backgroundColor: randomizeColor(),
+          borderColor: color,
+          backgroundColor: color,
+          yAxisId: "co2",
         }
       })
     }
-  }
-
-  function randomizeColor() {
-    const r = Math.floor(Math.random() * 255);
-    const g = Math.floor(Math.random() * 255);
-    const b = Math.floor(Math.random() * 255);
-    return "rgb(" + r + "," + g + "," + b + ")";
   }
 
   const options = {
@@ -56,10 +41,11 @@ function V8() {
     plugins: {
       legend: {
         position: "top",
+        // position: "right",
       },
       title: {
         display: true,
-        text: "asdgfafgsdfg",
+        text: "CO2 emissions by country",
       },
     },
     scales: {

@@ -1,9 +1,8 @@
 import axios from "axios";
 import {useState, useEffect, useRef} from "react";
-import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
+import {Chart} from "chart.js/auto";
 import {Doughnut, getElementAtEvent} from 'react-chartjs-2';
-
-ChartJS.register(ArcElement, Tooltip, Legend);
+import generateRandomColor from "./utils";
 
 function V9() {
 
@@ -14,6 +13,7 @@ function V9() {
   const [chartLevel, setChartLevel] = useState(1);
   const [sectorId, setSectorId] = useState(null);
   const [previousSectorId, setPreviousSectorId] = useState(null);
+  const [sectorColors, setSectorColors] = useState(Array(17).fill().map(() => generateRandomColor()));
 
   const chartRef = useRef();
 
@@ -37,29 +37,35 @@ function V9() {
   }
 
   function formatData(data) {
+    const labels = data.map(item => item.label);
+
     return {
-      labels: data.map(item => item.label),
+      labels: labels,
       datasets: [{
         label: "% of emissions",
         data: data.map(item => {
             return {value: item.emissionsPercentage, id: item.id}
           }
         ),
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-        ],
+        backgroundColor: sectorColors,
+        borderColor: 'rgba(0, 0, 0, 1)',
         borderWidth: 1
       }],
     };
+  }
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      title: {
+        display: true,
+        text: "CO2 emissions by sectors"
+      },
+      legend: {
+        position: "top"
+      }
+    }
   }
 
   function handleClick(event) {
@@ -83,7 +89,7 @@ function V9() {
       {loaded &&
         <Doughnut
           data={data}
-          options={{responsive: true, maintainAspectRatio: true}}
+          options={options}
           ref={chartRef}
           onClick={chartLevel < 3 ? handleClick : null}
           onContextMenu={chartLevel > 1 ? handleClick : null}
