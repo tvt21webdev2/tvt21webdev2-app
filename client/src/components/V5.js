@@ -12,6 +12,7 @@ const urlV5Data = 'http://localhost:8080/v5'
 export default function V5() {
   const[v5Data, setV5Data] = useState([])
   const[isLoaded, setIsLoaded] = useState(false)
+
   const chartRef = React.useRef(null);
 
   const handleResetZoom = () => {
@@ -165,7 +166,7 @@ export default function V5() {
         </div>
         <p id='description'>
           Northern Hemisphere temperature reconstruction for the past 2,000 years by combining low-resolution proxies with tree-ring data, using a wavelet transform technique to achieve timescale-dependent processing of the data.
-          <a href="https://bolin.su.se/data/moberg-2012-nh-1?n=moberg-2005" target="_blank">Source</a>
+          <a href="https://bolin.su.se/data/moberg-2012-nh-1?n=moberg-2005" target="_blank" rel="noreferrer">Source</a>
         </p>
       </div>
     )

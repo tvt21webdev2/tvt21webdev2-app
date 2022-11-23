@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { DateTime } from 'luxon';
-import '../styles/v1.css'
+import '../styles/v1.css';
 
 Chart.register(zoomPlugin);
 
@@ -26,7 +26,8 @@ export default function V1() {
   const [v1DataMonthlySouthern, setV1DataMonthlySouthern] = useState([])
   const [v2Data, setV2Data] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
-  const [v2DataVisible, setv2DataVisible] = useState(true)
+  const [v2DataVisible, setV2DataVisible] = useState(true)
+  
   const chartRef = React.useRef(null);
 
   const handleResetZoom = () => {
@@ -269,15 +270,16 @@ export default function V1() {
           const index = legendItem.datasetIndex;
           const ci = legend.chart;
           if (ci.isDatasetVisible(index)) {
-              if (index === 6) {
-                setv2DataVisible(false)
-              }
-              ci.hide(index);
-              legendItem.hidden = true;
+            ci.hide(index);
+            legendItem.hidden = true;
           } else {
-              setv2DataVisible(true)
-              ci.show(index);
-              legendItem.hidden = false;
+            ci.show(index);
+            legendItem.hidden = false;
+          }
+          if (index === 6 && ci.isDatasetVisible(6)) {
+            setV2DataVisible(true)
+          } else if (index === 6 && !ci.isDatasetVisible(6)) {
+            setV2DataVisible(false)
           }
           handleResetZoom()
         }
@@ -287,7 +289,7 @@ export default function V1() {
       x: {
         type: "time",
         time: {
-          unit: "month",
+          unit: v2DataVisible ? "year" : "month",
         },
         position: 'bottom',
         title: {
@@ -305,8 +307,7 @@ export default function V1() {
       },
     },
   };
-  console.log(v2Data);
-  console.log(v1DataMonthlyGlobal);
+
   if (!isLoaded) {
     return (
       <div>
@@ -326,7 +327,7 @@ export default function V1() {
         </div>
         <p id='description'>
         The gridded data are a blend of the CRUTEM5 land-surface air temperature dataset and the HadSST4 sea-surface temperature (SST) dataset. The dataset is presented in two ways. First, as with the previous version of the data set, HadCRUT4, data are averaged onto a regular grid with no value provided in grid cells containing no observations. Second, a statistical method has been used to extend coverage in data sparse areas and provide a more globally complete data set.
-          <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank">Source</a>
+          <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" rel="noreferrer">Source</a>
         </p>
       </div>
     )
