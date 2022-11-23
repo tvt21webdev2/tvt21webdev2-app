@@ -5,6 +5,7 @@ import { Line } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { DateTime } from 'luxon';
+import '../styles/v1.css'
 
 Chart.register(zoomPlugin);
 
@@ -25,6 +26,25 @@ export default function V1() {
   const [v1DataMonthlySouthern, setV1DataMonthlySouthern] = useState([])
   const [v2Data, setV2Data] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
+  const chartRef = React.useRef(null);
+
+  const handleResetZoom = () => {
+    if (chartRef && chartRef.current) {
+      chartRef.current.resetZoom();
+    }
+  };
+
+  const handlePanLeft = () => {
+    if (chartRef && chartRef.current) {
+      chartRef.current.pan({x: 250}, undefined, 'default');
+    }
+  }
+
+  const handlePanRight = () => {
+    if (chartRef && chartRef.current) {
+      chartRef.current.pan({x: -250}, undefined, 'default');
+    }
+  }
 
   useEffect(() => {
     if (!isLoaded) {
@@ -201,6 +221,9 @@ export default function V1() {
 
   const options = {
     responsive: true,
+    options: {
+      onClick: handleResetZoom(),
+    },
     plugins: {
       zoom: {
         pan: {
@@ -257,8 +280,13 @@ export default function V1() {
     )
   } else {
     return (
-      <div>
-        <Line options={options} data={data}/>
+      <div id='container'>
+        <Line ref={chartRef} options={options} data={data}/>
+        <div id='buttons'>
+          <button onClick={handlePanLeft}>Pan left 100px</button>
+          <button onClick={handleResetZoom}>Reset Zoom</button>
+          <button onClick={handlePanRight}>Pan right 100px</button>
+        </div>
       </div>
     )
   }

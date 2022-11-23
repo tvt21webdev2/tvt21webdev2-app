@@ -12,6 +12,25 @@ const urlV5Data = 'http://localhost:8080/v5'
 export default function V5() {
   const[v5Data, setV5Data] = useState([])
   const[isLoaded, setIsLoaded] = useState(false)
+  const chartRef = React.useRef(null);
+
+  const handleResetZoom = () => {
+    if (chartRef && chartRef.current) {
+      chartRef.current.resetZoom();
+    }
+  }
+
+  const handlePanLeft = () => {
+    if (chartRef && chartRef.current) {
+      chartRef.current.pan({x: 250}, undefined, 'default');
+    }
+  }
+
+  const handlePanRight = () => {
+    if (chartRef && chartRef.current) {
+      chartRef.current.pan({x: -250}, undefined, 'default');
+    }
+  }
 
   useEffect(() => {
     if (!isLoaded) {
@@ -98,6 +117,9 @@ export default function V5() {
     }
   }
 
+  const actions = [
+  ]
+
   if (!isLoaded) {
     return (
       <div>
@@ -106,8 +128,13 @@ export default function V5() {
     )
   } else {
     return (
-      <div style={{width: "1000px"}}>
-        <Line options={options} data={data}/>
+      <div id='container'>
+        <Line ref={chartRef} options={options} data={data}/>
+        <div id='buttons'>
+          <button onClick={handlePanLeft}>Pan left 100px</button>
+          <button onClick={handleResetZoom}>Reset Zoom</button>
+          <button onClick={handlePanRight}>Pan right 100px</button>
+        </div>
       </div>
     )
   }
