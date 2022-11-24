@@ -22,9 +22,9 @@ public class V9SubController {
   }
 
   @GetMapping("/v9sub")
-  public List<V9Sub> getData(@RequestParam(defaultValue = "empty") String sectorId) {
-    if (!sectorId.equals("empty"))
-      return service.findBySectorId(Long.parseLong(sectorId));
+  public List<V9Sub> getData(@RequestParam(defaultValue = "empty") String belongsTo) {
+    if (!belongsTo.equals("empty"))
+      return service.findByBelongsTo(Long.parseLong(belongsTo));
     return service.findAll();
   }
 

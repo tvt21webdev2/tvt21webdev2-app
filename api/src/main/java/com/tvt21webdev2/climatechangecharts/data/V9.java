@@ -8,13 +8,12 @@ import javax.persistence.Id;
 
 @Entity
 public class V9 {
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "sector_id")
   private Long id;
-  @Column(name = "sector")
-  private String sector;
+  @Column(name = "label")
+  private String label;
   @Column(name = "share_of_global_greenhouse_gas_emissions_perc")
   private double emissionsPercentage;
 
@@ -29,12 +28,12 @@ public class V9 {
     this.id = id;
   }
 
-  public String getSector() {
-    return sector;
+  public String getLabel() {
+    return label;
   }
 
-  public void setSector(String sector) {
-    this.sector = sector;
+  public void setSector(String label) {
+    this.label = label;
   }
 
   public double getEmissionsPercentage() {
