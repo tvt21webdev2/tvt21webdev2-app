@@ -10,17 +10,17 @@ import com.tvt21webdev2.climatechangecharts.repository.V9SubSubRepository;
 @Service
 public class V9SubSubService {
 
-    private final V9SubSubRepository repository;
+  private final V9SubSubRepository repository;
 
-    public V9SubSubService(final V9SubSubRepository repository) {
-      this.repository = repository;
-    }
+  public V9SubSubService(final V9SubSubRepository repository) {
+    this.repository = repository;
+  }
 
-    public List<V9SubSub> findAll() {
-      return repository.findAll();
-    }
+  public List<V9SubSub> findAll() {
+    return repository.findAll();
+  }
 
-    public List<V9SubSub> findBySubSecId(int subSectorId) {
-      return repository.findBySubSecId(subSectorId);
-    }
+  public List<V9SubSub> findByBelongsTo(Long belongsTo) {
+    return repository.findByBelongsTo(belongsTo);
+  }
 }
