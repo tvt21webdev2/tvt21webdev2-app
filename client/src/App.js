@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom'
-import Homepage from './pages/Homepage'
+import Frontpage from './pages/Frontpage'
 import Navbar from './components/Navbar';
 import V1 from './components/V1'
 import V5 from './components/V5';
@@ -14,7 +14,7 @@ export default function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Frontpage />} />
         <Route path="/v1" element={<V1 />} />
         <Route path="/v5" element={<V5 />} />
         <Route path="/v8" element={<V8 />} />

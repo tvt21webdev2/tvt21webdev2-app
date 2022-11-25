@@ -144,9 +144,6 @@ export default function V5() {
     }
   }
 
-  const actions = [
-  ]
-
   if (!isLoaded) {
     return (
       <div>

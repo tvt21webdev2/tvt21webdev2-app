@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-export default function Homepage() {
+export default function Frontpage() {
   return (
     <div>
       <Link to='/v1'>V1 CHART</Link> 
