@@ -1,7 +1,6 @@
 
 import './App.css';
 import V3LineGraph from './V3LineGraph';
-import V4LineGraph from './V4LineGraph';
 
 function App() {
   return (
