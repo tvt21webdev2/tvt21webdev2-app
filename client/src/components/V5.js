@@ -1,19 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef, forwardRef } from 'react'
 import axios from 'axios'
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
+import ChartButtons from './ChartButtons';
+import { resetZoom } from 'chartjs-plugin-zoom';
 import zoomPlugin from 'chartjs-plugin-zoom';
 
 Chart.register(zoomPlugin);
 
 const urlV5Data = 'http://localhost:8080/v5'
 
+// const Buttons = forwardRef((props, ref) => {
+//   return <ChartButtons myRef={ref}/>;
+// });
+
 export default function V5() {
   const[v5Data, setV5Data] = useState([])
   const[isLoaded, setIsLoaded] = useState(false)
 
-  const chartRef = React.useRef(null);
+  const chartRef = useRef(null);
 
   const handleResetZoom = () => {
     if (chartRef && chartRef.current) {
@@ -58,8 +64,6 @@ export default function V5() {
     }
     setIsLoaded(true)
   }, [])
-
-  console.log(v5Data);
 
   const data = {
     datasets: [
@@ -114,7 +118,7 @@ export default function V5() {
               ci.show(index);
               legendItem.hidden = false;
           }
-          handleResetZoom()
+          chartRef.current.resetZoom()
         }
       }
     },
@@ -153,8 +157,9 @@ export default function V5() {
   } else {
     return (
       <div id='container'>
-        <Line ref={chartRef} options={options} data={data}/>
+        <Line ref={chartRef} options={options} data={data} />
         <div id='buttons'>
+          {/* <ChartButtons myRef={chartRef} /> */}
           <button onClick={handlePanLeft}>Pan left</button>
           <button onClick={handleZoomOut}>Zoom out</button>
           <button onClick={handleResetZoom}>Reset Zoom</button>

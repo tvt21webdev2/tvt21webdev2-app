@@ -39,9 +39,9 @@ export default function Timeline() {
           <div className="timeline-content">
             <h2>2021</h2>
             <p>
-              <a href='https://www.ncei.noaa.gov/news/global-climate-202112' target={"_blank"}>NOAAn </a>
+              <a href='https://www.ncei.noaa.gov/news/global-climate-202112' target="_blank" rel="noreferrer">NOAAn </a>
               raportin mukaan vuosi 2021 oli kuudenneksi lämpimin koko mittaushistorian aikana.
-              </p>
+            </p>
           </div>
         </div>
       </div>
