@@ -68,20 +68,21 @@ function V9() {
     }
   }
 
-  function handleClick(event) {
-    if (getElementAtEvent(chartRef.current, event).length && event.type === "click") {
+  function handleLeftClick(event) {
+    if (getElementAtEvent(chartRef.current, event).length) {
       setPreviousSectorId(sectorId);
       const elementId = getElementAtEvent(chartRef.current, event)[0].element.$context.raw.id;
       setSectorId(elementId);
       setChartLevel(chartLevel + 1)
       setLoaded(false);
     }
-    if (event.type === "contextmenu") {
-      event.preventDefault();
-      setSectorId(previousSectorId);
-      setChartLevel(chartLevel - 1);
-      setLoaded(false);
-    }
+  }
+
+  function handleRightClick(event) {
+    event.preventDefault();
+    setSectorId(previousSectorId);
+    setChartLevel(chartLevel - 1);
+    setLoaded(false);
   }
 
   return (
@@ -91,8 +92,8 @@ function V9() {
           data={data}
           options={options}
           ref={chartRef}
-          onClick={chartLevel < 3 ? handleClick : null}
-          onContextMenu={chartLevel > 1 ? handleClick : null}
+          onClick={chartLevel < 3 ? handleLeftClick : null}
+          onContextMenu={chartLevel > 1 ? handleRightClick : null}
         />}
     </div>
   );
