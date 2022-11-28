@@ -58,7 +58,7 @@ function V7() {
           xAxisKey: "gasAge",
           yAxisKey: "co2",
         },
-        yAxisID: 'y',
+        yAxisID: 'y1',
       },
 
       {
@@ -68,7 +68,6 @@ function V7() {
           xAxisKey: "yearBp",
           yAxisKey: "tempChange",
         },
-        yAxisID: 'temp',
       },
 
       {
@@ -93,28 +92,30 @@ function V7() {
     },
     scales: {
       x: {
+        min: -5000,
         type: 'linear',
         title: {
           display: true,
-          position: 'left',
           text: "years (bp)"
         } 
       },
       
       y: {
+        type: 'linear',
+        display: true,
+        position: 'right',
         title: {
-          type: 'linear',
           display: true,
-          position: 'right',
           text: "temperature"
         } 
       },
       y1: {
+        type: 'linear',
+        display: true,
+        position: 'left',
         title: {
-          type: 'linear',
           display: true,
-          position: 'right',
-          text: "co2"
+          text: "co2 ppm"
         } 
       }
     }
