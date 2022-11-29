@@ -317,7 +317,7 @@ export default function V1() {
   } else {
     return (
       <div id='container'>
-        <Line ref={chartRef} options={options} data={data}/>
+        <Line ref={chartRef} options={options} data={data} />
         <div id='buttons'>
           <button onClick={handlePanLeft}>Pan left</button>
           <button onClick={handleZoomOut}>Zoom out</button>
