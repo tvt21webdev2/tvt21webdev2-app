@@ -71,19 +71,29 @@ function V7() {
       },
 
       {
-        label: "Human activities",
+        label: "Human event",
         data: v10Data,
         parsing: {
-          xAxisKey:"year",
-          yAxisKey: "event",
-        }
+          label: "event",
+          xAxisKey: "year",
+          yAxisKey: "tempChange",
+        },
+        yAxisID: 'y2',
       }
     ]
   }
 
   const options = {
     responsive: true,
+    /*interaction: {
+      mode: 'index',
+      intersect: false,
+    },*/
     maintainAspectRatio: true,
+    elements: {
+      point:{
+          radius: 0
+      }},
     plugins: {
       title: {
         display: true,
@@ -107,11 +117,23 @@ function V7() {
         title: {
           display: true,
           text: "temperature"
-        } 
+        },
+        grid: {
+          drawOnChartArea: false,
+        }, 
       },
       y1: {
         type: 'linear',
         display: true,
+        position: 'left',
+        title: {
+          display: true,
+          text: "co2 ppm"
+        } 
+      },
+
+      y2: {
+        display: false,
         position: 'left',
         title: {
           display: true,
