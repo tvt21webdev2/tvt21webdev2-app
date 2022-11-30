@@ -21,6 +21,7 @@ public class V1Controller {
   }
 
   // http://localhost:8080/v1?type=monthly&location=global&year=2022-01
+  @CrossOrigin(origins = "http://localhost:3000")
   @GetMapping("/v1")
   public List<V1> getData(@RequestParam(defaultValue = "empty") String type,
       @RequestParam(defaultValue = "empty") String location, @RequestParam(defaultValue = "empty") String year) {

@@ -13,7 +13,7 @@ import com.tvt21webdev2.climatechangecharts.service.V9SubSubService;
 @CrossOrigin
 @RestController
 public class V9SubSubController {
-  
+
   private final V9SubSubService service;
 
   public V9SubSubController(final V9SubSubService service) {
@@ -21,9 +21,9 @@ public class V9SubSubController {
   }
 
   @GetMapping("/v9subsub")
-  public List<V9SubSub> getData(@RequestParam(defaultValue = "empty") String subSectorId) {
-    if(!subSectorId.equals("empty"))
-      return service.findBySubSecId(Integer.parseInt(subSectorId));
+  public List<V9SubSub> getData(@RequestParam(defaultValue = "empty") String belongsTo) {
+    if (!belongsTo.equals("empty"))
+      return service.findByBelongsTo(Long.parseLong(belongsTo));
     return service.findAll();
   }
 

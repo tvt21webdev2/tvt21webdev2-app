@@ -20,8 +20,8 @@ public class V9SubService {
     return repository.findAll();
   }
 
-  public List<V9Sub> findBySectorId(Long sectorId) {
-    return repository.findBySectorId(sectorId);
+  public List<V9Sub> findByBelongsTo(Long belongsTo) {
+    return repository.findByBelongsTo(belongsTo);
   }
 
 }

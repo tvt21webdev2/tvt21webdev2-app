@@ -16,13 +16,10 @@ public class V8 {
   private int year;
   @Column(name = "country")
   private String country;
+  @Column(name = "co2_emissions")
+  private double emissions;
 
   public V8() {
-  }
-
-  public V8(int year, String country) {
-    this.year = year;
-    this.country = country;
   }
 
   public Long getId() {
@@ -48,5 +45,12 @@ public class V8 {
   public void setCountry(String country) {
     this.country = country;
   }
-  
+
+  public double getEmissions() {
+    return emissions;
+  }
+
+  public void setEmissions(double emissions) {
+    this.emissions = emissions;
+  }
 }
