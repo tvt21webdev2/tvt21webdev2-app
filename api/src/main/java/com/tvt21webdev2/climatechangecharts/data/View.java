@@ -19,6 +19,7 @@ public class View {
   @Column(name = "url")
   private String url;
   private boolean v1, v2, v3, v4, v5, v6, v7, v8, v9, v10;
+  private String v1description, v3description, v4description, v5description, v6description, v7description, v8description, v9description;
   @Column(name = "description")
   private String description;
   @Column(name = "stacked")
