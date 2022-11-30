@@ -74,9 +74,8 @@ function V7() {
         label: "Human event",
         data: v10Data,
         parsing: {
-          label: "event",
           xAxisKey: "year",
-          yAxisKey: "tempChange",
+          yAxisKey: "event",
         },
         yAxisID: 'y2',
       }
@@ -85,10 +84,10 @@ function V7() {
 
   const options = {
     responsive: true,
-    /*interaction: {
+    interaction: {
       mode: 'index',
       intersect: false,
-    },*/
+    },
     maintainAspectRatio: true,
     elements: {
       point:{
@@ -102,11 +101,10 @@ function V7() {
     },
     scales: {
       x: {
-        min: -5000,
         type: 'linear',
         title: {
           display: true,
-          text: "years (bp)"
+          text: "years"
         } 
       },
       
