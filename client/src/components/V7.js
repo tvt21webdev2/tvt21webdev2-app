@@ -24,22 +24,22 @@ function V7() {
 
     axios.get("http://localhost:8080/v7")
     .then(response => {
-      let jtn = []
+      let q = []
       response.data.forEach(element => {
-        jtn.push(element)
+        q.push(element)
       });
-      setV7Data(jtn)
+      setV7Data(q)
     }).catch(err => {
       console.log(err);
     })
 
     axios.get("http://localhost:8080/v10")
     .then(response => {
-      let jtn = []
+      let q = []
       response.data.forEach(element => {
-        jtn.push(element)
+        q.push(element)
       });
-      setV10Data(jtn)
+      setV10Data(q)
     }).catch(err => {
       console.log(err);
     })
