@@ -21,7 +21,7 @@ export default function App() {
         <Route path="/v8" element={<V8/>}/>
         <Route path="/v9" element={<V9/>}/>
         <Route path="/editor" element={<Editor />}/>
-        <Route path="/myview/" element={<N3 />}/>
+        <Route path="/myview" element={<N3 />}/>
       </Routes>
     </div>
   );

@@ -2,6 +2,7 @@ import { Button, Card, CardActionArea, CardHeader, CardMedia, Checkbox, FormCont
 import { shadows, width } from '@mui/system';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import React, { useEffect, useState } from 'react'
+import { Link } from "react-router-dom";
 import axios from 'axios'
 import '../styles/Editor.css'
 import ImgV1 from '../images/chart_v1.png';
@@ -19,7 +20,7 @@ export default function Editor() {
   const [v8Description, setV8Description] = useState(null)
   const [v9Description, setV9Description] = useState(null)
   const [v1Selected, setV1Selected] = useState(false)
-  const [v2Selected, setV2Selected] = useState(false)
+  // const [v2Selected, setV2Selected] = useState(false)
   const [v3Selected, setV3Selected] = useState(false)
   const [v4Selected, setV4Selected] = useState(false)
   const [v5Selected, setV5Selected] = useState(false)
@@ -27,11 +28,12 @@ export default function Editor() {
   const [v7Selected, setV7Selected] = useState(false)
   const [v8Selected, setV8Selected] = useState(false)
   const [v9Selected, setV9Selected] = useState(false)
-  const [v10Selected, setV10Selected] = useState(false)
-  const [stackedSelected, setstackedSelected] = useState(false)
+  // const [v10Selected, setV10Selected] = useState(false)
+  const [stackedSelected, setStackedSelected] = useState(false)
   const [description, setDescription] = useState("Testi description")
   const [url, setUrl] = useState("")
   const [user, setUser] = useState({userId: 1, username: "root"})
+  const [posted, setPosted] = useState(false)
   // const [view, setView] = useState({})
 
   const base = "http://localhost/myview/"
@@ -63,28 +65,28 @@ export default function Editor() {
 
   function createView() {
     const newView = {
-      url: url,
+      // url: url,
       userId: user.userId,
-      description: description,
       stacked: stackedSelected,
+      description: description,
       v1: v1Selected,
-      v1description: v1Description === "" ? null : v1Description,
-      v2: v2Selected,
+      // v2: v2Selected,
       v3: v3Selected,
-      v3description: v3Description === "" ? null : v3Description,
       v4: v4Selected,
-      v4description: v4Description === "" ? null : v4Description,
       v5: v5Selected,
-      v5description: v5Description === "" ? null : v5Description,
       v6: v6Selected,
-      v6description: v6Description === "" ? null : v6Description,
       v7: v7Selected,
-      v7description: v7Description === "" ? null : v7Description,
       v8: v8Selected,
-      v8description: v8Description === "" ? null : v8Description,
       v9: v9Selected,
+      // v10: v10Selected,
+      v1description: v1Description === "" ? null : v1Description,
+      v3description: v3Description === "" ? null : v3Description,
+      v4description: v4Description === "" ? null : v4Description,
+      v5description: v5Description === "" ? null : v5Description,
+      v6description: v6Description === "" ? null : v6Description,
+      v7description: v7Description === "" ? null : v7Description,
+      v8description: v8Description === "" ? null : v8Description,
       v9description: v9Description === "" ? null : v9Description,
-      v10: v10Selected,
     }
     console.log(newView);
     // setView(newView)
@@ -96,28 +98,29 @@ export default function Editor() {
     .then(response => {
       console.log(response);
       setUrl(response.data.split(" ")[0])
+      setPosted(true)
     })
     .catch(error => {
       console.log(error);
     })
   }
 
-  function debug() {
-    console.log("url: ", url);
-    console.log("userId: ", user.userId, "username: ", user.username);
-    console.log("descripton: ", description);
-    console.log("stacked: ", stackedSelected);
-    console.log("v1Selected: ", v1Selected);
-    // console.log("v2Selected: ", v2Selected);
-    console.log("v3Selected: ", v3Selected);
-    console.log("v4Selected: ", v4Selected);
-    console.log("v5Selected: ", v5Selected);
-    console.log("v6Selected: ", v6Selected);
-    console.log("v7Selected: ", v7Selected);
-    console.log("v8Selected: ", v8Selected);
-    console.log("v9Selected: ", v9Selected);
-    // console.log("v10Selected: ", v10Selected);
-  }
+  // function debug() {
+  //   console.log("url: ", url);
+  //   console.log("userId: ", user.userId, "username: ", user.username);
+  //   console.log("descripton: ", description);
+  //   console.log("stacked: ", stackedSelected);
+  //   console.log("v1Selected: ", v1Selected);
+  //   // console.log("v2Selected: ", v2Selected);
+  //   console.log("v3Selected: ", v3Selected);
+  //   console.log("v4Selected: ", v4Selected);
+  //   console.log("v5Selected: ", v5Selected);
+  //   console.log("v6Selected: ", v6Selected);
+  //   console.log("v7Selected: ", v7Selected);
+  //   console.log("v8Selected: ", v8Selected);
+  //   console.log("v9Selected: ", v9Selected);
+  //   // console.log("v10Selected: ", v10Selected);
+  // }
 
   return (
     <Grid>
@@ -133,12 +136,20 @@ export default function Editor() {
           InputProps={{endAdornment: <IconButton onClick={copyToClipboard} aria-label="copy"><ContentPasteIcon /></IconButton>}}/>
         <FormControlLabel 
           id="switch" 
-          control={<Switch onChange={event => setstackedSelected(event.target.checked)} />} 
+          control={<Switch onChange={event => setStackedSelected(event.target.checked)} />} 
           label="Two column view" />
-        <Button variant="outlined" onClick={createView}>Finish editing</Button>
+        <Button variant="outlined" onClick={postView} disabled={posted}>Finish editing</Button>
+        <Link to={`/myview?id=${url}`} hidden={!posted}>
+          <Button
+            sx={{ml: 2}} 
+            variant="contained" 
+            color="success" 
+            >View your charts
+          </Button> 
+        </Link>
       </Grid>
 
-      <Button onClick={debug}>DEBUG</Button>
+      {/* <Button onClick={debug}>DEBUG</Button> */}
 
       <Grid container spacing={6} direction={{xs: "column", md: "row"}} alignItems="center" justifyContent="center">
         <Grid item xs={5}>
