@@ -11,6 +11,7 @@ const addressM = 'http://localhost:8080/v3?type=monthly';
 const addressA1 = 'http://localhost:8080/v4?set=1';
 const addressA2 = 'http://localhost:8080/v4?set=2';
 const addressA3 = 'http://localhost:8080/v4?set=3';
+const addressE1 = 'http://localhost:8080/v10?year=1000';
 
 
 export default function V3LineGraph() {
@@ -25,6 +26,8 @@ export default function V3LineGraph() {
   const [isLoadingA2, setisLoadingA2] = useState(true);
   const [antSet3Array, setantSet3Array] = useState([]);
   const [isLoadingA3, setisLoadingA3] = useState(true);
+  const [evolutionArray, setevolutionArray] = useState([]);
+  const [isLoadingE1, setisLoadingE1] = useState(true);
 
   useEffect(() => {
 
@@ -124,6 +127,31 @@ export default function V3LineGraph() {
 
   }, [])
 
+  useEffect(() => {
+
+    console.log(addressE1);
+
+    axios.get(addressE1)
+    .then(response => {
+      let temp = []
+      response.data.forEach(element => {
+        element.year = 2022-element.year
+        element.year = String(element.year);
+        temp.push(element)
+      });
+      setevolutionArray(temp)
+    }).catch(error => {
+      alert(error.response.data.error)
+    })
+
+    setisLoadingE1(false)
+
+  }, [])
+
+
+  console.log("evolutionArray");
+  console.log(evolutionArray);
+
 
   const data = {
 
@@ -182,9 +210,22 @@ export default function V3LineGraph() {
       },
       pointRadius: 1,
     },
+
+    {
+      label: 'Evolution',
+      data: evolutionArray,
+      borderColor: "rgb(0, 102, 204)",
+      backgroundColor: "rgba(0, 102, 204, 0.5)",
+      parsing: {
+        xAxisKey: "year",
+        yAxisKey: "event",
+      },
+      pointRadius: 1,
+    },
+    
+
     ],
   };
-
 
 
   const options = {
@@ -220,7 +261,7 @@ export default function V3LineGraph() {
       },
     },
   };
-  if (isLoading || isLoadingM || isLoadingA1 || isLoadingA2 || isLoadingA3) {
+  if (isLoading || isLoadingM || isLoadingA1 || isLoadingA2 || isLoadingA3|| isLoadingE1) {
     return <div>Loading.</div>
   }
   else {

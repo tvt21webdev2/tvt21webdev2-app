@@ -15,7 +15,7 @@ public interface V10Repository extends JpaRepository<V10, Long> {
     @Query("SELECT v FROM V10 v ORDER BY v.year")
     List<V10> findAll();
 
-    @Query("SELECT v FROM V10 v WHERE v.year = ?1 ORDER BY v.year")
+    @Query("SELECT v FROM V10 v WHERE v.year < ?1 ORDER BY v.year")
     List<V10> findByYear(int year);
     
 }
