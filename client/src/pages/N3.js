@@ -87,36 +87,43 @@ export default function N3() {
         <Grid item xs={5} sx={{width: 1000}} hidden={!v3Selected}>
           <Card raised={true} sx={{p: 3}}>
             {/* <V3 /> */}
+            <Typography sx={{mt: 2}}>{v3Description}</Typography>
           </Card>
         </Grid>
         <Grid item xs={5} sx={{width: 1000}} hidden={!v4Selected}>
           <Card raised={true} sx={{p: 3}}>
             {/* <V4 /> */}
+            <Typography sx={{mt: 2}}>{v4Description}</Typography>
           </Card>
         </Grid>
         <Grid item xs={5} sx={{width: 1000}} hidden={!v5Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V5 />
+            <Typography sx={{mt: 2}}>{v5Description}</Typography>
           </Card>
         </Grid>
         <Grid item xs={5} sx={{width: 1000}} hidden={!v6Selected}>
           <Card raised={true} sx={{p: 3}}>
             {/* <V6 /> */}
+            <Typography sx={{mt: 2}}>{v6Description}</Typography>
           </Card>
         </Grid>
         <Grid item xs={5} sx={{width: 1000}} hidden={!v7Selected}>
           <Card raised={true} sx={{p: 3}}>
             {/* <V7 /> */}
+            <Typography sx={{mt: 2}}>{v7Description}</Typography>
           </Card>
         </Grid>
         <Grid item xs={5} sx={{width: 1000}} hidden={!v8Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V8 />
+            <Typography sx={{mt: 2}}>{v8Description}</Typography>
           </Card>
         </Grid>
         <Grid item xs={5} sx={{width: 800}} hidden={!v9Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V9 />
+            <Typography sx={{mt: 2}}>{v9Description}</Typography>
           </Card>
         </Grid>
       </Grid>
