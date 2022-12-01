@@ -1,4 +1,4 @@
-import { Card, CircularProgress, Grid, LinearProgress } from '@mui/material'
+import { Card, CircularProgress, Grid, LinearProgress, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -81,6 +81,7 @@ export default function N3() {
         <Grid item xs={5} sx={{width: 1000}} hidden={!v1Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V1 />
+            <Typography sx={{mt: 2}}>{v1Description}</Typography>
           </Card>
         </Grid>
         <Grid item xs={5} sx={{width: 1000}} hidden={!v3Selected}>
