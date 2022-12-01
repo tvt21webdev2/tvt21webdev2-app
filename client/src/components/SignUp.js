@@ -11,16 +11,31 @@ export default function SignUp({open, onClose}) {
   const URL = "http://localhost:8080/register";
 
   const [signUp, setSignUp] = useState({username: "", password: "", passwordAgain: ""});
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleSubmit(event) {
+    setErrorMessage("");
     event.preventDefault();
     (async () => {
       try {
         await axios.post(URL, signUp);
       } catch (err) {
-        console.log(err.response.data);
+        setErrorMessage(err.response.data);
       }
     })();
+  }
+
+  function selectErrorMessage() {
+    switch (errorMessage) {
+      case "name already exists":
+        return "Username already exists";
+      case "username invalid":
+        return "Username should contain 4 to 16 alphanumeric characters";
+      case "password invalid":
+        return "Password should contain at least 8 characters, including one uppercase letter, one lowercase letter and one number";
+      case "not matching":
+        return "Passwords do not match";
+    }
   }
 
   return (
@@ -49,8 +64,8 @@ export default function SignUp({open, onClose}) {
           autoFocus={true}
           value={signUp.username}
           onChange={(event) => setSignUp({...signUp, username: event.target.value})}
-          // error={}
-          // helperText={}
+          error={errorMessage === "name already exists" || errorMessage === "username invalid"}
+          helperText={errorMessage === "name already exists" ? selectErrorMessage() : errorMessage === "username invalid" ? selectErrorMessage() : null}
         />
         <TextField
           id="signup-password"
@@ -59,8 +74,8 @@ export default function SignUp({open, onClose}) {
           required={true}
           value={signUp.password}
           onChange={(event) => setSignUp({...signUp, password: event.target.value})}
-          // error={}
-          // helperText={}
+          error={errorMessage === "password invalid"}
+          helperText={errorMessage === "password invalid" ? selectErrorMessage() : null}
 
         />
         <TextField
@@ -70,8 +85,8 @@ export default function SignUp({open, onClose}) {
           required={true}
           value={signUp.passwordAgain}
           onChange={(event) => setSignUp({...signUp, passwordAgain: event.target.value})}
-          // error={}
-          // helperText={}
+          error={errorMessage === "not matching"}
+          helperText={errorMessage === "not matching" ? selectErrorMessage() : null}
         />
         <Button
           type="submit"

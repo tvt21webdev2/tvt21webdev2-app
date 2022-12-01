@@ -32,16 +32,16 @@ public class SecurityController {
     Matcher passwordMatcher = passwordRegex.matcher(user.getPassword());
     Matcher usernameMatcher = usernameRegex.matcher(user.getUsername());
     if (service.checkIfUserExists(user)) {
-      return new ResponseEntity<>("Username already exists", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("name already exists", HttpStatus.BAD_REQUEST);
     }
     if (!usernameMatcher.find()) {
-      return new ResponseEntity<>("Username should contain 4 to 16 alphanumeric characters", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("username invalid", HttpStatus.BAD_REQUEST);
     }
     if (!passwordMatcher.find()) {
-      return new ResponseEntity<>("Password should contain at least 8 characters, including one uppercase letter, one lowercase letter and one number", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("password invalid", HttpStatus.BAD_REQUEST);
     }
     if (!user.getPassword().equals(userMap.get("passwordAgain"))) {
-      return new ResponseEntity<>("Passwords do not match", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("not matching", HttpStatus.BAD_REQUEST);
     }
     service.saveUser(user);
     return new ResponseEntity<>(user.getUsername() + " registered successfully", HttpStatus.CREATED);
@@ -51,10 +51,10 @@ public class SecurityController {
   public ResponseEntity<String> login(@RequestBody User user) {
     if (service.checkIfUserExists(user)) {
       if (!service.validateUser(user)) {
-        return new ResponseEntity<>("Wrong password", HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>("wrong password", HttpStatus.UNAUTHORIZED);
       }
     } else {
-      return new ResponseEntity<>("User does not exist", HttpStatus.NOT_FOUND);
+      return new ResponseEntity<>("user doesn't exist", HttpStatus.NOT_FOUND);
     }
 
     String token = service.generateJwt(user);
