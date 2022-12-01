@@ -1,14 +1,21 @@
-import { CircularProgress, Grid, LinearProgress } from '@mui/material'
+import { Card, CircularProgress, Grid, LinearProgress } from '@mui/material'
 import { Box } from '@mui/system'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useLocation } from 'react-router-dom'
+import V1 from '../components/V1'
+import V5 from '../components/V5'
+import V8 from '../components/V8'
+import V9 from '../components/V9'
 
 export default function N3() {
   const [searchParams] = useSearchParams()
-  const [id, setId] = useState(null)
-  const [data, setData] = useState([])
+  // const [id, setId] = useState(null)
+  const [viewData, setViewData] = useState([])
   const [isLoaded, setLoaded] = useState(false)
+
+  const [stackedSelected, setStackedSelected] = useState(false)
+  const [description, setDescription] = useState("Testi description")
 
   const [v1Description, setV1Description] = useState(null)
   const [v3Description, setV3Description] = useState(null)
@@ -28,32 +35,23 @@ export default function N3() {
   const [v8Selected, setV8Selected] = useState(false)
   const [v9Selected, setV9Selected] = useState(false)
 
-  const [stackedSelected, setStackedSelected] = useState(false)
-  const [description, setDescription] = useState("Testi description")
-
-  // SEARCHPARAMS.GET DOESNT WORK PLS FIX
 
   const getData = async () => {
-    // const { data } = await axios.get(`http://localhost:8080/view?url=${id}`);
-    const url = await searchParams.get("id")
-    console.log(id);
-    const { data } = await axios.get(`http://localhost:8080/view?url=f8e3b55d-f9bf-4d7f-b2a1-c4c86e6d8bf9`);
-    console.log(data);
-    setData(data);
+    const id = searchParams.get("id")
+    const { data } = await axios.get(`http://localhost:8080/view?url=${id}`);
+    setViewData(data);
+    setValues(data)
   };
 
-  useEffect(() => {
-    // setId(searchParams.get("_id"))
+  useEffect(() => { 
     getData()
-    // setValues(data)
     setLoaded(true)
   }, [])
 
   function setValues(view) {
-    const viewObject = view
+    const viewObject = view[0]
 
-    console.log(viewObject);
-    setStackedSelected(viewObject[0].stacked)
+    setStackedSelected(viewObject.stacked)
     setDescription(viewObject.description)
 
     setV1Selected(viewObject.v1)
@@ -79,12 +77,46 @@ export default function N3() {
     return <LinearProgress color="secondary" sx={{height: 15}} />
   } else {
     return (
-      <Grid container spacing={6} direction={stackedSelected ? "column" : {xs: "column", md: "row"}} alignItems="center" justifyContent="center">
-        <Grid item xs={5}>
-          <p>testi</p>
+      <Grid container spacing={6} sx={{mt: 1, mb: 6}}  direction={stackedSelected ? "column" : "row"} alignItems="center" justifyContent="center">
+        <Grid item xs={5} sx={{width: 1000}} hidden={!v1Selected}>
+          <Card raised={true} sx={{p: 3}}>
+            <V1 />
+          </Card>
         </Grid>
-        <Grid item xs={5}>
-          <p>testi</p>
+        <Grid item xs={5} sx={{width: 1000}} hidden={!v3Selected}>
+          <Card raised={true} sx={{p: 3}}>
+            {/* <V3 /> */}
+          </Card>
+        </Grid>
+        <Grid item xs={5} sx={{width: 1000}} hidden={!v4Selected}>
+          <Card raised={true} sx={{p: 3}}>
+            {/* <V4 /> */}
+          </Card>
+        </Grid>
+        <Grid item xs={5} sx={{width: 1000}} hidden={!v5Selected}>
+          <Card raised={true} sx={{p: 3}}>
+            <V5 />
+          </Card>
+        </Grid>
+        <Grid item xs={5} sx={{width: 1000}} hidden={!v6Selected}>
+          <Card raised={true} sx={{p: 3}}>
+            {/* <V6 /> */}
+          </Card>
+        </Grid>
+        <Grid item xs={5} sx={{width: 1000}} hidden={!v7Selected}>
+          <Card raised={true} sx={{p: 3}}>
+            {/* <V7 /> */}
+          </Card>
+        </Grid>
+        <Grid item xs={5} sx={{width: 1000}} hidden={!v8Selected}>
+          <Card raised={true} sx={{p: 3}}>
+            <V8 />
+          </Card>
+        </Grid>
+        <Grid item xs={5} sx={{width: 800}} hidden={!v9Selected}>
+          <Card raised={true} sx={{p: 3}}>
+            <V9 />
+          </Card>
         </Grid>
       </Grid>
     )

@@ -36,7 +36,7 @@ export default function Editor() {
   const [posted, setPosted] = useState(false)
   // const [view, setView] = useState({})
 
-  const base = "http://localhost/myview/"
+  const base = "http://localhost:3000/myview?id="
 
   // useEffect(() => {
   //   setUser({userId: 1, username: "root"})
@@ -122,12 +122,26 @@ export default function Editor() {
   //   // console.log("v10Selected: ", v10Selected);
   // }
 
+  function check() {
+    if (v1Selected ||
+      v3Selected ||
+      v4Selected ||
+      v5Selected ||
+      v6Selected ||
+      v7Selected ||
+      v8Selected ||
+      v9Selected) {
+        return true
+      }
+    return false
+  }
+
   return (
     <Grid>
 
-      <Grid container id="controls" item xs={12} direction="row" alignItems="center" justifyContent="center">
+      <Grid container id="controls" sx={{mb: 6}} xs={12} direction="row" alignItems="center" justifyContent="center">
         <TextField
-          sx={{width: 500}} 
+          sx={{width: 600}} 
           disabled 
           id="view-url" 
           variant="outlined" 
@@ -138,7 +152,7 @@ export default function Editor() {
           id="switch" 
           control={<Switch onChange={event => setStackedSelected(event.target.checked)} />} 
           label="Two column view" />
-        <Button variant="outlined" onClick={postView} disabled={posted}>Finish editing</Button>
+        <Button variant="outlined" onClick={postView} disabled={posted || !check()}>Finish editing</Button>
         <Link to={`/myview?id=${url}`} hidden={!posted}>
           <Button
             sx={{ml: 2}} 

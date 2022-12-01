@@ -166,10 +166,10 @@ export default function V5() {
           <button onClick={handleZoomIn}>Zoom in</button>
           <button onClick={handlePanRight}>Pan right</button>
         </div>
-        <p id='description'>
+        {/* <p id='description'>
           Northern Hemisphere temperature reconstruction for the past 2,000 years by combining low-resolution proxies with tree-ring data, using a wavelet transform technique to achieve timescale-dependent processing of the data.
           <a href="https://bolin.su.se/data/moberg-2012-nh-1?n=moberg-2005" target="_blank" rel="noreferrer">Source</a>
-        </p>
+        </p> */}
       </div>
     )
   }
