@@ -5,14 +5,19 @@ import '../styles/n2.css';
 
 function N2() {
   return (
-    <body>
-    <div id='v8'>
-      <V8/>
+    <div className='container'>
+      <div>
+        <h1>keskitetty n2 otsikko</h1>
+        <div id='v8'>
+          <h2>keskitetty otsikko tänne?</h2>
+          <V8 />
+        </div>
+        <div id='v9'>
+          <h2>keskitetty otsikko tänne? (^^lisää väliä!)</h2>
+          <V9 />
+        </div>
+      </div>
     </div>
-    <div id='v9'>
-      <V9/>
-    </div>
-    </body>
   );
 }
 
