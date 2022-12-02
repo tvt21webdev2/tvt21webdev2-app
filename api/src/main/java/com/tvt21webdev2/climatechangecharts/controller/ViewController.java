@@ -20,12 +20,9 @@ public class ViewController {
   }
 
   @GetMapping("/view")
-  public List<View> getData(@RequestParam(defaultValue = "empty") String userId,
-      @RequestParam(defaultValue = "empty") String url) {
+  public List<View> getData(@RequestParam(defaultValue = "empty") String userId) {
     if (!userId.equals("empty"))
       return service.findByUserId(Long.parseLong(userId));
-    if (!url.equals("empty"))
-      return service.findByUrl(url);
     return service.findAll();
   }
 
@@ -40,5 +37,11 @@ public class ViewController {
     
     service.deleteById(Long.parseLong(id));
     return new ResponseEntity<>("View deleted", HttpStatus.OK);
+  }
+
+  @GetMapping("/{url}")
+  @ResponseBody
+  public List<View> getView(@PathVariable String url) {
+    return service.findByUrl(url);
   }
 }
