@@ -45,7 +45,6 @@ export default function N3() {
 
   useEffect(() => { 
     getData()
-    setLoaded(true)
   }, [])
 
   function setValues(view) {
@@ -71,6 +70,8 @@ export default function N3() {
     setV7Description(viewObject.v7description)
     setV8Description(viewObject.v8description)
     setV9Description(viewObject.v9description)
+
+    setLoaded(true)
   }
   
   if (!isLoaded) {
@@ -78,49 +79,49 @@ export default function N3() {
   } else {
     return (
       <Grid container spacing={6} sx={{mt: 1, mb: 6}}  direction={stackedSelected ? "column" : "row"} alignItems="center" justifyContent="center">
-        <Grid item xs={5} sx={{width: 1000}} hidden={!v1Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v1Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V1 />
             <Typography sx={{mt: 2}}>{v1Description}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{width: 1000}} hidden={!v3Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v3Selected}>
           <Card raised={true} sx={{p: 3}}>
             {/* <V3 /> */}
             <Typography sx={{mt: 2}}>{v3Description}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{width: 1000}} hidden={!v4Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v4Selected}>
           <Card raised={true} sx={{p: 3}}>
             {/* <V4 /> */}
             <Typography sx={{mt: 2}}>{v4Description}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{width: 1000}} hidden={!v5Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v5Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V5 />
             <Typography sx={{mt: 2}}>{v5Description}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{width: 1000}} hidden={!v6Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v6Selected}>
           <Card raised={true} sx={{p: 3}}>
             {/* <V6 /> */}
             <Typography sx={{mt: 2}}>{v6Description}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{width: 1000}} hidden={!v7Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v7Selected}>
           <Card raised={true} sx={{p: 3}}>
             {/* <V7 /> */}
             <Typography sx={{mt: 2}}>{v7Description}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{width: 1000}} hidden={!v8Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v8Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V8 />
             <Typography sx={{mt: 2}}>{v8Description}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{width: 800}} hidden={!v9Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v9Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V9 />
             <Typography sx={{mt: 2}}>{v9Description}</Typography>
@@ -130,30 +131,3 @@ export default function N3() {
     )
   }
 }
-
-
-// {
-//   "id": 29,
-//   "userId": 1,
-//   "url": "4cd61d4d-61c5-4576-9e47-1b205f906abf",
-//   "v1": false,
-//   "v2": false,
-//   "v3": false,
-//   "v4": false,
-//   "v5": false,
-//   "v6": false,
-//   "v7": false,
-//   "v8": false,
-//   "v9": false,
-//   "v10": false,
-//   "v1description": null,
-//   "v3description": null,
-//   "v4description": null,
-//   "v5description": null,
-//   "v6description": null,
-//   "v7description": null,
-//   "v8description": null,
-//   "v9description": null,
-//   "description": "Testi description",
-//   "stacked": false
-// }

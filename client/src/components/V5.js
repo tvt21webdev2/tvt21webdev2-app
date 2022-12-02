@@ -19,47 +19,15 @@ export default function V5() {
   const[v5Data, setV5Data] = useState([])
   const[isLoaded, setIsLoaded] = useState(false)
 
-  const chartRef = useRef(null);
-
-  const handleResetZoom = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.resetZoom();
-    }
-  }
-
-  const handleZoomIn = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.zoom({x: 1.1});
-    }
-  }
-
-  const handleZoomOut = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.zoom({x: 0.9});
-    }
-  }
-
-  const handlePanLeft = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.pan({x: 250}, undefined, 'default');
-    }
-  }
-
-  const handlePanRight = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.pan({x: -250}, undefined, 'default');
-    }
-  }
+  const chartRef = useRef();
 
   useEffect(() => {
     if (!isLoaded) {
       axios.get(urlV5Data)
       .then(response => {
-        let temp = []
-        response.data.forEach(element => {
-          temp.push(element)
-        });
-        setV5Data(temp.reverse())
+        setV5Data(response.data)
+      }).catch(err => {
+        console.log(err);
       })
     }
     setIsLoaded(true)
@@ -159,17 +127,8 @@ export default function V5() {
       <div id='container'>
         <Line ref={chartRef} options={options} data={data} />
         <div id='buttons'>
-          {/* <ChartButtons myRef={chartRef} /> */}
-          <button onClick={handlePanLeft}>Pan left</button>
-          <button onClick={handleZoomOut}>Zoom out</button>
-          <button onClick={handleResetZoom}>Reset Zoom</button>
-          <button onClick={handleZoomIn}>Zoom in</button>
-          <button onClick={handlePanRight}>Pan right</button>
+          <ChartButtons ref={chartRef} />
         </div>
-        {/* <p id='description'>
-          Northern Hemisphere temperature reconstruction for the past 2,000 years by combining low-resolution proxies with tree-ring data, using a wavelet transform technique to achieve timescale-dependent processing of the data.
-          <a href="https://bolin.su.se/data/moberg-2012-nh-1?n=moberg-2005" target="_blank" rel="noreferrer">Source</a>
-        </p> */}
       </div>
     )
   }

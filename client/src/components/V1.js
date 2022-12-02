@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
@@ -6,6 +6,7 @@ import "chartjs-adapter-luxon";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { DateTime } from 'luxon';
 import '../styles/v1.css';
+import ChartButtons from './ChartButtons';
 
 Chart.register(zoomPlugin);
 
@@ -28,102 +29,48 @@ export default function V1() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [v2DataVisible, setV2DataVisible] = useState(true)
   
-  const chartRef = React.useRef(null);
-
-  const handleResetZoom = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.resetZoom();
-    }
-  }
-
-  const handleZoomIn = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.zoom({x: 1.1});
-    }
-  }
-
-  const handleZoomOut = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.zoom({x: 0.9});
-    }
-  }
-
-  const handlePanLeft = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.pan({x: 250}, undefined, 'default');
-    }
-  }
-
-  const handlePanRight = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.pan({x: -250}, undefined, 'default');
-    }
-  }
+  const chartRef = useRef();
 
   useEffect(() => {
     if (!isLoaded) {
       axios.get(urlAnnualGlobal)
       .then(response => {
-        let temp = []
-        response.data.forEach(element => {
-          temp.push(element)
-        });
-        setV1DataAnnualGlobal(temp)
+        setV1DataAnnualGlobal(response.data)
       }).catch(err => {
         console.log(err);
       })
 
       axios.get(urlAnnualNorthern)
       .then(response => {
-        let temp = []
-        response.data.forEach(element => {
-          temp.push(element)
-        });
-        setV1DataAnnualNorthern(temp)
+        setV1DataAnnualNorthern(response.data)
       }).catch(err => {
         console.log(err);
       })
 
       axios.get(urlAnnualSouthern)
       .then(response => {
-        let temp = []
-        response.data.forEach(element => {
-          temp.push(element)
-        });
-        setV1DataAnnualSouthern(temp)
+        setV1DataAnnualSouthern(response.data)
       }).catch(err => {
         console.log(err);
       })
   
       axios.get(urlMonthlyGlobal)
       .then(response => {
-        let temp = []
-        response.data.forEach(element => {
-          temp.push(element)
-        });
-        setV1DataMonthlyGlobal(temp)
+        setV1DataMonthlyGlobal(response.data)
       }).catch(err => {
         console.log(err);
       })
 
       axios.get(urlMonthlyNorthern)
       .then(response => {
-        let temp = []
-        response.data.forEach(element => {
-          temp.push(element)
-        });
-        setV1DataMonthlyNorthern(temp)
+        setV1DataMonthlyNorthern(response.data)
       }).catch(err => {
         console.log(err);
       })
 
       axios.get(urlMonthlySouthern)
       .then(response => {
-        let temp = []
-        response.data.forEach(element => {
-          temp.push(element)
-        });
-        setV1DataMonthlySouthern(temp)
+        setV1DataMonthlySouthern(response.data)
       }).catch(err => {
         console.log(err);
       })
@@ -235,9 +182,6 @@ export default function V1() {
 
   const options = {
     responsive: true,
-    options: {
-      onClick: handleResetZoom(),
-    },
     plugins: {
       zoom: {
         pan: {
@@ -281,7 +225,7 @@ export default function V1() {
           } else if (index === 6 && !ci.isDatasetVisible(6)) {
             setV2DataVisible(false)
           }
-          handleResetZoom()
+          chartRef.current.resetZoom()
         }
       },
     },
@@ -319,16 +263,8 @@ export default function V1() {
       <div id='container'>
         <Line ref={chartRef} options={options} data={data} />
         <div id='buttons'>
-          <button onClick={handlePanLeft}>Pan left</button>
-          <button onClick={handleZoomOut}>Zoom out</button>
-          <button onClick={handleResetZoom}>Reset Zoom</button>
-          <button onClick={handleZoomIn}>Zoom in</button>
-          <button onClick={handlePanRight}>Pan right</button>
+          <ChartButtons ref={chartRef} />
         </div>
-        {/* <p id='description'>
-          The gridded data are a blend of the CRUTEM5 land-surface air temperature dataset and the HadSST4 sea-surface temperature (SST) dataset. The dataset is presented in two ways. First, as with the previous version of the data set, HadCRUT4, data are averaged onto a regular grid with no value provided in grid cells containing no observations. Second, a statistical method has been used to extend coverage in data sparse areas and provide a more globally complete data set.
-          <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" rel="noreferrer">Source</a>
-        </p> */}
       </div>
     )
   }
