@@ -1,0 +1,42 @@
+#view-url {
+  /* width: 500px; */
+  text-align: center;
+}
+
+#switch {
+  margin-left: 10px;
+}
+
+#controls {
+  margin-top: 50px;
+}
+
+#chart-card {
+  text-align: center;
+}
+
+#text-area {
+  min-height: 85px;
+  max-height: 170px;
+}
+
+@media screen and (min-width: 0px) {
+  #text-area {
+    min-width: 390px;
+    max-width: 390px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #text-area {
+    min-width: 590px;
+    max-width: 590px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  #text-area {
+    min-width: 790px;
+    max-width: 790px;
+  }
+}
