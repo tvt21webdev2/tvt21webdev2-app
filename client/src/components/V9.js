@@ -2,7 +2,7 @@ import axios from "axios";
 import {useState, useEffect, useRef} from "react";
 import {Chart} from "chart.js/auto";
 import {Doughnut, getElementAtEvent} from 'react-chartjs-2';
-import generateRandomColor from "./utils";
+import Util from "../util";
 
 function V9() {
 
@@ -13,7 +13,7 @@ function V9() {
   const [chartLevel, setChartLevel] = useState(1);
   const [sectorId, setSectorId] = useState(null);
   const [previousSectorId, setPreviousSectorId] = useState(null);
-  const [sectorColors, setSectorColors] = useState(Array(17).fill().map(() => generateRandomColor()));
+  const [sectorColors, setSectorColors] = useState(Array(17).fill().map(() => Util.generateRandomColor()));
 
   const chartRef = useRef();
 

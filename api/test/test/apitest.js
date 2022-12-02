@@ -20,6 +20,7 @@ describe("api tests", () => {
         .send({
           username: "lol",
           password: psword,
+          passwordAgain: psword,
         })
         .end((err, res) => {
           expect(err).to.be.null;
@@ -34,6 +35,7 @@ describe("api tests", () => {
         .send({
           username: "abcdefghijklmnopqrstu",
           password: psword,
+          passwordAgain: psword,
         })
         .end((err, res) => {
           expect(err).to.be.null;
@@ -49,6 +51,7 @@ describe("api tests", () => {
         .send({
           username: "username!?",
           password: psword,
+          passwordAgain: psword,
         })
         .end((err, res) => {
           expect(err).to.be.null;
@@ -63,6 +66,7 @@ describe("api tests", () => {
         .send({
           username: username,
           password: "Asda1",
+          passwordAgain: "Asda1",
         })
         .end((err, res) => {
           expect(err).to.be.null;
@@ -77,6 +81,7 @@ describe("api tests", () => {
         .send({
           username: username,
           password: "asdas1234",
+          passwordAgain: "asdas1234",
         })
         .end((err, res) => {
           expect(err).to.be.null;
@@ -91,6 +96,7 @@ describe("api tests", () => {
         .send({
           username: username,
           password: "ASDAS1234",
+          passwordAgain: "ASDAS1234",
         })
         .end((err, res) => {
           expect(err).to.be.null;
@@ -105,6 +111,7 @@ describe("api tests", () => {
         .send({
           username: username,
           password: "Asdasdasd",
+          passwordAgain: "Asdasdasd",
         })
         .end((err, res) => {
           expect(err).to.be.null;
@@ -112,7 +119,21 @@ describe("api tests", () => {
           done();
         });
     });
-
+    it("should reject request if passwords do not match", (done) => {
+      chai
+        .request(url)
+        .post("/register")
+        .send({
+          username: username,
+          password: psword,
+          passwordAgain: "thisdoesnotmatch",
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          done();
+        });
+    });
     it("should return status ok if successfully registered", (done) => {
       chai
         .request(url)
@@ -120,6 +141,7 @@ describe("api tests", () => {
         .send({
           username: username,
           password: psword,
+          passwordAgain: psword,
         })
         .end((err, res) => {
           expect(err).to.be.null;
@@ -134,6 +156,7 @@ describe("api tests", () => {
         .send({
           username: username,
           password: psword,
+          passwordAgain: psword,
         })
         .end((err, res) => {
           expect(err).to.be.null;

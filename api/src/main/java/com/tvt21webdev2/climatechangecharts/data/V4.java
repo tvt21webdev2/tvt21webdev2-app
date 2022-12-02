@@ -13,7 +13,7 @@ public class V4 {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @Column(name = "mean_air_age_year_a_d")
-  private int year;
+  private String year;
   @Column(name = "co2_mixing_ratio_ppm")
   private double co2;
   @Column(name = "set")
@@ -21,7 +21,7 @@ public class V4 {
 
   public V4() {}
 
-  public V4(int year, double co2, int set) {
+  public V4(String year, double co2, int set) {
     this.year = year;
     this.co2 = co2;
     this.set = set;
@@ -35,11 +35,11 @@ public class V4 {
     this.id = id;
   }
 
-  public int getYear() {
+  public String getYear() {
     return this.year;
   }
 
-  public void setYear(int year) {
+  public void setYear(String year) {
     this.year = year;
   }
 

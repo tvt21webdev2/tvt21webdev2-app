@@ -10,7 +10,6 @@ import {ClickAwayListener, Popper} from "@mui/material";
 import { Link } from 'react-router-dom';
 import ForestIcon from '@mui/icons-material/Forest';
 
-
 export default function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
 
