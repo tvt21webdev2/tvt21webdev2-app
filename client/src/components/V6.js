@@ -11,11 +11,7 @@ function V6() {
   useEffect(() => {
     axios.get("http://localhost:8080/v6")
     .then(response => {
-      let q = []
-      response.data.forEach(element => {
-        q.push(element)
-      });
-      setV6Data(q)
+      setV6Data(response.data)
     }).catch(err => {
       console.log(err);
     })

@@ -13,33 +13,21 @@ function V7() {
   useEffect(() => {
     axios.get("http://localhost:8080/v6")
     .then(response => {
-      let q = []
-      response.data.forEach(element => {
-        q.push(element)
-      });
-      setV6Data(q)
+      setV6Data(response.data)
     }).catch(err => {
       console.log(err);
     })
 
     axios.get("http://localhost:8080/v7")
     .then(response => {
-      let q = []
-      response.data.forEach(element => {
-        q.push(element)
-      });
-      setV7Data(q)
+      setV7Data(response.data)
     }).catch(err => {
       console.log(err);
     })
 
     axios.get("http://localhost:8080/v10")
     .then(response => {
-      let q = []
-      response.data.forEach(element => {
-        q.push(element)
-      });
-      setV10Data(q)
+      setV10Data(response.data)
     }).catch(err => {
       console.log(err);
     })
