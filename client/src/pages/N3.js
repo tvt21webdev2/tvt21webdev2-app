@@ -71,6 +71,7 @@ export default function N3() {
     setV8Description(viewObject.v8description)
     setV9Description(viewObject.v9description)
 
+    console.log(stackedSelected);
     setLoaded(true)
   }
   
@@ -78,7 +79,7 @@ export default function N3() {
     return <LinearProgress color="secondary" sx={{height: 15}} />
   } else {
     return (
-      <Grid container spacing={6} sx={{mt: 1, mb: 6}}  direction={stackedSelected ? "column" : "row"} alignItems="center" justifyContent="center">
+      <Grid container spacing={6} sx={{mt: 1, mb: 6}}  direction={stackedSelected ? "row" : "column"} alignItems="center" justifyContent="center">
         <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v1Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V1 />

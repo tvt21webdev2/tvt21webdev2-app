@@ -33,7 +33,7 @@ export default function Editor() {
   const [stackedSelected, setStackedSelected] = useState(false)
   const [description, setDescription] = useState("Testi description")
   const [url, setUrl] = useState("")
-  const [user, setUser] = useState({userId: 2, username: "root"})
+  const [user, setUser] = useState({userId: 1, username: "root"})
   const [posted, setPosted] = useState(false)
 
 
