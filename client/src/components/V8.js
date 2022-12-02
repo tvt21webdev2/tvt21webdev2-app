@@ -2,7 +2,7 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 import {Line} from "react-chartjs-2";
 import {Chart} from "chart.js/auto";
-import generateRandomColor from "./utils";
+import Util from "../util";
 
 function V8() {
   const [data, setData] = useState({});
@@ -23,7 +23,7 @@ function V8() {
     return {
       labels: years,
       datasets: countries.map(country => {
-        const color = generateRandomColor();
+        const color = Util.generateRandomColor();
         return {
           label: country,
           data: data.filter(item => country === item.country).map(item => item.emissions),
