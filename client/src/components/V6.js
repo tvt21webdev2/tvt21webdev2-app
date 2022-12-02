@@ -35,10 +35,6 @@ function V6() {
   const options = {
     responsive: true,
     maintainAspectRatio: true,
-    elements: {
-      point:{
-          radius: 0
-      }},
     plugins: {
       title: {
         display: true,

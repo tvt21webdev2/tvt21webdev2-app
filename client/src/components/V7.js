@@ -77,10 +77,6 @@ function V7() {
       intersect: false,
     },
     maintainAspectRatio: true,
-    elements: {
-      point:{
-          radius: 0
-      }},
     plugins: {
       title: {
         display: true,
