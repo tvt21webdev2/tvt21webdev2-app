@@ -1,32 +1,92 @@
-.container {
+.container-n2 {
   position: relative;
+  padding: 0 5%;
   justify-content: center;
+  padding-bottom: 25px;
 }
 
-.container h1 {
+.content-n2 h1 {
   font-size: 6vw;
-  color: black;
+  color: #fff;
   font-weight: 600;
   transition: 0.5s;
   text-align: center;
 }
 
-.container h2 {
+.content-n2 h1:hover {
+  -webkit-text-stroke: 2px #fff;
+  color: transparent;
+}
+
+.content-n2 {
   font-size: 3vw;
-  color: black;
+  color: #fff;;
   font-weight: 600;
   transition: 0.5s;
   text-align: center;
 }
 
 #v8 {
-
+  font-size: 2vw;
+  color: #fff;;
+  font-weight: 600;
+  transition: 0.5s;
+  text-align: center;
   padding: 5%;
 }
 
 #v9 {
+  font-size: 2vw;
+  color: #fff;;
+  font-weight: 600;
+  transition: 0.5s;
+  text-align: center;
   width: 50%;
   height: 50%;
   margin: 0 auto;
   padding: 5%;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .back-video {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .back-video {
+    width: auto;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .content-frontpage h1 {
+    font-size: 46px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .content-frontpage h1 {
+    font-size: 48px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .content-frontpage h1 {
+    font-size: 72px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .content-frontpage h1 {
+    font-size: 106px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .content-frontpage h1 {
+    font-size: 120px;
+  }
 }
