@@ -17,6 +17,10 @@ class Util {
         return "Password should contain at least 8 characters, including one uppercase letter, one lowercase letter and one number";
       case "not matching":
         return "Passwords do not match";
+      case "user doesn't exist":
+        return "Couldn't find your username";
+      case "wrong password":
+        return "Wrong password";
     }
   }
 }

@@ -3,19 +3,37 @@ import Box from "@mui/material/Box";
 import {Alert, Link, Snackbar, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {useState} from "react";
-// import ForgotPassword from "./ForgotPassword";
+import {useEffect, useRef, useState} from "react";
 import SignUp from "./SignUp";
+import axios from "axios";
+import Util from "../util";
+
 
 export default function Login() {
 
+  const URL = "http://localhost:8080/login"
+
   const [login, setLogin] = useState({username: "", password: ""});
-  // const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [errorMessage]);
 
   function handleSubmit(event) {
+    setErrorMessage("");
     event.preventDefault();
-    console.log("LOGIN");
+    (async () => {
+      try {
+        const response = await axios.post(URL, login);
+        console.log(response);
+      } catch (err) {
+        setErrorMessage(err.response.data);
+      }
+    })();
   }
 
   return (
@@ -46,6 +64,9 @@ export default function Login() {
           autoFocus={true}
           value={login.username}
           onChange={(event) => setLogin({...login, username: event.target.value})}
+          error={errorMessage === "user doesn't exist"}
+          helperText={errorMessage === "user doesn't exist" ? Util.selectErrorMessage(errorMessage) : null}
+          inputRef={errorMessage === "user doesn't exist" ? inputRef : null}
         />
         <TextField
           fullWidth={true}
@@ -55,6 +76,9 @@ export default function Login() {
           required={true}
           value={login.password}
           onChange={(event) => setLogin({...login, password: event.target.value})}
+          error={errorMessage === "wrong password"}
+          helperText={errorMessage === "wrong password" ? Util.selectErrorMessage(errorMessage) : null}
+          inputRef={errorMessage === "wrong password" ? inputRef : null}
         />
         <Button
           fullWidth={true}
@@ -65,14 +89,9 @@ export default function Login() {
           Log In
         </Button>
       </Box>
-      {/*<Link underline="none" onClick={() => setForgotPasswordOpen(true)}>*/}
-      {/*  Forgot password?*/}
-      {/*</Link>*/}
       <Link underline="none" onClick={() => setSignUpOpen(true)}>
         Don't have an account? Sign Up
       </Link>
-      {/*<ForgotPassword open={forgotPasswordOpen}*/}
-      {/*                onClose={(reason: "backdropClick") => setForgotPasswordOpen(false)}/>*/}
       <SignUp open={signUpOpen}
               onClose={() => setSignUpOpen(false)}/>
     </Box>

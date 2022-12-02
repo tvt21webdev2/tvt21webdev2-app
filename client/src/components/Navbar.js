@@ -8,7 +8,6 @@ import {useRef, useState} from "react";
 import Login from "./Login";
 import {ClickAwayListener, Popper} from "@mui/material";
 
-
 export default function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
 
