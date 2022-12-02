@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from "@mui/material/Box";
-import {Link, TextField} from "@mui/material";
+import {Alert, Link, Snackbar, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {useState} from "react";
@@ -78,3 +78,7 @@ export default function Login() {
     </Box>
   )
 }
+
+//   <Snackbar open={true} autoHideDuration={5000}>
+//           <Alert variant="filled" severity="success">Registration successful!</Alert>
+//   </Snackbar>

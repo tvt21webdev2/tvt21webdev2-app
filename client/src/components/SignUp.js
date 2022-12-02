@@ -3,8 +3,9 @@ import {Modal, TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import axios from "axios";
+import Util from "../util";
 
 export default function SignUp({open, onClose}) {
 
@@ -12,6 +13,12 @@ export default function SignUp({open, onClose}) {
 
   const [signUp, setSignUp] = useState({username: "", password: "", passwordAgain: ""});
   const [errorMessage, setErrorMessage] = useState("");
+
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [errorMessage]);
 
   function handleSubmit(event) {
     setErrorMessage("");
@@ -25,21 +32,14 @@ export default function SignUp({open, onClose}) {
     })();
   }
 
-  function selectErrorMessage() {
-    switch (errorMessage) {
-      case "name already exists":
-        return "Username already exists";
-      case "username invalid":
-        return "Username should contain 4 to 16 alphanumeric characters";
-      case "password invalid":
-        return "Password should contain at least 8 characters, including one uppercase letter, one lowercase letter and one number";
-      case "not matching":
-        return "Passwords do not match";
-    }
+  function handleClose() {
+    onClose();
+    setErrorMessage("");
+    setSignUp({username: "", password: "", passwordAgain: ""});
   }
 
   return (
-    <Modal open={open} onClose={onClose} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+    <Modal open={open} onClose={handleClose} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
       <Box component="form"
            onSubmit={handleSubmit}
            sx={{
@@ -53,10 +53,12 @@ export default function SignUp({open, onClose}) {
              gap: 2
            }}
       >
+
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
         <TextField
+          inputRef={(errorMessage === "name already exists" || errorMessage === "username invalid") ? inputRef : null}
           id="signup-username"
           name="signup-username"
           label="Username"
@@ -65,9 +67,10 @@ export default function SignUp({open, onClose}) {
           value={signUp.username}
           onChange={(event) => setSignUp({...signUp, username: event.target.value})}
           error={errorMessage === "name already exists" || errorMessage === "username invalid"}
-          helperText={errorMessage === "name already exists" ? selectErrorMessage() : errorMessage === "username invalid" ? selectErrorMessage() : null}
+          helperText={errorMessage === "name already exists" ? Util.selectErrorMessage(errorMessage) : errorMessage === "username invalid" ? Util.selectErrorMessage(errorMessage) : null}
         />
         <TextField
+          inputRef={errorMessage === "password invalid" ? inputRef : null}
           id="signup-password"
           name="signup-password"
           label="Password"
@@ -75,10 +78,11 @@ export default function SignUp({open, onClose}) {
           value={signUp.password}
           onChange={(event) => setSignUp({...signUp, password: event.target.value})}
           error={errorMessage === "password invalid"}
-          helperText={errorMessage === "password invalid" ? selectErrorMessage() : null}
+          helperText={errorMessage === "password invalid" ? Util.selectErrorMessage(errorMessage) : null}
 
         />
         <TextField
+          inputRef={errorMessage === "not matching" ? inputRef : null}
           id="signup-password-again"
           name="signup-password-again"
           label="Confirm password"
@@ -86,7 +90,7 @@ export default function SignUp({open, onClose}) {
           value={signUp.passwordAgain}
           onChange={(event) => setSignUp({...signUp, passwordAgain: event.target.value})}
           error={errorMessage === "not matching"}
-          helperText={errorMessage === "not matching" ? selectErrorMessage() : null}
+          helperText={errorMessage === "not matching" ? Util.selectErrorMessage(errorMessage) : null}
         />
         <Button
           type="submit"
@@ -96,6 +100,8 @@ export default function SignUp({open, onClose}) {
           Sign up
         </Button>
       </Box>
+
     </Modal>
+
   )
 }
