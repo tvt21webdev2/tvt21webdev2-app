@@ -1,0 +1,32 @@
+.container {
+  position: relative;
+  justify-content: center;
+}
+
+.container h1 {
+  font-size: 6vw;
+  color: black;
+  font-weight: 600;
+  transition: 0.5s;
+  text-align: center;
+}
+
+.container h2 {
+  font-size: 3vw;
+  color: black;
+  font-weight: 600;
+  transition: 0.5s;
+  text-align: center;
+}
+
+#v8 {
+
+  padding: 5%;
+}
+
+#v9 {
+  width: 50%;
+  height: 50%;
+  margin: 0 auto;
+  padding: 5%;
+}
