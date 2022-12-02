@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import Frontpage from './pages/Frontpage'
 import Navbar from './components/Navbar';
 import V1 from './components/V1'
+import V4 from './components/V4'
 import V5 from './components/V5';
 import V8 from './components/V8';
 import V9 from './components/V9';
@@ -16,6 +17,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Frontpage />} />
         <Route path="/v1" element={<V1 />} />
+        <Route path="/v4" element={<V4 />} />
         <Route path="/v5" element={<V5 />} />
         <Route path="/v8" element={<V8 />} />
         <Route path="/v9" element={<V9 />} />

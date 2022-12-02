@@ -4,6 +4,7 @@ import { Line } from "react-chartjs-2";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'chartjs-adapter-luxon';
+import Context from "@mui/base/TabsUnstyled/TabsContext";
 
 
 const addressA = 'http://localhost:8080/v3?type=annual';
@@ -14,7 +15,7 @@ const addressA3 = 'http://localhost:8080/v4?set=3';
 const addressE1 = 'http://localhost:8080/v10?year=1000';
 
 
-export default function V3LineGraph() {
+export default function V4() {
 
   const [maunaArray, setmaunaArray] = useState([]);
   const [isLoading, setisLoading] = useState(true);
@@ -116,7 +117,7 @@ export default function V3LineGraph() {
       .then((response) => {
         console.log(response.data)
         setantSet3Array(response.data.map(Ant3 => {
-          return { id: Ant3.id, year: Ant3.year, co2: Ant3.co2 }
+          return { id: Ant3.id, year: Ant3.year, co2: Ant3.co2}
         }))
       }).catch(error => {
         alert(error.response.data.error)
@@ -126,7 +127,6 @@ export default function V3LineGraph() {
     setisLoadingA3(false)
 
   }, [])
-
   useEffect(() => {
 
     console.log(addressE1);
@@ -135,39 +135,38 @@ export default function V3LineGraph() {
     .then(response => {
       let temp = []
       response.data.forEach(element => {
-        element.year = 2022-element.year
+//        element.year = 2022-element.year
         element.year = String(element.year);
         temp.push(element)
       });
-      setevolutionArray(temp)
+      setevolutionArray(temp.map(evo => {
+        return{id: evo.id, year: evo.year, co2: 240, event: evo.event}
+      }))
+
     }).catch(error => {
       alert(error.response.data.error)
     })
+
 
     setisLoadingE1(false)
 
   }, [])
 
-
-  console.log("evolutionArray");
-  console.log(evolutionArray);
-
-
   const data = {
 
     datasets: [{
-      label: 'maunaMonthly',
+      label: 'Monthly Mauna Loa',
       data: maunaArrayM,
       borderColor: "rgb(255, 102, 0)",
-      backgroundColor: "rgba(255, 102, 0, 0.5)",
+      backgroundColor: "rgba(255, 102, 0, 0.3)",
       parsing: {
         xAxisKey: "year",
         yAxisKey: "co2",
       },
-      pointRadius: 1,
+      pointRadius: 2,
     },
     {
-      label: 'maunaAnnual',
+      label: 'Annual Mauna Loa',
       data: maunaArray,
       borderColor: "rgb(204, 0, 204)",
       backgroundColor: "rgba(204, 0, 204, 0.5)",
@@ -175,10 +174,10 @@ export default function V3LineGraph() {
         xAxisKey: "year",
         yAxisKey: "co2",
       },
-      pointRadius: 1,
+      pointRadius: 2,
     },
     {
-      label: 'ice core1',
+      label: 'Antarctic Ice core set 1',
       data: antSet1Array,
       borderColor: "rgb(102, 0, 51)",
       backgroundColor: "rgba(102, 0, 51, 0.5)",
@@ -186,10 +185,10 @@ export default function V3LineGraph() {
         xAxisKey: "year",
         yAxisKey: "co2",
       },
-      pointRadius: 1,
+      pointRadius: 2,
     },
     {
-      label: 'icecore2',
+      label: 'Antarctic Ice core set 2',
       data: antSet2Array,
       borderColor: "rgb(51, 51, 153)",
       backgroundColor: "rgba(51, 51, 153, 0.5)",
@@ -197,10 +196,10 @@ export default function V3LineGraph() {
         xAxisKey: "year",
         yAxisKey: "co2",
       },
-      pointRadius: 1,
+      pointRadius: 2,
     },
     {
-      label: 'icecore3',
+      label: 'Antarctic Ice core set 3',
       data: antSet3Array,
       borderColor: "rgb(0, 102, 204)",
       backgroundColor: "rgba(0, 102, 204, 0.5)",
@@ -208,19 +207,20 @@ export default function V3LineGraph() {
         xAxisKey: "year",
         yAxisKey: "co2",
       },
-      pointRadius: 1,
+      pointRadius: 2,
     },
 
     {
-      label: 'Evolution',
+      label: 'Human evolution and activities',
       data: evolutionArray,
       borderColor: "rgb(0, 102, 204)",
       backgroundColor: "rgba(0, 102, 204, 0.5)",
+      showLine:false,
       parsing: {
         xAxisKey: "year",
-        yAxisKey: "event",
+        yAxisKey: "co2",
       },
-      pointRadius: 1,
+      pointRadius: 4,
     },
     
 
@@ -229,6 +229,7 @@ export default function V3LineGraph() {
 
 
   const options = {
+    animation : false,
     responsive: true,
     plugins: {
       legend: {
@@ -238,12 +239,30 @@ export default function V3LineGraph() {
         display: true,
         text: "Co2 plot",
       },
+      tooltip: {
+
+        callbacks: {
+
+            label: function(context){
+            var seeker = context.datasetIndex;
+            var content;
+            let label = context.dataset.label;
+            if(seeker === 5) {
+              content = context.raw.event;
+            }
+            else{
+              content = context.parsed.y;
+                
+            }
+            return label + ": " + content;
+          }
+
+        }
+      }
     },
     scales: {
 
       x: {
-        min: "1000-01",
-        max: "2030-01",
         type: 'time',
         time: {
           unit: 'month',
@@ -266,9 +285,18 @@ export default function V3LineGraph() {
   }
   else {
     return (
-      <div style={{ width: "1000px" }}>
-        <h2>Mauna Loa and Antarctic ice cores</h2>
+      <div style={{ width: "99%" }}>
+        <h2>Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement</h2>
         <Line options={options} data={data} />
+        <p id="description">
+The graph displays the mean amount of carbon dioxide mixed into the athmosphere over a time period from the year 1006 to 2022 and combines it with significants events of the human history. To cover the phenomenon adequately, the graph uses annual and monthly measurement data from an observatory at Mauna Loa, annual data from a research site in East-Antarctica, as well as the events of the human history presented by the University of Southampton.
+<br></br>
+<a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" rel="noreferrer">Mauna Loa data source</a> --- <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html" target="_blank" rel="noreferrer">description</a> 
+<br></br>
+<a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" rel="noreferrer">Antartic data source</a> --- <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html" target="_blank" rel="noreferrer">description</a> 
+<br></br>
+<a href="https://www.southampton.ac.uk/~cpd/history.html" target="_blank" rel="noreferrer">Human evolution data source</a>
+        </p>
       </div>
     );
   }
