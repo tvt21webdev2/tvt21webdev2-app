@@ -48,5 +48,5 @@ public class V10 {
   public void setEvent(String event) {
     this.event = event;
   }
-  
+
 }
