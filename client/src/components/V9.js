@@ -2,7 +2,7 @@ import axios from "axios";
 import {useState, useEffect, useRef} from "react";
 import {Chart} from "chart.js/auto";
 import {Doughnut, getElementAtEvent} from 'react-chartjs-2';
-import generateRandomColor from "./utils";
+import Util from "../util";
 
 function V9() {
 
@@ -13,7 +13,7 @@ function V9() {
   const [chartLevel, setChartLevel] = useState(1);
   const [sectorId, setSectorId] = useState(null);
   const [previousSectorId, setPreviousSectorId] = useState(null);
-  const [sectorColors, setSectorColors] = useState(Array(17).fill().map(() => generateRandomColor()));
+  const [sectorColors, setSectorColors] = useState(Array(17).fill().map(() => Util.generateRandomColor()));
 
   const chartRef = useRef();
 
@@ -68,20 +68,21 @@ function V9() {
     }
   }
 
-  function handleClick(event) {
-    if (getElementAtEvent(chartRef.current, event).length && event.type === "click") {
+  function handleLeftClick(event) {
+    if (getElementAtEvent(chartRef.current, event).length) {
       setPreviousSectorId(sectorId);
       const elementId = getElementAtEvent(chartRef.current, event)[0].element.$context.raw.id;
       setSectorId(elementId);
       setChartLevel(chartLevel + 1)
       setLoaded(false);
     }
-    if (event.type === "contextmenu") {
-      event.preventDefault();
-      setSectorId(previousSectorId);
-      setChartLevel(chartLevel - 1);
-      setLoaded(false);
-    }
+  }
+
+  function handleRightClick(event) {
+    event.preventDefault();
+    setSectorId(previousSectorId);
+    setChartLevel(chartLevel - 1);
+    setLoaded(false);
   }
 
   return (
@@ -91,8 +92,8 @@ function V9() {
           data={data}
           options={options}
           ref={chartRef}
-          onClick={chartLevel < 3 ? handleClick : null}
-          onContextMenu={chartLevel > 1 ? handleClick : null}
+          onClick={chartLevel < 3 ? handleLeftClick : null}
+          onContextMenu={chartLevel > 1 ? handleRightClick : null}
         />}
     </div>
   );
