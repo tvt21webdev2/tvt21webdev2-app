@@ -1,15 +1,13 @@
-import { Card, CircularProgress, Grid, LinearProgress, Typography } from '@mui/material'
-import { Box } from '@mui/system'
+import { Card, Grid, LinearProgress, Typography } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSearchParams, useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import V1 from '../components/V1'
 import V5 from '../components/V5'
 import V8 from '../components/V8'
 import V9 from '../components/V9'
 
 export default function N3() {
-  const [searchParams] = useSearchParams()
   // const [id, setId] = useState(null)
   const [viewData, setViewData] = useState([])
   const [isLoaded, setLoaded] = useState(false)
@@ -35,10 +33,10 @@ export default function N3() {
   const [v8Selected, setV8Selected] = useState(false)
   const [v9Selected, setV9Selected] = useState(false)
 
+  const params = useParams();
 
   const getData = async () => {
-    const id = searchParams.get("id")
-    const { data } = await axios.get(`http://localhost:8080/view?url=${id}`);
+    const { data } = await axios.get(`http://localhost:8080/${params.id}`);
     setViewData(data);
     setValues(data)
   };
@@ -71,7 +69,6 @@ export default function N3() {
     setV8Description(viewObject.v8description)
     setV9Description(viewObject.v9description)
 
-    console.log(stackedSelected);
     setLoaded(true)
   }
   

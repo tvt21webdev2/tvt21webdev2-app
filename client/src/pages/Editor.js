@@ -37,7 +37,8 @@ export default function Editor() {
   const [posted, setPosted] = useState(false)
 
 
-  const base = "http://localhost:3000/myview?id="
+  // const base = "http://localhost:3000/myview?id="
+  const base = "http://localhost:3000/myview/"
 
   // useEffect(() => {
   //   setUser({userId: 1, username: "root"})
@@ -96,7 +97,6 @@ export default function Editor() {
   function postView() {
     axios.post("http://localhost:8080/view/create", createView())
     .then(response => {
-      console.log(response);
       setUrl(response.data.split(" ")[0])
       setPosted(true)
     })
@@ -153,7 +153,8 @@ export default function Editor() {
           control={<Switch onChange={event => setStackedSelected(event.target.checked)} />} 
           label="Two column view" />
         <Button variant="outlined" onClick={postView} disabled={posted || !check()}>Finish editing</Button>
-        <Link to={`/myview?id=${url}`} hidden={!posted}>
+        {/* <Link to={`/myview?id=${url}`} hidden={!posted}> */}
+        <Link to={`/myview/${url}`} hidden={!posted}>
           <Button
             sx={{ml: 2}} 
             variant="contained" 
