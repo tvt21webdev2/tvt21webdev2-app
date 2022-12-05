@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {Modal, TextField} from "@mui/material";
+import {TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {useEffect, useRef, useState} from "react";
+import {forwardRef, useEffect, useRef, useState} from "react";
 import axios from "axios";
 import Util from "../util";
 
-export default function SignUp({open, onClose}) {
+const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
 
   const URL = "http://localhost:8080/register";
 
@@ -26,20 +26,15 @@ export default function SignUp({open, onClose}) {
     (async () => {
       try {
         await axios.post(URL, signUp);
+        setSnackbarOpen(true);
+        setSignUpOpen(false);
       } catch (err) {
         setErrorMessage(err.response.data);
       }
     })();
   }
 
-  function handleClose() {
-    onClose();
-    setErrorMessage("");
-    setSignUp({username: "", password: "", passwordAgain: ""});
-  }
-
   return (
-    <Modal open={open} onClose={handleClose} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
       <Box component="form"
            onSubmit={handleSubmit}
            sx={{
@@ -53,7 +48,6 @@ export default function SignUp({open, onClose}) {
              gap: 2
            }}
       >
-
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
@@ -100,8 +94,7 @@ export default function SignUp({open, onClose}) {
           Sign up
         </Button>
       </Box>
+  );
+});
 
-    </Modal>
-
-  )
-}
+export default SignUp

@@ -5,12 +5,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {useRef, useState} from "react";
-import Login from "./Login";
 import {ClickAwayListener, Popper} from "@mui/material";
 import { Link } from 'react-router-dom';
 import ForestIcon from '@mui/icons-material/Forest';
 
-export default function Navbar() {
+export default function Navbar({children}) {
   const [showLogin, setShowLogin] = useState(false);
 
   const anchorRef = useRef(null);
@@ -35,7 +34,7 @@ export default function Navbar() {
                 Log in
               </Button>
               <Popper id="login" open={showLogin} anchorEl={anchorRef.current}>
-                <Login/>
+                {children}
               </Popper>
             </div>
           </ClickAwayListener>

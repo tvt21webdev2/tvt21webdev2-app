@@ -1,15 +1,14 @@
 import * as React from 'react';
 import Box from "@mui/material/Box";
-import {Alert, Link, Snackbar, TextField} from "@mui/material";
+import {Link, Modal, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {useEffect, useRef, useState} from "react";
-import SignUp from "./SignUp";
+import {cloneElement, useEffect, useRef, useState} from "react";
 import axios from "axios";
 import Util from "../util";
 
 
-export default function Login() {
+export default function Login({children}) {
 
   const URL = "http://localhost:8080/login"
 
@@ -90,14 +89,11 @@ export default function Login() {
         </Button>
       </Box>
       <Link underline="none" onClick={() => setSignUpOpen(true)}>
-        Don't have an account? Sign Up
+        Don't have an account? Sign up!
       </Link>
-      <SignUp open={signUpOpen}
-              onClose={() => setSignUpOpen(false)}/>
+      <Modal open={signUpOpen} onClose={() => setSignUpOpen(false)} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        {cloneElement(children, {setSignUpOpen})}
+      </Modal>
     </Box>
   )
 }
-
-//   <Snackbar open={true} autoHideDuration={5000}>
-//           <Alert variant="filled" severity="success">Registration successful!</Alert>
-//   </Snackbar>
