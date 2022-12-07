@@ -19,7 +19,7 @@ export default function App() {
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-
+  
   useEffect(() => {
     const user = localStorage.getItem("user");
     console.log(user);
@@ -28,12 +28,11 @@ export default function App() {
     }
   }, []);
 
-
   return (
     <div>
-      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}>
+      <Navbar currentUser={currentUser}>
         {currentUser ?
-          <UserOptions/>
+          <UserOptions setCurrentUser={setCurrentUser}/>
           :
           <Login setCurrentUser={setCurrentUser}>
             <SignUp setSnackbarOpen={setSnackbarOpen}/>
@@ -42,22 +41,21 @@ export default function App() {
       </Navbar>
       <Routes>
         <Route path="/" element={<Frontpage/>}/>
-        <Route path="/n2" element={<N2 />}/>
-        <Route path="/v1" element={<V1 />}/>
+        <Route path="/n2" element={<N2/>}/>
+        <Route path="/v1" element={<V1/>}/>
         {currentUser ?
           <>
-            <Route path="/myview" element={<N3 />}/>
-            <Route path="/editor" element={<Editor />}/>
+            <Route path="/myview" element={<N3/>}/>
+            <Route path="/editor" element={<Editor/>}/>
           </>
           :
           null
         }
-        <Route path='*' element={<Navigate to ='/'/>}/>
+        <Route path='*' element={<Navigate to='/'/>}/>
       </Routes>
       <Snackbar open={snackbarOpen} autoHideDuration={5000} onClose={() => setSnackbarOpen(false)}>
         <Alert variant="filled" severity="success">Registration successful!</Alert>
       </Snackbar>
-
     </div>
   );
 }

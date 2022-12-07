@@ -7,7 +7,6 @@ import {cloneElement, useEffect, useRef, useState} from "react";
 import axios from "axios";
 import Util from "../util";
 
-
 export default function Login({children, setLoginOpen, setCurrentUser}) {
 
   const URL = "http://localhost:8080/login"
@@ -93,7 +92,8 @@ export default function Login({children, setLoginOpen, setCurrentUser}) {
       <Link underline="none" onClick={() => setSignUpOpen(true)}>
         Don't have an account? Sign up!
       </Link>
-      <Modal open={signUpOpen} onClose={() => setSignUpOpen(false)} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      <Modal open={signUpOpen} onClose={() => setSignUpOpen(false)}
+             sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         {cloneElement(children, {setSignUpOpen})}
       </Modal>
     </Box>
