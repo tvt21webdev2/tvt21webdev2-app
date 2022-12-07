@@ -27,6 +27,15 @@ export default function N3() {
   const [v8Description, setV8Description] = useState(null)
   const [v9Description, setV9Description] = useState(null)
 
+  const [v1DescriptionDefault] = useState('Viivagraafi Hadcrut lämpötilatiedoista')
+  const [v3DescriptionDefault] = useState('Viivagraafi Havaijin Mauna Loalla tehdyt ilmakehän hiilidioksidipitoisuuksista. Aikajakso ~65 vuotta.')
+  const [v4DescriptionDefault] = useState('Ilmakehän hiilidioksidipitoisuudet perustuen etelämantereen jääkairauksiin. Aikajakso ~1000 vuotta')
+  const [v5DescriptionDefault] = useState('Viivagraafi ilmakehän hiilidioksidipitoisuuksista perustuen Neuvostoliiton etelämantereen Vostok asemalla tehtyihin jääkairauksiin. Aikajakso ~400000 vuotta.')
+  const [v6DescriptionDefault] = useState('Viivagraafi ilmakehän hiilidioksidipitoisuuksista perustuen yhdistelmätutkimukseen etelmäntereen jääkairauksista. Aikajakso ~800000 vuotta.')
+  const [v7DescriptionDefault] = useState('Moniakselinen viivagraafi lämpötilan ja hiilidioksidipitoisuuksien muutoksista 2 miljoonan vuoden aikana.')
+  const [v8DescriptionDefault] = useState('Pinottu viivagraafi ajan suhteen maakohtaisista co2 päästöistä.')
+  const [v9DescriptionDefault] = useState('Piirakkakaavio hiilidioksidipäästöistä toimialoittain.')
+
   const [v1Selected, setV1Selected] = useState(false)
   const [v3Selected, setV3Selected] = useState(false)
   const [v4Selected, setV4Selected] = useState(false)
@@ -40,6 +49,7 @@ export default function N3() {
 
   const getData = async () => {
     const { data } = await axios.get(`http://localhost:8080/${params.id}`);
+    console.log(data);
     setViewData(data);
     setValues(data)
   };
@@ -80,52 +90,52 @@ export default function N3() {
   } else {
     return (
       <Grid container spacing={6} sx={{mt: 1, mb: 6}}  direction={stackedSelected ? "row" : "column"} alignItems="center" justifyContent="center">
-        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v1Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v1Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V1 />
-            <Typography sx={{mt: 2}}>{v1Description}</Typography>
+            <Typography sx={{mt: 2}}>{v1Description ?? v1DescriptionDefault}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v3Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v3Selected}>
           <Card raised={true} sx={{p: 3}}>
             {/* <V3 /> */}
-            <Typography sx={{mt: 2}}>{v3Description}</Typography>
+            <Typography sx={{mt: 2}}>{v3Description ?? v3DescriptionDefault}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v4Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v4Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V4 />
-            <Typography sx={{mt: 2}}>{v4Description}</Typography>
+            <Typography sx={{mt: 2}}>{v4Description ?? v4DescriptionDefault}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v5Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v5Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V5 />
-            <Typography sx={{mt: 2}}>{v5Description}</Typography>
+            <Typography sx={{mt: 2}}>{v5Description ?? v5DescriptionDefault}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v6Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v6Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V6 />
-            <Typography sx={{mt: 2}}>{v6Description}</Typography>
+            <Typography sx={{mt: 2}}>{v6Description ?? v6DescriptionDefault}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v7Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v7Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V7 />
-            <Typography sx={{mt: 2}}>{v7Description}</Typography>
+            <Typography sx={{mt: 2}}>{v7Description ?? v7DescriptionDefault}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v8Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v8Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V8 />
-            <Typography sx={{mt: 2}}>{v8Description}</Typography>
+            <Typography sx={{mt: 2}}>{v8Description ?? v8DescriptionDefault}</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v9Selected}>
+        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v9Selected}>
           <Card raised={true} sx={{p: 3}}>
             <V9 />
-            <Typography sx={{mt: 2}}>{v9Description}</Typography>
+            <Typography sx={{mt: 2}}>{v9Description ?? v9DescriptionDefault}</Typography>
           </Card>
         </Grid>
       </Grid>

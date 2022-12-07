@@ -20,8 +20,8 @@ export default function Editor() {
   const [v7Description, setV7Description] = useState(null)
   const [v8Description, setV8Description] = useState(null)
   const [v9Description, setV9Description] = useState(null)
+
   const [v1Selected, setV1Selected] = useState(false)
-  // const [v2Selected, setV2Selected] = useState(false)
   const [v3Selected, setV3Selected] = useState(false)
   const [v4Selected, setV4Selected] = useState(false)
   const [v5Selected, setV5Selected] = useState(false)
@@ -29,7 +29,7 @@ export default function Editor() {
   const [v7Selected, setV7Selected] = useState(false)
   const [v8Selected, setV8Selected] = useState(false)
   const [v9Selected, setV9Selected] = useState(false)
-  // const [v10Selected, setV10Selected] = useState(false)
+
   const [stackedSelected, setStackedSelected] = useState(false)
   const [description, setDescription] = useState("Testi description")
   const [url, setUrl] = useState("")
@@ -170,118 +170,118 @@ export default function Editor() {
         <Grid item xs={5}>
           <Card id="chart-card" sx={{ minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450 }} raised={v1Selected} >
             <CardActionArea onClick={() => setV1Selected(v1Selected ? false : true)}>
-              <CardHeader title="V1 chart" subheader="Viivagraafi Hadcrut lämpötilatiedoista sekä Anders Mobergin et al. Paleoklimatologinen tutkimus 2000 vuoden lämpötilatiedoista"/>
-              <CardMedia component="img" height="300" image={ImgV1} alt="V1 Chart" />
+              <CardHeader title="Globaalit pintalämpötilavaihteluilmiöt tammikuusta 1850 lähtien sekä pohjoisen pallonpuoliskon lämpötilat 2000 vuodelta." subheader="V1"/>
+              <CardMedia component="img" height="400" image={ImgV1} alt="V1 Chart" />
             </CardActionArea>
             <TextareaAutosize 
               id="text-area" maxRows={10} 
               aria-label="empty textarea" 
-              placeholder="Write a describing text about this chart here!" 
+              placeholder="Jätä tyhjäksi käyttääksesi oletuskuvausta." 
               onChange={event => setV1Description(event.target.value)}
               hidden={!v1Selected}
             />
           </Card>
         </Grid>
         <Grid item xs={5}>
-          <Card id="chart-card" sx={{ minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450 }} raised={v3Selected} >
+          <Card id="chart-card" sx={{ minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450 }} raised={v3Selected} >
             <CardActionArea onClick={() => setV3Selected(v3Selected ? false : true)}>
-              <CardHeader title="V3 chart" subheader="Viivagraafi Havaijin Mauna Loalla tehdyt ilmakehän hiilidioksidipitoisuuksista. Aikajakso ~65 vuotta sekä ilmakehän hiilidioksidipitoisuudet perustuen etelämantereen jääkairauksiin"/>
-              <CardMedia component="img" height="300" image={ImgV1} alt="V3 Chart" />
+              <CardHeader title="Ilmakehän hiilidioksidipitoisuudet Mauna Loaalta alkaen vuodesta 1958." subheader="V3"/>
+              <CardMedia component="img" height="400" image={ImgV1} alt="V3 Chart" />
             </CardActionArea>
             <TextareaAutosize 
               id="text-area" maxRows={10} 
               aria-label="empty textarea" 
-              placeholder="Write a describing text about this chart here!" 
+              placeholder="Jätä tyhjäksi käyttääksesi oletuskuvausta." 
               onChange={event => setV3Description(event.target.value)}
               hidden={!v3Selected}
             />
           </Card>
         </Grid>
         <Grid item xs={5}>
-          <Card id="chart-card" sx={{ minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450 }} raised={v4Selected} >
+          <Card id="chart-card" sx={{ minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450 }} raised={v4Selected} >
             <CardActionArea onClick={() => setV4Selected(v4Selected ? false : true)}>
-              <CardHeader title="V4 chart" subheader="Ilmakehän hiilidioksidipitoisuudet perustuen etelämantereen jääkairauksiin"/>
-              <CardMedia component="img" height="300" image={ImgV1} alt="V4 Chart" />
+              <CardHeader title="Antarktiset jäämittaukset ilmakehän hiilidioksidipitoisuuksista yhdistettynä Mauna Loan mittauksiin." subheader="V4"/>
+              <CardMedia component="img" height="400" image={ImgV1} alt="V4 Chart" />
             </CardActionArea>
             <TextareaAutosize 
               id="text-area" maxRows={10} 
               aria-label="empty textarea" 
-              placeholder="Write a describing text about this chart here!" 
+              placeholder="Jätä tyhjäksi käyttääksesi oletuskuvausta." 
               onChange={event => setV4Description(event.target.value)}
               hidden={!v4Selected}
             />
           </Card>
         </Grid>
         <Grid item xs={5}>
-          <Card id="chart-card" sx={{ minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450 }} raised={v5Selected} >
+          <Card id="chart-card" sx={{ minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450 }} raised={v5Selected} >
             <CardActionArea onClick={() => setV5Selected(v5Selected ? false : true)}>
-              <CardHeader title="V5 chart" subheader="Viivagraafi ilmakehän hiilidioksidipitoisuuksista perustuen Neuvostoliiton etelämantereen Vostok asemalla tehtyihin jääkairauksiin. Aikajakso ~400000 vuotta."/>
-              <CardMedia component="img" height="300" image={ImgV5} alt="V5 Chart" />
+              <CardHeader title="Vostokin jäämittaukset hiilidioksidipitoisuuksista vuosilta 417160 - 2342 BP" subheader="V5"/>
+              <CardMedia component="img" height="400" image={ImgV5} alt="V5 Chart" />
             </CardActionArea>
             <TextareaAutosize 
               id="text-area" maxRows={10} 
               aria-label="empty textarea" 
-              placeholder="Write a describing text about this chart here!" 
+              placeholder="Jätä tyhjäksi käyttääksesi oletuskuvausta." 
               onChange={event => setV5Description(event.target.value)}
               hidden={!v5Selected}
             />
           </Card>
         </Grid>
         <Grid item xs={5}>
-          <Card id="chart-card" sx={{ minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450 }} raised={v6Selected} >
+          <Card id="chart-card" sx={{ minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450 }} raised={v6Selected} >
             <CardActionArea onClick={() => setV6Selected(v6Selected ? false : true)}>
-              <CardHeader title="V6 chart" subheader="Viivagraafi ilmakehän hiilidioksidipitoisuuksista perustuen yhdistelmätutkimukseen etelmäntereen jääkairauksista. Aikajakso ~800000 vuotta."/>
-              <CardMedia component="img" height="300" image={ImgV1} alt="V6 Chart" />
+              <CardHeader title="Jäämittaukset 800k vuodelta yhdistettynä hiilidioksidimittauksiin." subheader="V6"/>
+              <CardMedia component="img" height="400" image={ImgV1} alt="V6 Chart" />
             </CardActionArea>
             <TextareaAutosize 
               id="text-area" maxRows={10} 
               aria-label="empty textarea" 
-              placeholder="Write a describing text about this chart here!" 
+              placeholder="Jätä tyhjäksi käyttääksesi oletuskuvausta." 
               onChange={event => setV6Description(event.target.value)}
               hidden={!v6Selected}
             />
           </Card>
         </Grid>
         <Grid item xs={5}>
-          <Card id="chart-card" sx={{ minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450 }} raised={v7Selected} >
+          <Card id="chart-card" sx={{ minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450 }} raised={v7Selected} >
             <CardActionArea onClick={() => setV7Selected(v7Selected ? false : true)}>
-              <CardHeader title="V7 chart" subheader="Moniakselinen viivagraafi lämpötilan ja hiilidioksidipitoisuuksien muutoksista 2 miljoonan vuoden aikana."/>
-              <CardMedia component="img" height="300" image={ImgV1} alt="V7 Chart" />
+              <CardHeader title="Globaalin lämpötilan evoluutio viimeisen kahden miljoonan vuoden aikana." subheader="V7"/>
+              <CardMedia component="img" height="400" image={ImgV1} alt="V7 Chart" />
             </CardActionArea>
             <TextareaAutosize 
               id="text-area" maxRows={10} 
               aria-label="empty textarea" 
-              placeholder="Write a describing text about this chart here!" 
+              placeholder="Jätä tyhjäksi käyttääksesi oletuskuvausta." 
               onChange={event => setV7Description(event.target.value)}
               hidden={!v7Selected}
             />
           </Card>
         </Grid>
         <Grid item xs={5}>
-          <Card id="chart-card" sx={{ minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450, mb: 6 }} raised={v8Selected} >
+          <Card id="chart-card" sx={{ minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450, mb: 6 }} raised={v8Selected} >
             <CardActionArea onClick={() => setV8Selected(v8Selected ? false : true)}>
-              <CardHeader title="V8 chart" subheader="Pinottu viivagraafi ajan suhteen maakohtaisista co2 päästöistä."/>
-              <CardMedia component="img" height="300" image={ImgV8} alt="V8 Chart" />
+              <CardHeader title="Hiilidioksidipäästöt maittain." subheader="V8"/>
+              <CardMedia component="img" height="400" image={ImgV8} alt="V8 Chart" />
             </CardActionArea>
             <TextareaAutosize 
               id="text-area" maxRows={10} 
               aria-label="empty textarea" 
-              placeholder="Write a describing text about this chart here!" 
+              placeholder="Jätä tyhjäksi käyttääksesi oletuskuvausta." 
               onChange={event => setV8Description(event.target.value)}
               hidden={!v8Selected}
             />
           </Card>
         </Grid>
         <Grid item xs={5}>
-          <Card id="chart-card" sx={{ minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450, mb: 6 }} raised={v9Selected} >
+          <Card id="chart-card" sx={{ minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450, mb: 6 }} raised={v9Selected} >
             <CardActionArea onClick={() => setV9Selected(v9Selected ? false : true)}>
-              <CardHeader title="V9 chart" subheader="Piirakkakaavio co2 päästöistä toimialoittain."/>
-              <CardMedia component="img" height="300" image={ImgV9} alt="V9 Chart" />
+              <CardHeader title="Hiilidioksidipäästöt sektoreittain." subheader="V9"/>
+              <CardMedia component="img" height="400" image={ImgV9} alt="V9 Chart" />
             </CardActionArea>
             <TextareaAutosize 
               id="text-area" maxRows={10} 
               aria-label="empty textarea" 
-              placeholder="Write a describing text about this chart here!" 
+              placeholder="Jätä tyhjäksi käyttääksesi oletuskuvausta." 
               onChange={event => setV9Description(event.target.value)}
               hidden={!v9Selected}
             />
