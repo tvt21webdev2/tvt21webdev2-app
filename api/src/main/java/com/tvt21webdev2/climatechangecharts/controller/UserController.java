@@ -1,13 +1,9 @@
 package com.tvt21webdev2.climatechangecharts.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.tvt21webdev2.climatechangecharts.data.User;
 import com.tvt21webdev2.climatechangecharts.service.SecurityService;
 import com.tvt21webdev2.climatechangecharts.service.UserService;
 
@@ -15,34 +11,23 @@ import com.tvt21webdev2.climatechangecharts.service.UserService;
 @RestController
 public class UserController {
 
-  private final UserService service;
-  private final SecurityService secService;
+  private final UserService userService;
+  private final SecurityService securityService;
 
-  public UserController(final UserService service, final SecurityService secService) {
-    this.service = service;
-    this.secService = secService;
-  }
-
-  @GetMapping("/user")
-  public List<User> getData(@RequestParam(defaultValue = "empty") String username) {
-    if (!username.equals("empty"))
-      return service.findByUsername(username);
-    return service.findAll();
+  public UserController(final UserService userService, final SecurityService securityService) {
+    this.userService = userService;
+    this.securityService = securityService;
   }
 
   @PostMapping("/user/delete")
-  public ResponseEntity<String> deleteUser(@RequestBody Map<String, String> userMap) {
-    String username = userMap.get("username");
-    String token = userMap.get("token");
-
-    if (secService.validateJwt(token) == null) {
+  public ResponseEntity<String> deleteUser(@CookieValue(name = "token") String token) {
+    //what if multiple tokens in cookies on same computer?
+    String username = securityService.validateJwt(token);
+    if (securityService.validateJwt(username) == null) {
       return new ResponseEntity<>("Token not valid", HttpStatus.UNAUTHORIZED);
     }
-    if (!secService.validateJwt(token).equals(username)) {
-      return new ResponseEntity<>("Username not valid", HttpStatus.UNAUTHORIZED);
-    }
-    if (service.existsByUsername(username)) {
-      service.deleteByUsername(username);
+    if (userService.existsByUsername(username)) {
+      userService.deleteByUsername(username);
       return new ResponseEntity<>("User deleted", HttpStatus.OK);
     } else {
       return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tvt21webdev2.climatechangecharts.data.User;
 import com.tvt21webdev2.climatechangecharts.service.SecurityService;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,7 +50,7 @@ public class SecurityController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<String> login(@RequestBody User user) {
+  public ResponseEntity<String> login(@RequestBody User user, HttpServletResponse response) {
     if (service.checkIfUserExists(user)) {
       if (!service.validateUser(user)) {
         return new ResponseEntity<>("wrong password", HttpStatus.UNAUTHORIZED);
@@ -58,7 +60,15 @@ public class SecurityController {
     }
 
     String token = service.generateJwt(user);
-    return new ResponseEntity<>(token, HttpStatus.OK);
+
+    Cookie cookie = new Cookie("token", token);
+
+    cookie.setMaxAge(7 * 24 * 60 * 60);
+//    cookie.setSecure(true);
+    cookie.setHttpOnly(true);
+    cookie.setPath("/");
+    response.addCookie(cookie);
+    return new ResponseEntity<>("logged in successfully", HttpStatus.OK);
   }
 
 }
