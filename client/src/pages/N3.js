@@ -3,7 +3,10 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import V1 from '../components/V1'
+import V4 from '../components/V4'
 import V5 from '../components/V5'
+import V6 from '../components/V6'
+import V7 from '../components/V7'
 import V8 from '../components/V8'
 import V9 from '../components/V9'
 
@@ -91,7 +94,7 @@ export default function N3() {
         </Grid>
         <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v4Selected}>
           <Card raised={true} sx={{p: 3}}>
-            {/* <V4 /> */}
+            <V4 />
             <Typography sx={{mt: 2}}>{v4Description}</Typography>
           </Card>
         </Grid>
@@ -103,13 +106,13 @@ export default function N3() {
         </Grid>
         <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v6Selected}>
           <Card raised={true} sx={{p: 3}}>
-            {/* <V6 /> */}
+            <V6 />
             <Typography sx={{mt: 2}}>{v6Description}</Typography>
           </Card>
         </Grid>
         <Grid item xs={5} sx={{minWidth: {xs:400, sm: 600, md: 800}, minHeight: 450}} hidden={!v7Selected}>
           <Card raised={true} sx={{p: 3}}>
-            {/* <V7 /> */}
+            <V7 />
             <Typography sx={{mt: 2}}>{v7Description}</Typography>
           </Card>
         </Grid>
