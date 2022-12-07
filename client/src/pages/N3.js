@@ -1,4 +1,4 @@
-import { Card, Grid, LinearProgress, Typography } from '@mui/material'
+import { Card, CardContent, Grid, LinearProgress, TextareaAutosize, Typography } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -9,11 +9,14 @@ import V6 from '../components/V6'
 import V7 from '../components/V7'
 import V8 from '../components/V8'
 import V9 from '../components/V9'
+import '../styles/N3.css'
+
 
 export default function N3() {
   // const [id, setId] = useState(null)
-  const [viewData, setViewData] = useState([])
+  // const [viewData, setViewData] = useState([])
   const [isLoaded, setLoaded] = useState(false)
+  const [isEmptyData, setEmptyData] = useState(false)
 
   const [stackedSelected, setStackedSelected] = useState(false)
   const [description, setDescription] = useState("Testi description")
@@ -50,8 +53,11 @@ export default function N3() {
   const getData = async () => {
     const { data } = await axios.get(`http://localhost:8080/${params.id}`);
     console.log(data);
-    setViewData(data);
-    setValues(data)
+    if (data.length === 0)
+      setEmptyData(true)
+    else
+      setValues(data)
+    // setViewData(data);
   };
 
   useEffect(() => { 
@@ -85,60 +91,78 @@ export default function N3() {
     setLoaded(true)
   }
   
-  if (!isLoaded) {
-    return <LinearProgress color="secondary" sx={{height: 15}} />
-  } else {
+  if (isEmptyData) {
     return (
-      <Grid container spacing={6} sx={{mt: 1, mb: 6}}  direction={stackedSelected ? "row" : "column"} alignItems="center" justifyContent="center">
-        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v1Selected}>
-          <Card raised={true} sx={{p: 3}}>
-            <V1 />
-            <Typography sx={{mt: 2}}>{v1Description ?? v1DescriptionDefault}</Typography>
-          </Card>
+      <Grid container alignItems="center" justifyContent="center" direction={'column'}>
+        <Grid item xs={12}>
+          <h1>404</h1>
         </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v3Selected}>
-          <Card raised={true} sx={{p: 3}}>
-            {/* <V3 /> */}
-            <Typography sx={{mt: 2}}>{v3Description ?? v3DescriptionDefault}</Typography>
-          </Card>
-        </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v4Selected}>
-          <Card raised={true} sx={{p: 3}}>
-            <V4 />
-            <Typography sx={{mt: 2}}>{v4Description ?? v4DescriptionDefault}</Typography>
-          </Card>
-        </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v5Selected}>
-          <Card raised={true} sx={{p: 3}}>
-            <V5 />
-            <Typography sx={{mt: 2}}>{v5Description ?? v5DescriptionDefault}</Typography>
-          </Card>
-        </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v6Selected}>
-          <Card raised={true} sx={{p: 3}}>
-            <V6 />
-            <Typography sx={{mt: 2}}>{v6Description ?? v6DescriptionDefault}</Typography>
-          </Card>
-        </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v7Selected}>
-          <Card raised={true} sx={{p: 3}}>
-            <V7 />
-            <Typography sx={{mt: 2}}>{v7Description ?? v7DescriptionDefault}</Typography>
-          </Card>
-        </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v8Selected}>
-          <Card raised={true} sx={{p: 3}}>
-            <V8 />
-            <Typography sx={{mt: 2}}>{v8Description ?? v8DescriptionDefault}</Typography>
-          </Card>
-        </Grid>
-        <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v9Selected}>
-          <Card raised={true} sx={{p: 3}}>
-            <V9 />
-            <Typography sx={{mt: 2}}>{v9Description ?? v9DescriptionDefault}</Typography>
-          </Card>
+        <Grid item xs={12}>
+          <h2>Näkymää ei voida näyttää</h2>
         </Grid>
       </Grid>
     )
+  } else {
+    if (!isLoaded) {
+      return <LinearProgress color="secondary" sx={{height: 15}} />
+    } else {
+        return (
+          <Grid container spacing={6} sx={{mt: 1, mb: 6}}  direction={stackedSelected ? "row" : "column"} alignItems="center" justifyContent="center">
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v1Selected}>
+              <Card raised={true} sx={{p: 3}}>
+                <V1 />
+                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v1Description ?? v1DescriptionDefault}</Typography>
+                {/* <Text
+                  id="text-area" maxRows={10} 
+                  aria-label="description" 
+                  defaultValue={v1Description ?? v1DescriptionDefault}
+                /> */}
+              </Card>
+            </Grid>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v3Selected}>
+              <Card raised={true} sx={{p: 3}}>
+                {/* <V3 /> */}
+                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v3Description ?? v3DescriptionDefault}</Typography>
+              </Card>
+            </Grid>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v4Selected}>
+              <Card raised={true} sx={{p: 3}}>
+                <V4 />
+                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v4Description ?? v4DescriptionDefault}</Typography>
+              </Card>
+            </Grid>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v5Selected}>
+              <Card raised={true} sx={{p: 3}}>
+                <V5 />
+                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v5Description ?? v5DescriptionDefault}</Typography>
+              </Card>
+            </Grid>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v6Selected}>
+              <Card raised={true} sx={{p: 3}}>
+                <V6 />
+                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v6Description ?? v6DescriptionDefault}</Typography>
+              </Card>
+            </Grid>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v7Selected}>
+              <Card raised={true} sx={{p: 3}}>
+                <V7 />
+                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v7Description ?? v7DescriptionDefault}</Typography>
+              </Card>
+            </Grid>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v8Selected}>
+              <Card raised={true} sx={{p: 3}}>
+                <V8 />
+                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v8Description ?? v8DescriptionDefault}</Typography>
+              </Card>
+            </Grid>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v9Selected}>
+              <Card raised={true} sx={{p: 3}}>
+                <V9 />
+                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v9Description ?? v9DescriptionDefault}</Typography>
+              </Card>
+            </Grid>
+          </Grid>
+        )
+    }
   }
 }
