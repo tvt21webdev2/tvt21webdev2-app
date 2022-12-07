@@ -15,7 +15,7 @@ const addressA3 = 'http://localhost:8080/v4?set=3';
 const addressE1 = 'http://localhost:8080/v10?year=1000';
 
 
-export default function V4() {
+export default function V3() {
 
   const [maunaArray, setmaunaArray] = useState([]);
   const [isLoading, setisLoading] = useState(true);
@@ -235,24 +235,50 @@ export default function V4() {
       },
       title: {
         display: true,
-        text: "Co2 plot",
+        text: "Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement",
       },
       tooltip: {
 
+        tooltipCaretsize: 0,
+
+
         callbacks: {
+
+          beforeLabel: function (context){
+            var seeker = context.datasetIndex;
+            if(seeker === 5){
+              var event = context.dataset.label;
+              return "Events :"+event;
+            }
+          },
+          
 
           label: function (context) {
             var seeker = context.datasetIndex;
             var content;
             let label = context.dataset.label;
             if (seeker === 5) {
-              content = context.raw.event;
+              
+              var chunks = [];
+              var str = context.raw.event;
+              str = str.match(/.{1,75}(?:\s|$)/g);
+
+              str.forEach(mdmg => 
+                {chunks.push(mdmg)
+              });
+
+              content = chunks;
+
+              return content;
+
             }
             else {
               content = context.parsed.y;
 
+              return label + ": " + content;
+
             }
-            return label + ": " + content;
+
           }
 
         }
@@ -284,7 +310,6 @@ export default function V4() {
   else {
     return (
       <div style={{ width: "99%" }}>
-        <h2>Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement</h2>
         <Line options={options} data={data} />
         <p id="description">
           The graph displays the mean amount of carbon dioxide mixed into the athmosphere over a time period from the year 1006 to 2022 and combines it with significants events of the human history. To cover the phenomenon adequately, the graph uses annual and monthly measurement data from an observatory at Mauna Loa, annual data from a research site in East-Antarctica, as well as the events of the human history presented by the University of Southampton.
