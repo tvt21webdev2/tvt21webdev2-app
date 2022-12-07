@@ -13,7 +13,6 @@ function N2() {
 
       <div className='content-n2'>
         <h1>Päästölähteet</h1>
-        <p>Kuvaus: lorem</p>
       </div>
 
       <div id='v8'>
