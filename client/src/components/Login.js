@@ -8,7 +8,7 @@ import axios from "axios";
 import Util from "../util";
 
 
-export default function Login({children}) {
+export default function Login({children, setLoginOpen, setCurrentUser}) {
 
   const URL = "http://localhost:8080/login"
 
@@ -27,8 +27,10 @@ export default function Login({children}) {
     event.preventDefault();
     (async () => {
       try {
-        const response = await axios.post(URL, login);
-        console.log(response);
+        const response = await axios.post(URL, login, {withCredentials: true});
+        localStorage.setItem("user", response.data);
+        setCurrentUser(response.data);
+        setLoginOpen(false);
       } catch (err) {
         setErrorMessage(err.response.data);
       }

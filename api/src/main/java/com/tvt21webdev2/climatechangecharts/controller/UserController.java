@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.tvt21webdev2.climatechangecharts.service.SecurityService;
 import com.tvt21webdev2.climatechangecharts.service.UserService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 public class UserController {
 
@@ -19,11 +19,11 @@ public class UserController {
     this.securityService = securityService;
   }
 
-  @PostMapping("/user/delete")
+  @DeleteMapping("/user/delete")
   public ResponseEntity<String> deleteUser(@CookieValue(name = "token") String token) {
     //what if multiple tokens in cookies on same computer?
     String username = securityService.validateJwt(token);
-    if (securityService.validateJwt(username) == null) {
+    if (username == null) {
       return new ResponseEntity<>("Token not valid", HttpStatus.UNAUTHORIZED);
     }
     if (userService.existsByUsername(username)) {

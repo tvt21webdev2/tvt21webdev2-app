@@ -4,15 +4,33 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {useRef, useState} from "react";
+import {cloneElement, useRef, useState} from "react";
 import {ClickAwayListener, Popper} from "@mui/material";
 import { Link } from 'react-router-dom';
 import ForestIcon from '@mui/icons-material/Forest';
+import axios from "axios";
 
-export default function Navbar({children}) {
-  const [showLogin, setShowLogin] = useState(false);
+export default function Navbar({children, currentUser, setCurrentUser}) {
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [userOptionsOpen, setUserOptionsOpen] = useState(false);
 
   const anchorRef = useRef(null);
+
+  // function handleLogout() {
+  //   localStorage.removeItem("user")
+  //   setCurrentUser(null);
+  // }
+
+  function handleDelete() {
+    (async () => {
+      try {
+        const response = await axios.delete("http://localhost:8080/user/delete", {withCredentials: true});
+        console.log(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }
 
   return (
     <Box sx={{flexGrow: 1}}>
@@ -23,18 +41,25 @@ export default function Navbar({children}) {
               <ForestIcon sx={{ fontSize: 45, color: "#fff", mt: 1 }} />
             </Link>
           </Typography>
-          <ClickAwayListener onClickAway={() => setShowLogin(false)}>
+          <ClickAwayListener onClickAway={() => setLoginOpen(false)}>
             <div>
-              <Link to="/editor">
-                <Button sx={{color: "#fff"}}>
-                  Editor
-                </Button>
-              </Link>
-              <Button color="inherit" onClick={() => setShowLogin(!showLogin)} ref={anchorRef}>
-                Log in
+              {currentUser ?
+                <Link to="/editor">
+                  <Button sx={{color: "#fff"}}>
+                    Editor
+                  </Button>
+                </Link>
+                :
+                null
+              }
+              <Button color="inherit" onClick={() => currentUser ? setUserOptionsOpen(!userOptionsOpen) : setLoginOpen(!loginOpen)} ref={anchorRef}>
+                {currentUser ? currentUser : "Log in" }
               </Button>
-              <Popper id="login" open={showLogin} anchorEl={anchorRef.current}>
-                {children}
+              <Button color="inherit" onClick={handleDelete}>
+                DELETE
+              </Button>
+              <Popper open={currentUser ? userOptionsOpen : loginOpen} anchorEl={anchorRef.current}>
+                {cloneElement(children, currentUser ? {setUserOptionsOpen} : {setLoginOpen})}
               </Popper>
             </div>
           </ClickAwayListener>

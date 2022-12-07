@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 public class SecurityController {
 
@@ -68,7 +68,7 @@ public class SecurityController {
     cookie.setHttpOnly(true);
     cookie.setPath("/");
     response.addCookie(cookie);
-    return new ResponseEntity<>("logged in successfully", HttpStatus.OK);
+    return new ResponseEntity<>(user.getUsername(), HttpStatus.OK);
   }
 
 }
