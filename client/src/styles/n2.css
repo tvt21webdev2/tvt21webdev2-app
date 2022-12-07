@@ -51,11 +51,19 @@
   .content-n2 h1 {
     font-size: 46px;
   }
+  #help {
+    margin: auto;
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 600px) {
   .content-n2 h1 {
     font-size: 48px;
+  }
+  #help {
+    margin: auto;
+    width: 85%;
   }
 }
 
@@ -63,16 +71,28 @@
   .content-n2 h1 {
     font-size: 72px;
   }
+  #help {
+    margin: auto;
+    width: 70%;
+  }
 }
 
 @media screen and (min-width: 1280px) {
   .content-n2 h1 {
     font-size: 106px;
   }
+  #help {
+    margin: auto;
+    width: 50%;
+  }
 }
 
 @media screen and (min-width: 1920px) {
   .content-n2 h1 {
     font-size: 120px;
+  }
+  #help {
+    margin: auto;
+    width: 50%;
   }
 }
