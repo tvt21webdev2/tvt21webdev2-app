@@ -25,24 +25,29 @@
 }
 
 #v8 {
-  font-size: 2vw;
-  color: #fff;;
-  font-weight: 600;
+  color: #000;
+  font-weight: bold;
   transition: 0.5s;
   text-align: center;
-  padding: 5%;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: solid 3px #fff;
+  position: relative;
+  border-radius: 6px;
+  margin: 5%;
 }
 
 #v9 {
-  font-size: 2vw;
-  color: #fff;;
-  font-weight: 600;
+  color: #000;
+  font-weight: bold;
   transition: 0.5s;
   text-align: center;
-  width: 50%;
-  height: 50%;
-  margin: 0 auto;
-  padding: 5%;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: solid 3px #fff;
+  position: relative;
+  border-radius: 6px;
+  margin: 5%;
 }
 
 @media screen and (max-width: 600px) {
