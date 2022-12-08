@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, forwardRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
@@ -124,7 +124,7 @@ export default function V5() {
     )
   } else {
     return (
-      <div id='container'>
+      <div>
         <Line ref={chartRef} options={options} data={data} />
         <div id='buttons'>
           <ChartButtons ref={chartRef} />

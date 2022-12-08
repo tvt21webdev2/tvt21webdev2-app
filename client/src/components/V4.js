@@ -235,7 +235,8 @@ export default function V4() {
       },
       title: {
         display: true,
-        text: "Co2 plot",
+        // text: "Co2 plot",
+        text: "Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement",
       },
       tooltip: {
 
@@ -283,10 +284,10 @@ export default function V4() {
   }
   else {
     return (
-      <div style={{ width: "99%" }}>
-        <h2>Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement</h2>
+      <div>
+        {/* <h2>Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement</h2> */}
         <Line options={options} data={data} />
-        <p id="description">
+        {/* <p id="description">
           The graph displays the mean amount of carbon dioxide mixed into the athmosphere over a time period from the year 1006 to 2022 and combines it with significants events of the human history. To cover the phenomenon adequately, the graph uses annual and monthly measurement data from an observatory at Mauna Loa, annual data from a research site in East-Antarctica, as well as the events of the human history presented by the University of Southampton.
           <br></br>
           <a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" rel="noreferrer">Mauna Loa data source</a> --- <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html" target="_blank" rel="noreferrer">description</a>
@@ -294,7 +295,7 @@ export default function V4() {
           <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" rel="noreferrer">Antartic data source</a> --- <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html" target="_blank" rel="noreferrer">description</a>
           <br></br>
           <a href="https://www.southampton.ac.uk/~cpd/history.html" target="_blank" rel="noreferrer">Human evolution data source</a>
-        </p>
+        </p> */}
       </div>
     );
   }

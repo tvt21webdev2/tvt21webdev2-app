@@ -22,18 +22,18 @@ export default function App() {
     <div>
       <Navbar/>
       <Routes>
-        <Route path="/" element={<Frontpage/>}/>
-        <Route path="/v1" element={<V1/>}/>
+        <Route path="/" element={<Frontpage />} />
+        <Route path="/v1" element={<V1 />} />
         <Route path="/v4" element={<V4 />} />
-        <Route path="/v5" element={<V5/>}/>
+        <Route path="/v5" element={<V5 />} />
         <Route path="/v6" element={<V6 />} />
         <Route path="/v7" element={<V7 />} />
-        <Route path="/v8" element={<V8/>}/>
-        <Route path="/v9" element={<V9/>}/>
+        <Route path="/v8" element={<V8 />} />
+        <Route path="/v9" element={<V9 />} />
         <Route path="/n2" element={<N2 />} />
-        <Route path="/myview" element={<N3 />}/>
-        <Route path="/editor" element={<Editor />}/>
-        <Route path='*' element={<Navigate to ='/'/>}/>
+        <Route path="myview/:id" element={<N3 />} />
+        <Route path="/editor" element={<Editor />} />
+        <Route path='*' element={<Navigate to ='/' />} />
       </Routes>
     </div>
   );
