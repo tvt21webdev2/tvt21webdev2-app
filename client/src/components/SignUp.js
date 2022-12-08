@@ -20,18 +20,16 @@ const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
     inputRef.current?.focus();
   }, [errorMessage]);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     setErrorMessage("");
     event.preventDefault();
-    (async () => {
-      try {
-        await axios.post(URL, signUp);
-        setSnackbarOpen("signup");
-        setSignUpOpen(false);
-      } catch (err) {
-        setErrorMessage(err.response.data);
-      }
-    })();
+    try {
+      await axios.post(URL, signUp);
+      setSnackbarOpen("signup");
+      setSignUpOpen(false);
+    } catch (err) {
+      setErrorMessage(err.response.data);
+    }
   }
 
   return (
@@ -65,6 +63,7 @@ const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
       />
       <TextField
         inputRef={errorMessage === "password invalid" ? inputRef : null}
+        type="password"
         id="signup-password"
         name="signup-password"
         label="Password"
@@ -77,6 +76,7 @@ const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
       />
       <TextField
         inputRef={errorMessage === "not matching" ? inputRef : null}
+        type="password"
         id="signup-password-again"
         name="signup-password-again"
         label="Confirm password"

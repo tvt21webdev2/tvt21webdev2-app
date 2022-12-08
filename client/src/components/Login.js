@@ -7,7 +7,7 @@ import {cloneElement, useEffect, useRef, useState} from "react";
 import axios from "axios";
 import Util from "../util";
 
-export default function Login({children, setLoginOpen, setCurrentUser}) {
+export default function Login({children, setLoginOpen, setCurrentUser, setSnackbarOpen}) {
 
   const URL = "http://localhost:8080/login"
 
@@ -21,19 +21,18 @@ export default function Login({children, setLoginOpen, setCurrentUser}) {
     inputRef.current?.focus();
   }, [errorMessage]);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     setErrorMessage("");
     event.preventDefault();
-    (async () => {
-      try {
-        const response = await axios.post(URL, login, {withCredentials: true});
-        localStorage.setItem("user", response.data);
-        setCurrentUser(response.data);
-        setLoginOpen(false);
-      } catch (err) {
-        setErrorMessage(err.response.data);
-      }
-    })();
+    try {
+      const response = await axios.post(URL, login, {withCredentials: true});
+      localStorage.setItem("user", response.data);
+      setCurrentUser(response.data);
+      setLoginOpen(false);
+      setSnackbarOpen("login");
+    } catch (err) {
+      setErrorMessage(err.response.data);
+    }
   }
 
   return (
@@ -70,6 +69,7 @@ export default function Login({children, setLoginOpen, setCurrentUser}) {
         />
         <TextField
           fullWidth={true}
+          type="password"
           id="password"
           name="password"
           label="Password"

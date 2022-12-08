@@ -28,6 +28,8 @@ class Util {
     switch (snackbarOpen) {
       case "signup":
         return "Registration successful!"
+      case "login":
+        return "Logged in successfully!"
       case "logout":
         return "Logged out successfully!"
       case "deleteuser":

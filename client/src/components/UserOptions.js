@@ -9,30 +9,26 @@ export default function UserOptions({setUserOptionsOpen, setCurrentUser, setSnac
 
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
-  function handleLogOut() {
-    setSnackbarOpen("logout");
-    (async () => {
-      try {
-        await axios.get("http://localhost:8080/logout", {withCredentials: true});
-        localStorage.removeItem("user");
-        setCurrentUser(null);
-        setUserOptionsOpen(false);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
+  async function handleLogOut() {
+    try {
+      await axios.get("http://localhost:8080/logout", {withCredentials: true});
+      localStorage.removeItem("user");
+      setCurrentUser(null);
+      setUserOptionsOpen(false);
+      setSnackbarOpen("logout");
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  function handleDeleteAccount() {
-    (async () => {
-      try {
-        await axios.delete("http://localhost:8080/user/delete", {withCredentials: true});
-        handleLogOut();
-        setSnackbarOpen("deleteuser");
-      } catch (err) {
-        console.log(err);
-      }
-    })();
+  async function handleDeleteAccount() {
+    try {
+      await axios.delete("http://localhost:8080/user/delete", {withCredentials: true});
+      await handleLogOut();
+      setSnackbarOpen("deleteuser");
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

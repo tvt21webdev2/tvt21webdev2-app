@@ -23,7 +23,6 @@ export default function App() {
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    console.log(user);
     if (user) {
       setCurrentUser(user);
     }
@@ -35,7 +34,7 @@ export default function App() {
         {currentUser ?
           <UserOptions setCurrentUser={setCurrentUser} setSnackbarOpen={setSnackbarOpen}/>
           :
-          <Login setCurrentUser={setCurrentUser}>
+          <Login setCurrentUser={setCurrentUser} setSnackbarOpen={setSnackbarOpen}>
             <SignUp setSnackbarOpen={setSnackbarOpen}/>
           </Login>
         }
