@@ -147,7 +147,8 @@ export default function Editor() {
           variant="outlined" 
           value={base + url}
           size={"small"} 
-          InputProps={{endAdornment: <IconButton onClick={copyToClipboard} aria-label="copy"><ContentPasteIcon /></IconButton>}}/>
+          InputProps={{endAdornment: <IconButton onClick={copyToClipboard} aria-label="copy"><ContentPasteIcon /></IconButton>}}
+        />
         <FormControlLabel 
           id="switch" 
           control={<Switch onChange={event => setStackedSelected(event.target.checked)} />} 
@@ -161,6 +162,15 @@ export default function Editor() {
             >View your charts
           </Button> 
         </Link>
+        <Grid item xs={12}>
+          <TextField
+            required={true}
+            sx={{width: 200}} 
+            id="view-name" 
+            variant="outlined" 
+            size={"small"} 
+          />
+        </Grid>
       </Grid>
 
       {/* <Button onClick={debug}>DEBUG</Button> */}
