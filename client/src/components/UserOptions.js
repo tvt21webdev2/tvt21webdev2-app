@@ -2,22 +2,33 @@ import * as React from 'react';
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import axios from "axios";
+import {Dialog, DialogActions, DialogTitle} from "@mui/material";
+import {useState} from "react";
 
-export default function UserOptions({setUserOptionsOpen, setCurrentUser}) {
+export default function UserOptions({setUserOptionsOpen, setCurrentUser, setSnackbarOpen}) {
+
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   function handleLogOut() {
-    localStorage.removeItem("user");
-    setCurrentUser(null);
-    setUserOptionsOpen(false);
-    // logout request
+    setSnackbarOpen("logout");
+    (async () => {
+      try {
+        await axios.get("http://localhost:8080/logout", {withCredentials: true});
+        localStorage.removeItem("user");
+        setCurrentUser(null);
+        setUserOptionsOpen(false);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
   }
 
   function handleDeleteAccount() {
     (async () => {
       try {
         await axios.delete("http://localhost:8080/user/delete", {withCredentials: true});
-        //are you sure -dialog
         handleLogOut();
+        setSnackbarOpen("deleteuser");
       } catch (err) {
         console.log(err);
       }
@@ -35,11 +46,24 @@ export default function UserOptions({setUserOptionsOpen, setCurrentUser}) {
       bgcolor: "pink",
       gap: 2
     }}>
-      <Button onClick={handleDeleteAccount}
+      <Button onClick={() => setDeleteDialogOpen(true)}
               variant="contained"
       >
         Delete account
       </Button>
+      <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
+        <DialogTitle>
+          {"Are you sure you want to delete your account?"}
+        </DialogTitle>
+        <DialogActions>
+          <Button variant="contained" onClick={() => setDeleteDialogOpen(false)}>
+            Cancel
+          </Button>
+          <Button variant="contained" onClick={handleDeleteAccount}>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Button onClick={handleLogOut}
               variant="contained"
       >

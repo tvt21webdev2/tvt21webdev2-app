@@ -21,7 +21,6 @@ public class UserController {
 
   @DeleteMapping("/user/delete")
   public ResponseEntity<String> deleteUser(@CookieValue(name = "token") String token) {
-    //what if multiple tokens in cookies on same computer?
     String username = securityService.validateJwt(token);
     if (username == null) {
       return new ResponseEntity<>("Token not valid", HttpStatus.UNAUTHORIZED);

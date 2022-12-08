@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import com.tvt21webdev2.climatechangecharts.data.View;
 import com.tvt21webdev2.climatechangecharts.service.ViewService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 public class ViewController {
 
@@ -32,7 +32,7 @@ public class ViewController {
   @PostMapping("/view/create")
   public ResponseEntity<String> createView(@RequestBody View view, @CookieValue(name = "token") String token) {
     String username = securityService.validateJwt(token);
-    if (securityService.validateJwt(username) == null) {
+    if (username == null) {
       return new ResponseEntity<>("Token not valid", HttpStatus.UNAUTHORIZED);
     }
     service.saveView(view);
@@ -42,7 +42,7 @@ public class ViewController {
   @PostMapping("/view/delete")
   public ResponseEntity<String> deleteView(@RequestParam(defaultValue = "empty") String id, @CookieValue(name = "token") String token) {
     String username = securityService.validateJwt(token);
-    if (securityService.validateJwt(username) == null) {
+    if (username == null) {
       return new ResponseEntity<>("Token not valid", HttpStatus.UNAUTHORIZED);
     }
     service.deleteById(Long.parseLong(id));

@@ -23,6 +23,17 @@ class Util {
         return "Wrong password";
     }
   }
+
+  static selectAlertMessage(snackbarOpen) {
+    switch (snackbarOpen) {
+      case "signup":
+        return "Registration successful!"
+      case "logout":
+        return "Logged out successfully!"
+      case "deleteuser":
+        return "User deleted successful!"
+    }
+  }
 }
 
 export default Util;
