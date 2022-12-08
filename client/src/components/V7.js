@@ -1,8 +1,8 @@
 import React from "react";
 import axios from 'axios';
-import {useEffect, useState} from 'react';
-import {Line} from 'react-chartjs-2';
-import {Chart, Tooltip} from 'chart.js/auto';
+import { useEffect, useState } from 'react';
+import { Line } from 'react-chartjs-2';
+import { Chart, Tooltip } from 'chart.js/auto';
 
 import 'chartjs-adapter-luxon';
 import Context from "@mui/base/TabsUnstyled/TabsContext";
@@ -15,40 +15,37 @@ function V7() {
 
   useEffect(() => {
     axios.get("http://localhost:8080/v6")
-    .then(response => {
-      console.log(response.data)
-      setV6Data(response.data.map(six => {
-        return { id: six.id, gasAge: six.gasAge, co2: six.co2 }
-      }))
-    }).catch(err => {
-      console.log(err);
-    })
+      .then(response => {
+        setV6Data(response.data.map(six => {
+          return { id: six.id, gasAge: six.gasAge, co2: six.co2 }
+        }))
+      }).catch(err => {
+        console.log(err);
+      })
 
     axios.get("http://localhost:8080/v7")
-    .then(response => {
-      console.log(response.data)
-      setV7Data(response.data.map(seven => {
-        return { id: seven.id, yearBp: seven.yearBp, tempChange: seven.tempChange }
-      }))
-    }).catch(err => {
-      console.log(err);
-    })
+      .then(response => {
+        setV7Data(response.data.map(seven => {
+          return { id: seven.id, yearBp: seven.yearBp, tempChange: seven.tempChange }
+        }))
+      }).catch(err => {
+        console.log(err);
+      })
 
     axios.get("http://localhost:8080/v10")
-    .then(response => {
-      console.log(response.data)
-      setV10Data(response.data.map(evo => {
-        return { id: evo.id, year: evo.year, co2: 0, event: evo.event }
-      }))
-    }).catch(err => {
-      console.log(err);
-    })
+      .then(response => {
+        setV10Data(response.data.map(evo => {
+          return { id: evo.id, year: evo.year, co2: 0, event: evo.event }
+        }))
+      }).catch(err => {
+        console.log(err);
+      })
 
     setLoaded(true)
-  
+
   }, [])
-  
-  
+
+
   const data = {
     datasets: [
       {
@@ -101,31 +98,31 @@ function V7() {
       },
       tooltip: {
         callbacks: {
-        label: function (context) {
-          var seeker = context.datasetIndex;
-          var content;
-          let label = context.dataset.label;
-          if (seeker === 2) {
-            content = context.raw.event;
+          label: function (context) {
+            var seeker = context.datasetIndex;
+            var content;
+            let label = context.dataset.label;
+            if (seeker === 2) {
+              content = context.raw.event;
+            }
+            else {
+              content = context.parsed.y;
+            }
+            return label + ": " + content;
           }
-          else {
-            content = context.parsed.y;
-          }
-          return label + ": " + content;
         }
       }
-      }
     },
-    
+
     scales: {
       x: {
         type: 'linear',
         title: {
           display: true,
           text: "years"
-        } 
+        }
       },
-      
+
       y: {
         type: 'linear',
         position: 'right',
@@ -135,7 +132,7 @@ function V7() {
         },
         grid: {
           drawOnChartArea: false,
-        }, 
+        },
       },
       y1: {
         type: 'linear',
@@ -143,7 +140,7 @@ function V7() {
         title: {
           display: true,
           text: "co2 ppm"
-        } 
+        }
       },
 
       y2: {
