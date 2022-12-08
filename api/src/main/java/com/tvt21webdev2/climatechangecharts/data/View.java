@@ -47,10 +47,9 @@ public class View {
     this.stacked = stacked;
   }
 
-  public View(Long userId, boolean stacked, String description, boolean v1, boolean v3, boolean v4, boolean v5, boolean v6,
+  public View(boolean stacked, String description, boolean v1, boolean v3, boolean v4, boolean v5, boolean v6,
               boolean v7, boolean v8, boolean v9, String v1Description, String v3Description, String v4Description, String v5Description, 
               String v6Description, String v7Description, String v8Description, String v9Description) {
-    this.userId = userId;
     this.stacked = stacked;
     this.description = description;
     this.v1 = v1;
