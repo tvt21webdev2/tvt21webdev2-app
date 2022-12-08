@@ -2,19 +2,18 @@ package com.tvt21webdev2.climatechangecharts.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.tvt21webdev2.climatechangecharts.data.User;
 import com.tvt21webdev2.climatechangecharts.service.SecurityService;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 public class SecurityController {
 
@@ -48,7 +47,7 @@ public class SecurityController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<String> login(@RequestBody User user) {
+  public ResponseEntity<String> login(@RequestBody User user, HttpServletResponse response) {
     if (service.checkIfUserExists(user)) {
       if (!service.validateUser(user)) {
         return new ResponseEntity<>("wrong password", HttpStatus.UNAUTHORIZED);
@@ -58,7 +57,23 @@ public class SecurityController {
     }
 
     String token = service.generateJwt(user);
-    return new ResponseEntity<>(token, HttpStatus.OK);
+
+    Cookie cookie = new Cookie("token", token);
+
+    cookie.setMaxAge(7 * 24 * 60 * 60);
+//    cookie.setSecure(true);
+    cookie.setHttpOnly(true);
+    cookie.setPath("/");
+    response.addCookie(cookie);
+    return new ResponseEntity<>(user.getUsername(), HttpStatus.OK);
+  }
+
+  @GetMapping("/logout")
+  public ResponseEntity<String> logout(HttpServletResponse response) {
+    Cookie cookie = new Cookie("token", "");
+    cookie.setMaxAge(0);
+    response.addCookie(cookie);
+    return new ResponseEntity<>("logged out successfully", HttpStatus.OK);
   }
 
 }

@@ -10,17 +10,30 @@ class Util {
   static selectErrorMessage(errorMessage) {
     switch (errorMessage) {
       case "name already exists":
-        return "Username already exists";
+        return "Antamasi käyttäjänimi on varattu";
       case "username invalid":
-        return "Username should contain 4 to 16 alphanumeric characters";
+        return "Käyttäjänimen täytyy sisältää 4-16 kirjainta ja/tai numeroa";
       case "password invalid":
-        return "Password should contain at least 8 characters, including one uppercase letter, one lowercase letter and one number";
+        return "Salasanan täytyy sisältää vähintään 8 merkkiä, sekä vähintään yksi iso kirjain ja numero";
       case "not matching":
-        return "Passwords do not match";
+        return "Salasanat eivät täsmää";
       case "user doesn't exist":
-        return "Couldn't find your username";
+        return "Tiliä ei löytynyt";
       case "wrong password":
-        return "Wrong password";
+        return "Väärä salasana";
+    }
+  }
+
+  static selectAlertMessage(snackbarOpen) {
+    switch (snackbarOpen) {
+      case "signup":
+        return "Tilin luonti onnistui!"
+      case "login":
+        return "Kirjautuminen onnistui!"
+      case "logout":
+        return "Uloskirjautuminen onnistui!"
+      case "deleteuser":
+        return "Käyttäjän poisto onnistui!"
     }
   }
 }
