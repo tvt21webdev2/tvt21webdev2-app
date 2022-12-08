@@ -108,57 +108,52 @@ export default function N3() {
     } else {
         return (
           <Grid container spacing={6} sx={{mt: 1, mb: 6}}  direction={stackedSelected ? "row" : "column"} alignItems="center" justifyContent="center">
-            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v1Selected}>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v1Selected}>
               <Card raised={true} sx={{p: 3}}>
                 <V1 />
-                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v1Description ?? v1DescriptionDefault}</Typography>
-                {/* <Text
-                  id="text-area" maxRows={10} 
-                  aria-label="description" 
-                  defaultValue={v1Description ?? v1DescriptionDefault}
-                /> */}
+                <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v1Description ?? v1DescriptionDefault}</Typography>
               </Card>
             </Grid>
-            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v3Selected}>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v3Selected}>
               <Card raised={true} sx={{p: 3}}>
                 {/* <V3 /> */}
-                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v3Description ?? v3DescriptionDefault}</Typography>
+                <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v3Description ?? v3DescriptionDefault}</Typography>
               </Card>
             </Grid>
-            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v4Selected}>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v4Selected}>
               <Card raised={true} sx={{p: 3}}>
                 <V4 />
-                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v4Description ?? v4DescriptionDefault}</Typography>
+                <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v4Description ?? v4DescriptionDefault}</Typography>
               </Card>
             </Grid>
-            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v5Selected}>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v5Selected}>
               <Card raised={true} sx={{p: 3}}>
                 <V5 />
-                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v5Description ?? v5DescriptionDefault}</Typography>
+                <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v5Description ?? v5DescriptionDefault}</Typography>
               </Card>
             </Grid>
-            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v6Selected}>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v6Selected}>
               <Card raised={true} sx={{p: 3}}>
                 <V6 />
-                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v6Description ?? v6DescriptionDefault}</Typography>
+                <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v6Description ?? v6DescriptionDefault}</Typography>
               </Card>
             </Grid>
-            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v7Selected}>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v7Selected}>
               <Card raised={true} sx={{p: 3}}>
                 <V7 />
-                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v7Description ?? v7DescriptionDefault}</Typography>
+                <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v7Description ?? v7DescriptionDefault}</Typography>
               </Card>
             </Grid>
-            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v8Selected}>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v8Selected}>
               <Card raised={true} sx={{p: 3}}>
                 <V8 />
-                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v8Description ?? v8DescriptionDefault}</Typography>
+                <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v8Description ?? v8DescriptionDefault}</Typography>
               </Card>
             </Grid>
-            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 450}} hidden={!v9Selected}>
+            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v9Selected}>
               <Card raised={true} sx={{p: 3}}>
                 <V9 />
-                <Typography sx={{mt: 2, width: {xs: 400, sm: 600, md: 800}}}>{v9Description ?? v9DescriptionDefault}</Typography>
+                <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v9Description ?? v9DescriptionDefault}</Typography>
               </Card>
             </Grid>
           </Grid>

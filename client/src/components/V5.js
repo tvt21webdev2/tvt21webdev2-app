@@ -124,7 +124,7 @@ export default function V5() {
     )
   } else {
     return (
-      <div id='container'>
+      <div>
         <Line ref={chartRef} options={options} data={data} />
         <div id='buttons'>
           <ChartButtons ref={chartRef} />
