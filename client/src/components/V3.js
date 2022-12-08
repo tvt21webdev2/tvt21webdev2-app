@@ -1,11 +1,14 @@
 import React from "react";
-import { Chart } from "chart.js/auto";
+import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef} from 'react';
 import axios from 'axios';
 import 'chartjs-adapter-luxon';
-import Context from "@mui/base/TabsUnstyled/TabsContext";
+import ChartButtons from './ChartButtons';
+import zoomPlugin from 'chartjs-plugin-zoom';
+import { minHeight } from "@mui/system";
 
+Chart.register(zoomPlugin);
 
 const addressA = 'http://localhost:8080/v3?type=annual';
 const addressM = 'http://localhost:8080/v3?type=monthly';
@@ -29,6 +32,8 @@ export default function V3() {
   const [isLoadingA3, setisLoadingA3] = useState(true);
   const [evolutionArray, setevolutionArray] = useState([]);
   const [isLoadingE1, setisLoadingE1] = useState(true);
+
+  const chartRef = useRef();
 
   useEffect(() => {
 
@@ -227,12 +232,49 @@ export default function V3() {
 
 
   const options = {
+    maintainAspectRatio: false,
     animation: false,
     responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
+    plugins: { 
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'xy',
+        },
+        limits: {
+          x: 
+          {          
+          min: new Date('1000-01-01T00:00:00').valueOf(),
+          max: new Date('2022-09-01T00:00:00').valueOf()
+          },
+          y: {min: 240, max: 440}
+        },
+        zoom: {
+          pinch: {
+            enabled: true
+          },
+          wheel: {
+            enabled: true,
+          },
+          mode: 'x',
+        },
       },
+      
+      legend: {
+        onClick: function(e, legendItem, legend) {
+          const index = legendItem.datasetIndex;
+          const ci = legend.chart;
+          if (ci.isDatasetVisible(index)) {
+              ci.hide(index);
+              legendItem.hidden = true;
+          } else {
+              ci.show(index);
+              legendItem.hidden = false;
+          }
+          chartRef.current.resetZoom()
+        }
+      },
+      
       title: {
         display: true,
         text: "Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement",
@@ -309,8 +351,11 @@ export default function V3() {
   }
   else {
     return (
-      <div style={{ width: "99%" }}>
-        <Line options={options} data={data} />
+      <div style={{ textAlign:"center", minHeight: "20vh",maxHeight:"50vh" }}>
+        <Line ref={chartRef} options={options} data={data} />
+        <div id='buttons'>
+          <ChartButtons ref={chartRef} />
+        </div>
         <p id="description">
           The graph displays the mean amount of carbon dioxide mixed into the athmosphere over a time period from the year 1006 to 2022 and combines it with significants events of the human history. To cover the phenomenon adequately, the graph uses annual and monthly measurement data from an observatory at Mauna Loa, annual data from a research site in East-Antarctica, as well as the events of the human history presented by the University of Southampton.
           <br></br>
