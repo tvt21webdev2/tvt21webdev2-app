@@ -58,10 +58,6 @@ function V9() {
     responsive: true,
     maintainAspectRatio: true,
     plugins: {
-      title: {
-        display: true,
-        text: "CO2 emissions by sectors"
-      },
       legend: {
         position: "top"
       }
