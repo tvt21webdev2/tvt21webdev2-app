@@ -26,9 +26,9 @@ KUVA 2. EER-kaavio sovelluksen tietokantarakenteesta
 Projektin eri osa-alueiden sisältämät työtehtävät pyrittiin jakamaan mahdollisimman tasaisesti kaikkien osallistujien kesken. Projektin jokainen tekijä toimi full stack -kehittäjänä osallistuen projektin jokaiseen vaiheeseen. 
 
 Olli Petäjäniemi, [Github](https://github.com/petajaol)
-Teea Põldsam, [Github](https://github.com/tpoldsam) 
-Johannes Rantapää, [Github](https://github.com/Necromunda) 
-Perttu Vehviläinen, [Github](https://github.com/Penamonni) 
+<br>Teea Põldsam, [Github](https://github.com/tpoldsam) 
+<br>Johannes Rantapää, [Github](https://github.com/Necromunda) 
+<br>Perttu Vehviläinen, [Github](https://github.com/Penamonni) 
 
 ## Käyttöönotto
 
