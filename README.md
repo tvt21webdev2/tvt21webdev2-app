@@ -42,7 +42,7 @@ Tietokantapalvelin toimii oletuksena osoitteessa https://localhost:3006.
 
 Backend-palvelin toimii oletuksena osoitteessa https://localhost:8080.
 
-### Frontending käynnistys
+### Frontendin käynnistys
 
 Siirry client-hakemistoon: `cd client`. 
 
