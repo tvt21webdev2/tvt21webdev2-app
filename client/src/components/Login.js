@@ -43,7 +43,7 @@ export default function Login({children, setLoginOpen, setCurrentUser, setSnackb
       p: 3,
       border: 1,
       borderRadius: "10px",
-      bgcolor: "pink",
+      bgcolor: "#FFFFFF",
       gap: 2
     }}
     >

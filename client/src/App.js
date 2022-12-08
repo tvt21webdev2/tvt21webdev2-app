@@ -9,7 +9,7 @@ import {Alert, Snackbar} from '@mui/material';
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import UserOptions from "./components/UserOptions";
-// import './styles/App.css';
+import './styles/App.css';
 import Util from "./util";
 
 // https://stackoverflow.com/questions/66289122/how-to-create-a-protected-route/66289280#66289280
