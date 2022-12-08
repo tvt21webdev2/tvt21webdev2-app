@@ -2,6 +2,7 @@ package com.tvt21webdev2.climatechangecharts.controller;
 
 import java.util.List;
 
+import com.tvt21webdev2.climatechangecharts.service.SecurityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,14 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import com.tvt21webdev2.climatechangecharts.data.View;
 import com.tvt21webdev2.climatechangecharts.service.ViewService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 public class ViewController {
 
   private final ViewService service;
+  private final SecurityService securityService;
 
-  public ViewController(final ViewService service) {
+  public ViewController(final ViewService service, final SecurityService securityService) {
     this.service = service;
+    this.securityService = securityService;
   }
 
   @GetMapping("/view")
@@ -27,14 +30,21 @@ public class ViewController {
   }
 
   @PostMapping("/view/create")
-  public ResponseEntity<String> createView(@RequestBody View view) {
+  public ResponseEntity<String> createView(@RequestBody View view, @CookieValue(name = "token") String token) {
+    String username = securityService.validateJwt(token);
+    if (username == null) {
+      return new ResponseEntity<>("Token not valid", HttpStatus.UNAUTHORIZED);
+    }
     service.saveView(view);
     return new ResponseEntity<>(view.getUrl() + " created successfully", HttpStatus.OK);
   }
 
   @PostMapping("/view/delete")
-  public ResponseEntity<String> deleteView(@RequestParam(defaultValue = "empty") String id) {
-    
+  public ResponseEntity<String> deleteView(@RequestParam(defaultValue = "empty") String id, @CookieValue(name = "token") String token) {
+    String username = securityService.validateJwt(token);
+    if (username == null) {
+      return new ResponseEntity<>("Token not valid", HttpStatus.UNAUTHORIZED);
+    }
     service.deleteById(Long.parseLong(id));
     return new ResponseEntity<>("View deleted", HttpStatus.OK);
   }

@@ -33,10 +33,7 @@ public class SecurityService {
   }
 
   public boolean checkIfUserExists(User user) {
-    if (repository.existsByUsername(user.getUsername())) {
-      return true;
-    }
-    return false;
+    return repository.existsByUsername(user.getUsername());
   }
 
   public boolean validateUser(User user) {
@@ -44,10 +41,7 @@ public class SecurityService {
     List<User> users = repository.findByUsername(user.getUsername());
     try {
       User userFromRepo = users.size() > 0 ? users.get(0) : null;
-      if (userFromRepo == null || !service.matches(user.getPassword(), userFromRepo.getPassword())) {
-        return false;
-      }
-      return true;
+      return userFromRepo != null && service.matches(user.getPassword(), userFromRepo.getPassword());
     } catch (IndexOutOfBoundsException e) {
       e.printStackTrace();
       return false;
@@ -59,12 +53,11 @@ public class SecurityService {
     return JWT.create().withSubject(user.getUsername()).sign(alg);
   }
 
-  public String validateJwt(String jwtToken) {
+  public String validateJwt(String token) {
     Algorithm alg = Algorithm.HMAC256(jwtKey);
     JWTVerifier verifier = JWT.require(alg).build();
-
     try {
-      DecodedJWT jwt = verifier.verify(jwtToken);
+      DecodedJWT jwt = verifier.verify(token);
       return jwt.getSubject();
     } catch (JWTVerificationException e) {
       e.printStackTrace();
