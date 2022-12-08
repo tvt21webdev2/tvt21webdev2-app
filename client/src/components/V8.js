@@ -43,10 +43,6 @@ function V8() {
         position: "top",
         // position: "right",
       },
-      title: {
-        display: true,
-        text: "CO2 emissions by country",
-      },
     },
     scales: {
       co2: {
