@@ -19,26 +19,42 @@ export default function Navbar({children, currentUser}) {
     <Box sx={{flexGrow: 1}}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+          <Typography variant="h6" component="div">
             <Link to="/">
               <ForestIcon sx={{fontSize: 45, color: "#fff", mt: 1}}/>
             </Link>
           </Typography>
-          <ClickAwayListener onClickAway={() => currentUser ? setUserOptionsOpen(false) : setLoginOpen(false)}>
-            <div>
-              {currentUser ?
-                <Link to="/editor">
+          <Typography sx={{ml: 3, flexGrow: 1}}>
+            <Link to="/n2">
+              <Button sx={{color: "#fff"}}>
+                N2
+              </Button>
+            </Link>
+            {currentUser ?
+              <>
+                <Link to="/customviews">
                   <Button sx={{color: "#fff"}}>
-                    Editor
+                    Omat Näkymät
                   </Button>
                 </Link>
-                :
-                null
-              }
+                <Link to="/editor">
+                  <Button sx={{color: "#fff"}}>
+                    Luo Näkymä
+                  </Button>
+                </Link>
+
+              </>
+
+              :
+              null
+            }
+          </Typography>
+          <ClickAwayListener onClickAway={() => currentUser ? setUserOptionsOpen(false) : setLoginOpen(false)}>
+            <div>
               <Button color="inherit"
                       onClick={() => currentUser ? setUserOptionsOpen(!userOptionsOpen) : setLoginOpen(!loginOpen)}
                       ref={anchorRef}>
-                {currentUser ? currentUser : "Log in"}
+                {currentUser ? currentUser : "Kirjaudu sisään"}
               </Button>
               <Popper open={currentUser ? userOptionsOpen : loginOpen} anchorEl={anchorRef.current}>
                 {cloneElement(children, currentUser ? {setUserOptionsOpen} : {setLoginOpen})}

@@ -44,26 +44,27 @@ export default function UserOptions({setUserOptionsOpen, setCurrentUser, setSnac
     }}>
       <Button onClick={() => setDeleteDialogOpen(true)}
               variant="contained"
+              color="warning"
       >
-        Delete account
+        Poista tili
       </Button>
       <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
         <DialogTitle>
-          {"Are you sure you want to delete your account?"}
+          {"Oletko varma, että haluat poistaa tilin?"}
         </DialogTitle>
         <DialogActions>
           <Button variant="contained" onClick={() => setDeleteDialogOpen(false)}>
-            Cancel
+            Peruuta
           </Button>
-          <Button variant="contained" onClick={handleDeleteAccount}>
-            Confirm
+          <Button variant="contained" onClick={handleDeleteAccount} color="warning">
+            Vahvista
           </Button>
         </DialogActions>
       </Dialog>
       <Button onClick={handleLogOut}
               variant="contained"
       >
-        Log out
+        Kirjaudu ulos
       </Button>
     </Box>
   )

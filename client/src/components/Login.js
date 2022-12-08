@@ -48,7 +48,7 @@ export default function Login({children, setLoginOpen, setCurrentUser, setSnackb
     }}
     >
       <Typography component="h1" variant="h5">
-        Log in
+        Kirjaudu sisään
       </Typography>
       <Box component="form"
            onSubmit={handleSubmit}
@@ -58,7 +58,7 @@ export default function Login({children, setLoginOpen, setCurrentUser, setSnackb
           fullWidth={true}
           id="username"
           name="username"
-          label="Username"
+          label="Käyttäjätunnus"
           required={true}
           autoFocus={true}
           value={login.username}
@@ -72,7 +72,7 @@ export default function Login({children, setLoginOpen, setCurrentUser, setSnackb
           type="password"
           id="password"
           name="password"
-          label="Password"
+          label="Salasana"
           required={true}
           value={login.password}
           onChange={(event) => setLogin({...login, password: event.target.value})}
@@ -86,11 +86,11 @@ export default function Login({children, setLoginOpen, setCurrentUser, setSnackb
           variant="contained"
           sx={{mt: 3, mb: 2}}
         >
-          Log In
+          Kirjaudu
         </Button>
       </Box>
       <Link underline="none" onClick={() => setSignUpOpen(true)}>
-        Don't have an account? Sign up!
+        Ei vielä tiliä? Luo tili täällä!
       </Link>
       <Modal open={signUpOpen} onClose={() => setSignUpOpen(false)}
              sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>

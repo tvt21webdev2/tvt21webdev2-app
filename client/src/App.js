@@ -8,7 +8,6 @@ import N3 from './pages/N3';
 import {Alert, Snackbar} from '@mui/material';
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
-import V1 from "./components/V1";
 import UserOptions from "./components/UserOptions";
 // import './styles/App.css';
 import Util from "./util";
@@ -42,10 +41,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Frontpage/>}/>
         <Route path="/n2" element={<N2/>}/>
-        <Route path="/v1" element={<V1/>}/>
         {currentUser ?
           <>
-            <Route path="/myview" element={<N3/>}/>
+            <Route path="/customviews" element={<N3/>}/>
             <Route path="/editor" element={<Editor/>}/>
           </>
           :

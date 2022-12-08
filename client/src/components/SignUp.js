@@ -47,13 +47,13 @@ const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
          }}
     >
       <Typography component="h1" variant="h5">
-        Sign up
+        Luo tili
       </Typography>
       <TextField
         inputRef={(errorMessage === "name already exists" || errorMessage === "username invalid") ? inputRef : null}
         id="signup-username"
         name="signup-username"
-        label="Username"
+        label="Käyttäjätunnus"
         required={true}
         autoFocus={true}
         value={signUp.username}
@@ -66,7 +66,7 @@ const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
         type="password"
         id="signup-password"
         name="signup-password"
-        label="Password"
+        label="Salasana"
         required={true}
         value={signUp.password}
         onChange={(event) => setSignUp({...signUp, password: event.target.value})}
@@ -79,7 +79,7 @@ const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
         type="password"
         id="signup-password-again"
         name="signup-password-again"
-        label="Confirm password"
+        label="Vahvista salasana"
         required={true}
         value={signUp.passwordAgain}
         onChange={(event) => setSignUp({...signUp, passwordAgain: event.target.value})}
@@ -91,7 +91,7 @@ const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
         variant="contained"
         sx={{mt: 2, mb: 2}}
       >
-        Sign up
+        Luo tili
       </Button>
     </Box>
   );
