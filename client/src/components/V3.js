@@ -276,7 +276,7 @@ export default function V3() {
       },
       
       title: {
-        display: true,
+        display: false,
         text: "Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement",
       },
       tooltip: {

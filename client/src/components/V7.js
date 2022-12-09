@@ -93,7 +93,7 @@ function V7() {
     maintainAspectRatio: true,
     plugins: {
       title: {
-        display: true,
+        display: false,
         text: "Ice core 800k year composite study CO2 measurements and Evolution of global temperature over the past two million years and Human evolution and activities",
       },
       tooltip: {
