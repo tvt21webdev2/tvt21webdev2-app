@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import V1 from '../components/V1'
-import V4 from '../components/V4'
+import V3 from '../components/V3'
 import V5 from '../components/V5'
 import V6 from '../components/V6'
 import V7 from '../components/V7'
@@ -18,12 +18,12 @@ export default function N3() {
   const [isLoaded, setLoaded] = useState(false)
   const [isEmptyData, setEmptyData] = useState(false)
 
-  const [stackedSelected, setStackedSelected] = useState(false)
+  const [stackedSelected, setStackedSelected] = useState(true)
   const [description, setDescription] = useState(null)
 
   const [v1Desc, setV1Desc] = useState(null)
   const [v3Desc, setV3Desc] = useState(null)
-  const [v4Desc, setV4Desc] = useState(null)
+  // const [v4Desc, setV4Desc] = useState(null)
   const [v5Desc, setV5Desc] = useState(null)
   const [v6Desc, setV6Desc] = useState(null)
   const [v7Desc, setV7Desc] = useState(null)
@@ -32,7 +32,7 @@ export default function N3() {
 
   const [v1Selected, setV1Selected] = useState(false)
   const [v3Selected, setV3Selected] = useState(false)
-  const [v4Selected, setV4Selected] = useState(false)
+  // const [v4Selected, setV4Selected] = useState(false)
   const [v5Selected, setV5Selected] = useState(false)
   const [v6Selected, setV6Selected] = useState(false)
   const [v7Selected, setV7Selected] = useState(false)
@@ -41,7 +41,7 @@ export default function N3() {
 
   const [v1DescDefault] = useState('Viivagraafi Hadcrut lämpötilatiedoista')
   const [v3DescDefault] = useState('Viivagraafi Havaijin Mauna Loalla tehdyt ilmakehän hiilidioksidipitoisuuksista. Aikajakso ~65 vuotta.')
-  const [v4DescDefault] = useState('Ilmakehän hiilidioksidipitoisuudet perustuen etelämantereen jääkairauksiin. Aikajakso ~1000 vuotta')
+  // const [v4DescDefault] = useState('Ilmakehän hiilidioksidipitoisuudet perustuen etelämantereen jääkairauksiin. Aikajakso ~1000 vuotta')
   const [v5DescDefault] = useState('Viivagraafi ilmakehän hiilidioksidipitoisuuksista perustuen Neuvostoliiton etelämantereen Vostok asemalla tehtyihin jääkairauksiin. Aikajakso ~400000 vuotta.')
   const [v6DescDefault] = useState('Viivagraafi ilmakehän hiilidioksidipitoisuuksista perustuen yhdistelmätutkimukseen etelmäntereen jääkairauksista. Aikajakso ~800000 vuotta.')
   const [v7DescDefault] = useState('Moniakselinen viivagraafi lämpötilan ja hiilidioksidipitoisuuksien muutoksista 2 miljoonan vuoden aikana.')
@@ -73,7 +73,7 @@ export default function N3() {
 
     setV1Selected(viewObject.v1)
     setV3Selected(viewObject.v3)
-    setV4Selected(viewObject.v4)
+    // setV4Selected(viewObject.v4)
     setV5Selected(viewObject.v5)
     setV6Selected(viewObject.v6)
     setV7Selected(viewObject.v7)
@@ -81,8 +81,8 @@ export default function N3() {
     setV9Selected(viewObject.v9)
 
     setV1Desc(viewObject.v1description)
-    setV4Desc(viewObject.v4description)
     setV3Desc(viewObject.v3description)
+    // setV4Desc(viewObject.v4description)
     setV5Desc(viewObject.v5description)
     setV6Desc(viewObject.v6description)
     setV7Desc(viewObject.v7description)
@@ -108,7 +108,7 @@ export default function N3() {
       return <LinearProgress color="secondary" sx={{height: 15}} />
     } else {
         return (
-          <Grid container spacing={6} sx={{mt: 1, mb: 6}}  direction={stackedSelected ? "row" : "column"} alignItems="center" justifyContent="center">
+          <Grid container spacing={6} sx={{mt: 1, mb: 6}}  direction={!stackedSelected ? "row" : "column"} alignItems="center" justifyContent="center">
             <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v1Selected}>
               <Card raised={true} sx={{p: 3}}>
                 <V1 />
@@ -117,16 +117,16 @@ export default function N3() {
             </Grid>
             <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v3Selected}>
               <Card raised={true} sx={{p: 3}}>
-                {/* <V3 /> */}
+                <V3 />
                 <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v3Desc ?? v3DescDefault}</Typography>
               </Card>
             </Grid>
-            <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v4Selected}>
+            {/* <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v4Selected}>
               <Card raised={true} sx={{p: 3}}>
                 <V4 />
                 <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v4Desc ?? v4DescDefault}</Typography>
               </Card>
-            </Grid>
+            </Grid> */}
             <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v5Selected}>
               <Card raised={true} sx={{p: 3}}>
                 <V5 />
