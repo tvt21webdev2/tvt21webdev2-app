@@ -204,7 +204,7 @@ describe("api tests", () => {
           password: psword,
         })
         .end((err, res) => {
-          token = res.text;
+          token = res.header["set-cookie"].pop().split(",")[0];
           expect(err).to.be.null;
           expect(res).to.have.status(200);
           done();
@@ -213,42 +213,11 @@ describe("api tests", () => {
   });
 
   describe("delete user", () => {
-    it("should reject request if token is right but username is wrong", (done) => {
+    it("should reject request if token is wrong", (done) => {
       chai
         .request(url)
-        .post("/user/delete")
-        .send({
-          username: "idontexistinyourdb",
-          token: token,
-        })
-        .end((err, res) => {
-          expect(err).to.be.null;
-          expect(res).to.have.status(401);
-          done();
-        });
-    });
-    it("should reject request if username is right but token is wrong", (done) => {
-      chai
-        .request(url)
-        .post("/user/delete")
-        .send({
-          username: username,
-          token: "dfhsfdhgsagsde",
-        })
-        .end((err, res) => {
-          expect(err).to.be.null;
-          expect(res).to.have.status(401);
-          done();
-        });
-    });
-    it("should reject request if username does not exist in database", (done) => {
-      chai
-        .request(url)
-        .post("/user/delete")
-        .send({
-          username: "idontexistinyourdb",
-          token: token,
-        })
+        .delete("/user/delete")
+        .set("Cookie", "token=likdsjfgkljafg")
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(401);
@@ -258,14 +227,22 @@ describe("api tests", () => {
     it("should return status ok if user deleted successfully", (done) => {
       chai
         .request(url)
-        .post("/user/delete")
-        .send({
-          username: username,
-          token: token,
-        })
+        .delete("/user/delete")
+        .set("Cookie", token)
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
+          done();
+        });
+    });
+    it("should reject request if username does not exist in database", (done) => {
+      chai
+        .request(url)
+        .delete("/user/delete")
+        .set("Cookie", token)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(404);
           done();
         });
     });
