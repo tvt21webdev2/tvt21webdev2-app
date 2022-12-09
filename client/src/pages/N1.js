@@ -4,37 +4,74 @@ import V3 from '../components/V3';
 import V5 from '../components/V5';
 import V6 from '../components/V6';
 import V7 from '../components/V7';
+import '../styles/n1.css';
+import video from '../images/cherry.mp4';
 
-export default function N1() {
+function N1() {
+    return (
+      <div className='container-n1'>
+        <video autoPlay loop muted playsInline className="back-video">
+          <source src={video} type="video/mp4"></source>
+        </video>
+  
+        <div className='content-n1'>
+          <h1>Lämpötilatiedot ja co2 pitoisuudet</h1>
+        </div>
+  
+        <div id='v1'>
+          <h2>Globaaleja lämpötilan vaihteluita</h2>
+          <p>Viivakaavio globaaleista lämpötilan vaihteluista kattaen 2000 vuoden ajanjakson. <br />
+            Hadley Centren<a href="https://www.metoffice.gov.uk/hadobs/hadcrut5"> data & kuvaus.</a> <br />
+            Bolin Centren<a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt"> data.</a> <br />
+            Bolin Centren datan<a href="https://www.nature.com/articles/nature0326"> kuvaus.</a> <br />
+          </p>
+          <V1 />
+        </div>
 
-return(
+        <div id='v3'>
+          <h2>Ilmakehän hiilidioksidipitoisuuksia ja tapahtumia</h2>
+          <p>Viivakaavio ilmakehän hiilidioksidipitoisuuksista sekä historian merkittävistä tapahtumista kattaen 1000 vuoden ajanjakson. <br />
+            Mauna Loan<a href="https://gml.noaa.gov/ccgg/trends"> data.</a> <br />
+            Mauna Loan datan<a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html"> kuvaus.</a> <br />
+            Law Domen<a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.da"> data.</a> <br />
+            Law Domen datan<a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html"> kuvaus.</a> <br />
+            South Hamptonin yliopiston<a href="https://www.southampton.ac.uk/~cpd/history.html"> data.</a> <br />
+          </p>
+          <V3 />
+        </div>
 
-    <div>
-        <div>
-            <h1>Juttuja</h1>
+        <div id='v5'>
+          <h2>Ilmakehän hiilidioksidipitoisuuksia</h2>
+          <p>Viivagraafi ilmakehän hiilidioksidipitoisuuksista kattaen 400 000 vuoden ajanjakson. <br />
+            Vostokin<a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co"> data.</a> <br />
+            Vostokin datan<a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html "> kuvaus.</a>
+          </p>
+          <V5 />
         </div>
-        <div>
-            <h2>V1</h2>
-            <V1></V1>
-        </div>
-        <div>
-            <h2>V3</h2>
-            <V3></V3>
-        </div>
-        <div>
-            <h2>V5</h2>
-            <V5></V5>
-        </div>
-        <div>
-            <h2>V6</h2>
-            <V6></V6>
-        </div>
-        <div>
-            <h2>V7</h2>
-            <V7></V7>
-        </div>
-    </div>
 
+        <div id='v6'>
+          <h2>Ilmakehän hiilidioksidipitoisuuksia ja </h2>
+          <p>Viivagraafi ilmakehän hiilidioksidipitoisuuksista kattaen 800 000 vuoden ajanjakson. <br />
+            Tutkimuksen<a href="https://www.ncei.noaa.gov/access/paleo-search/study/17975"> data.</a> <br />
+            Tutkimuksen<a href="https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.tx"> kuvaus.</a>
+          </p>
+          <V6 />
+        </div>
 
-)
-}
+        <div id='v7'>
+          <h2>Ilmakehän hiilidioksidipitoisuuksia ja globaaleja lämpötilan vaihteluita</h2>
+          <p>Moniakselinen viivagraafi lämpötilan ja hiilidioksidipitoisuuksien muutoksista sekä historian merkittävistä <br/>
+          tapahtumista kattaen 2 miljoonan vuoden ajanjakson <br/>
+            C. Snyderin tutkimuksen<a href="http://carolynsnyder.com/papers/Snyder_Data_Figures.zip "> data.</a> <br/>
+            C. Snyderin tutkimuksen<a href="https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf"> kuvaus.</a> <br/>
+            South Hamptonin yliopiston<a href="https://www.southampton.ac.uk/~cpd/history.html"> data.</a> <br />
+          </p>
+          <div id='helper'>
+            <V7 />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  export default N1;

@@ -1,0 +1,141 @@
+.container-n1 {
+    position: relative;
+  }
+  
+  .content-n1 h1 {
+    font-size: 120px;
+    color: #fff;
+    font-weight: 600;
+    transition: 0.5s;
+    text-align: center;
+  }
+  
+  .content-n1 h1:hover {
+    -webkit-text-stroke: 2px #fff;
+    color: transparent;
+  }
+  
+  #v1 {
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    margin: 5%;
+    height: 100%;
+    width: auto;
+  }
+  
+  #v3 {
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    margin: 5%;
+    height: 100%;
+    width: auto;
+  }
+
+  #v5 {
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    margin: 5%;
+    height: 100%;
+    width: auto;
+  }
+  
+  #v6 {
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    margin: 5%;
+    height: 100%;
+    width: auto;
+  }
+
+  #v7 {
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    margin: 5%;
+    height: 100%;
+    width: auto;
+  }
+
+  #helper {
+    margin: auto;
+    width: 45%;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .content-n2 h1 {
+      font-size: 46px;
+    }
+  
+    #helper {
+      margin: auto;
+      width: 95%;
+    }
+  }
+  
+  @media screen and (min-width: 600px) {
+    .content-n2 h1 {
+      font-size: 48px;
+    }
+  
+    #helper {
+      margin: auto;
+      width: 80%;
+    }
+  }
+  
+  @media screen and (min-width: 900px) {
+    .content-n2 h1 {
+      font-size: 72px;
+    }
+  
+    #helper {
+      margin: auto;
+      width: 65%;
+    }
+  }
+  
+  @media screen and (min-width: 1280px) {
+    .content-n2 h1 {
+      font-size: 106px;
+    }
+  
+    #helper {
+      margin: auto;
+      width: 45%;
+    }
+  }
+  
+  @media screen and (min-width: 1920px) {
+    .content-n2 h1 {
+      font-size: 120px;
+    }
+  
+    #helper {
+      margin: auto;
+      width: 45%;
+    }
+  }

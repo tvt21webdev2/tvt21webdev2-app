@@ -206,7 +206,7 @@ export default function V1() {
         }
       },
       title: {
-        display: true,
+        display: false,
         text: "Global historical surface temperature anomalies from January 1850 onwards and Northern Hemisphere 2,000-year temperature reconstruction",
       },
       legend: {

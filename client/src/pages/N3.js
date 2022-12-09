@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import V1 from '../components/V1'
-import V4 from '../components/V4'
+import V3 from '../components/V3'
 import V5 from '../components/V5'
 import V6 from '../components/V6'
 import V7 from '../components/V7'
@@ -116,13 +116,13 @@ export default function N3() {
             </Grid>
             <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v3Selected}>
               <Card raised={true} sx={{p: 3}}>
-                {/* <V3 /> */}
+                <V3 />
                 <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v3Description ?? v3DescriptionDefault}</Typography>
               </Card>
             </Grid>
             <Grid item xs={5} sx={{minWidth: {xs: 400, sm: 600, md: 800}, minHeight: 500}} hidden={!v4Selected}>
               <Card raised={true} sx={{p: 3}}>
-                <V4 />
+                {/*<V4 />*/}
                 <Typography sx={{mt: 2, minWidth: {xs: 400, sm: 575, md: 875}, minHeight: 50}}>{v4Description ?? v4DescriptionDefault}</Typography>
               </Card>
             </Grid>

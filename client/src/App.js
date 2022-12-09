@@ -41,6 +41,7 @@ export default function App() {
       </Navbar>
       <Routes>
         <Route path="/" element={<Frontpage/>}/>
+        <Route path="/n1" element={<N1/>}/>
         <Route path="/n2" element={<N2/>}/>
         {currentUser ?
           <>
