@@ -15,7 +15,7 @@ function N1() {
         </video>
   
         <div className='content-n1'>
-          <h1>Lämpötilatiedot ja co2 pitoisuudet</h1>
+          <h1>Lämpötilatiedot ja CO<sub>2</sub>-pitoisuudet</h1>
         </div>
   
         <div id='v1'>
@@ -29,8 +29,8 @@ function N1() {
         </div>
 
         <div id='v3'>
-          <h2>Ilmakehän hiilidioksidipitoisuuksia ja tapahtumia</h2>
-          <p>Viivakaavio ilmakehän hiilidioksidipitoisuuksista sekä historian merkittävistä tapahtumista kattaen 1000 vuoden ajanjakson. <br />
+          <h2>Ilmakehän CO<sub>2</sub>-pitoisuuksia ja tapahtumia</h2>
+          <p>Viivakaavio ilmakehän CO<sub>2</sub>-pitoisuuksista sekä historian merkittävistä tapahtumista kattaen 1000 vuoden ajanjakson. <br />
             Mauna Loan<a href="https://gml.noaa.gov/ccgg/trends"> data.</a> <br />
             Mauna Loan datan<a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html"> kuvaus.</a> <br />
             Law Domen<a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.da"> data.</a> <br />
@@ -41,8 +41,8 @@ function N1() {
         </div>
 
         <div id='v5'>
-          <h2>Ilmakehän hiilidioksidipitoisuuksia</h2>
-          <p>Viivagraafi ilmakehän hiilidioksidipitoisuuksista kattaen 400 000 vuoden ajanjakson. <br />
+          <h2>Ilmakehän CO<sub>2</sub>-pitoisuuksia</h2>
+          <p>Viivagraafi ilmakehän CO<sub>2</sub>-pitoisuuksista kattaen 400 000 vuoden ajanjakson. <br />
             Vostokin<a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co"> data.</a> <br />
             Vostokin datan<a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html "> kuvaus.</a>
           </p>
@@ -50,8 +50,8 @@ function N1() {
         </div>
 
         <div id='v6'>
-          <h2>Ilmakehän hiilidioksidipitoisuuksia ja </h2>
-          <p>Viivagraafi ilmakehän hiilidioksidipitoisuuksista kattaen 800 000 vuoden ajanjakson. <br />
+          <h2>Ilmakehän CO<sub>2</sub>-pitoisuuksia</h2>
+          <p>Viivagraafi ilmakehän CO<sub>2</sub>-pitoisuuksista kattaen 800 000 vuoden ajanjakson. <br />
             Tutkimuksen<a href="https://www.ncei.noaa.gov/access/paleo-search/study/17975"> data.</a> <br />
             Tutkimuksen<a href="https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.tx"> kuvaus.</a>
           </p>
@@ -59,16 +59,14 @@ function N1() {
         </div>
 
         <div id='v7'>
-          <h2>Ilmakehän hiilidioksidipitoisuuksia ja globaaleja lämpötilan vaihteluita</h2>
-          <p>Moniakselinen viivagraafi lämpötilan ja hiilidioksidipitoisuuksien muutoksista sekä historian merkittävistä <br/>
+          <h2>Ilmakehän CO<sub>2</sub>-pitoisuuksia ja globaaleja lämpötilan vaihteluita</h2>
+          <p>Moniakselinen viivagraafi lämpötilan muutoksista ja CO<sub>2</sub>-pitoisuuksista sekä historian merkittävistä <br/>
           tapahtumista kattaen 2 miljoonan vuoden ajanjakson <br/>
             C. Snyderin tutkimuksen<a href="http://carolynsnyder.com/papers/Snyder_Data_Figures.zip "> data.</a> <br/>
             C. Snyderin tutkimuksen<a href="https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf"> kuvaus.</a> <br/>
             South Hamptonin yliopiston<a href="https://www.southampton.ac.uk/~cpd/history.html"> data.</a> <br />
           </p>
-          <div id='helper'>
-            <V7 />
-          </div>
+          <V7 />
         </div>
       </div>
     );

@@ -119,7 +119,8 @@ function V7() {
         type: 'linear',
         title: {
           display: true,
-          text: "years"
+          text: "years",
+          position: "bottom"
         }
       },
 

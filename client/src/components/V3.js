@@ -6,7 +6,6 @@ import axios from 'axios';
 import 'chartjs-adapter-luxon';
 import ChartButtons from './ChartButtons';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import { minHeight } from "@mui/system";
 
 Chart.register(zoomPlugin);
 
@@ -52,13 +51,6 @@ export default function V3() {
 
     setisLoading(false)
 
-  }, [])
-
-
-  useEffect(() => {
-
-    console.log(addressM);
-
     axios.get(addressM)
       .then((response) => {
         console.log(response.data)
@@ -72,11 +64,6 @@ export default function V3() {
 
     setisLoadingM(false)
 
-  }, [])
-
-  useEffect(() => {
-
-    console.log(addressA1);
 
     axios.get(addressA1)
       .then((response) => {
@@ -91,10 +78,6 @@ export default function V3() {
 
     setisLoadingA1(false)
 
-  }, [])
-
-
-  useEffect(() => {
 
     console.log(addressA2);
 
@@ -111,12 +94,6 @@ export default function V3() {
 
     setisLoadingA2(false)
 
-  }, [])
-
-
-  useEffect(() => {
-
-    console.log(addressA3);
 
     axios.get(addressA3)
       .then((response) => {
@@ -130,13 +107,6 @@ export default function V3() {
       })
 
     setisLoadingA3(false)
-
-  }, [])
-
-
-  useEffect(() => {
-
-    console.log(addressE1);
 
     axios.get(addressE1)
       .then(response => {
@@ -290,7 +260,7 @@ export default function V3() {
             var seeker = context.datasetIndex;
             if(seeker === 5){
               var event = context.dataset.label;
-              return "Events :"+event;
+              return "Event: "+event;
             }
           },
           
@@ -303,7 +273,7 @@ export default function V3() {
               
               var chunks = [];
               var str = context.raw.event;
-              str = str.match(/.{1,75}(?:\s|$)/g);
+              str = str.match(/.{1,65}(?:\s|$)/g);
 
               str.forEach(mdmg => 
                 {chunks.push(mdmg)
@@ -351,7 +321,7 @@ export default function V3() {
   }
   else {
     return (     
-      <div>
+      <div className="chart3">
       <Line ref={chartRef} options={options} data={data} />
       <div id='buttons'>
         <ChartButtons ref={chartRef} />
