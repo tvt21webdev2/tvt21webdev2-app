@@ -4,14 +4,14 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {useRef, useState} from "react";
-import Login from "./Login";
+import {cloneElement, useRef, useState} from "react";
 import {ClickAwayListener, Popper} from "@mui/material";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import ForestIcon from '@mui/icons-material/Forest';
 
-export default function Navbar() {
-  const [showLogin, setShowLogin] = useState(false);
+export default function Navbar({children, currentUser}) {
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [userOptionsOpen, setUserOptionsOpen] = useState(false);
 
   const anchorRef = useRef(null);
 
@@ -19,23 +19,45 @@ export default function Navbar() {
     <Box sx={{flexGrow: 1}}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+          <Typography variant="h6" component="div">
             <Link to="/">
-              <ForestIcon sx={{ fontSize: 45, color: "#fff", mt: 1 }} />
+              <ForestIcon sx={{fontSize: 45, color: "#fff", mt: 1}}/>
             </Link>
           </Typography>
-          <ClickAwayListener onClickAway={() => setShowLogin(false)}>
-            <div>
-              <Link to="/editor">
-                <Button sx={{color: "#fff"}}>
-                  Editor
-                </Button>
-              </Link>
-              <Button color="inherit" onClick={() => setShowLogin(!showLogin)} ref={anchorRef}>
-                Log in
+          <Typography sx={{ml: 3, flexGrow: 1}}>
+            <Link to="/n2">
+              <Button sx={{color: "#fff"}}>
+                N2
               </Button>
-              <Popper id="login" open={showLogin} anchorEl={anchorRef.current}>
-                <Login/>
+            </Link>
+            {currentUser ?
+              <>
+                <Link to="/customviews">
+                  <Button sx={{color: "#fff"}}>
+                    Omat Näkymät
+                  </Button>
+                </Link>
+                <Link to="/editor">
+                  <Button sx={{color: "#fff"}}>
+                    Luo Näkymä
+                  </Button>
+                </Link>
+
+              </>
+
+              :
+              null
+            }
+          </Typography>
+          <ClickAwayListener onClickAway={() => currentUser ? setUserOptionsOpen(false) : setLoginOpen(false)}>
+            <div>
+              <Button color="inherit"
+                      onClick={() => currentUser ? setUserOptionsOpen(!userOptionsOpen) : setLoginOpen(!loginOpen)}
+                      ref={anchorRef}>
+                {currentUser ? currentUser : "Kirjaudu sisään"}
+              </Button>
+              <Popper open={currentUser ? userOptionsOpen : loginOpen} anchorEl={anchorRef.current}>
+                {cloneElement(children, currentUser ? {setUserOptionsOpen} : {setLoginOpen})}
               </Popper>
             </div>
           </ClickAwayListener>

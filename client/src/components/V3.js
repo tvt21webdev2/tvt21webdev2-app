@@ -364,7 +364,7 @@ export default function V3() {
           <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" rel="noreferrer">Antartic data source</a> --- <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html" target="_blank" rel="noreferrer">description</a>
           <br></br>
           <a href="https://www.southampton.ac.uk/~cpd/history.html" target="_blank" rel="noreferrer">Human evolution data source</a>
-        </p>
+        </p> 
       </div>
     );
   }

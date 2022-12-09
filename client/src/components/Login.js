@@ -1,15 +1,13 @@
 import * as React from 'react';
 import Box from "@mui/material/Box";
-import {Alert, Link, Snackbar, TextField} from "@mui/material";
+import {Link, Modal, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {useEffect, useRef, useState} from "react";
-import SignUp from "./SignUp";
+import {cloneElement, useEffect, useRef, useState} from "react";
 import axios from "axios";
 import Util from "../util";
 
-
-export default function Login() {
+export default function Login({children, setLoginOpen, setCurrentUser, setSnackbarOpen}) {
 
   const URL = "http://localhost:8080/login"
 
@@ -23,17 +21,18 @@ export default function Login() {
     inputRef.current?.focus();
   }, [errorMessage]);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     setErrorMessage("");
     event.preventDefault();
-    (async () => {
-      try {
-        const response = await axios.post(URL, login);
-        console.log(response);
-      } catch (err) {
-        setErrorMessage(err.response.data);
-      }
-    })();
+    try {
+      const response = await axios.post(URL, login, {withCredentials: true});
+      localStorage.setItem("user", response.data);
+      setCurrentUser(response.data);
+      setLoginOpen(false);
+      setSnackbarOpen("login");
+    } catch (err) {
+      setErrorMessage(err.response.data);
+    }
   }
 
   return (
@@ -44,12 +43,12 @@ export default function Login() {
       p: 3,
       border: 1,
       borderRadius: "10px",
-      bgcolor: "pink",
+      bgcolor: "#FFFFFF",
       gap: 2
     }}
     >
       <Typography component="h1" variant="h5">
-        Log in
+        Kirjaudu sisään
       </Typography>
       <Box component="form"
            onSubmit={handleSubmit}
@@ -59,7 +58,7 @@ export default function Login() {
           fullWidth={true}
           id="username"
           name="username"
-          label="Username"
+          label="Käyttäjätunnus"
           required={true}
           autoFocus={true}
           value={login.username}
@@ -70,9 +69,10 @@ export default function Login() {
         />
         <TextField
           fullWidth={true}
+          type="password"
           id="password"
           name="password"
-          label="Password"
+          label="Salasana"
           required={true}
           value={login.password}
           onChange={(event) => setLogin({...login, password: event.target.value})}
@@ -86,18 +86,16 @@ export default function Login() {
           variant="contained"
           sx={{mt: 3, mb: 2}}
         >
-          Log In
+          Kirjaudu
         </Button>
       </Box>
       <Link underline="none" onClick={() => setSignUpOpen(true)}>
-        Don't have an account? Sign Up
+        Ei vielä tiliä? Luo tili täällä!
       </Link>
-      <SignUp open={signUpOpen}
-              onClose={() => setSignUpOpen(false)}/>
+      <Modal open={signUpOpen} onClose={() => setSignUpOpen(false)}
+             sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        {cloneElement(children, {setSignUpOpen})}
+      </Modal>
     </Box>
   )
 }
-
-//   <Snackbar open={true} autoHideDuration={5000}>
-//           <Alert variant="filled" severity="success">Registration successful!</Alert>
-//   </Snackbar>
