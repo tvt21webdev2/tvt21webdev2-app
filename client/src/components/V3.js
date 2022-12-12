@@ -280,7 +280,7 @@ export default function V3() {
 
               var chunks = [];
               var str = context.raw.event;
-              str = str.match(/.{1,65}(?:\s|$)/g);
+              str = str.match(/.{1,75}(?:\s|$)/g);
 
               str.forEach(mdmg => {
                 chunks.push(mdmg)

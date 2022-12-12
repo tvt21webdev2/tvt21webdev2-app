@@ -98,18 +98,44 @@ function V7() {
       },
       tooltip: {
         callbacks: {
+
+          beforeLabel: function (context) {
+            var seeker = context.datasetIndex;
+            if (seeker === 2) {
+              var event = context.dataset.label;
+              return "Event: " + event;
+            }
+          },
+
+
           label: function (context) {
             var seeker = context.datasetIndex;
             var content;
             let label = context.dataset.label;
             if (seeker === 2) {
-              content = context.raw.event;
+
+              var chunks = [];
+              var str = context.raw.event;
+              str = str.match(/.{1,75}(?:\s|$)/g);
+
+              str.forEach(mdmg => {
+                chunks.push(mdmg)
+              });
+
+              content = chunks;
+
+              return content;
+
             }
             else {
               content = context.parsed.y;
+
+              return label + ": " + content;
+
             }
-            return label + ": " + content;
+
           }
+
         }
       }
     },
