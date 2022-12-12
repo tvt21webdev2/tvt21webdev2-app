@@ -166,7 +166,7 @@ function V7() {
         position: 'left',
         title: {
           display: true,
-          text: "co2 ppm"
+          text: "CO2 ppm"
         }
       },
 

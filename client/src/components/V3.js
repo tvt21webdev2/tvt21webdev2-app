@@ -322,7 +322,7 @@ export default function V3() {
         position: "left",
         title: {
           display: true,
-          text: "co2 levels",
+          text: "CO2 levels",
         },
       },
     }
