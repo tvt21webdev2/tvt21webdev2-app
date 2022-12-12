@@ -8,8 +8,8 @@ Tämän projektin ovat toteuttaneet Oulun ammattikorkeakoulun tietotekniikan tut
 
 Sovellukseen (kuva 1) on mahdollista luoda käyttäjätunnus. Rekisteröityneellä ja kirjautuneella käyttäjällä on sovelluksen käyttöliittymän sisältämän editorin avulla mahdollisuus luoda itse määrittelemiään, vapaavalintaisia näkymäkokonaisuuksia edellä mainituista kuvaajakomponenteista. Käyttäjän luomat ja määrittelemät näkymät ovat edelleen jaettavissa yksilöllisellä URL-osoitteella. 
 
-Sivun osoite: [Google Cloud linkki](#) 
-Sovelluksen esittelyvideo: [Youtube linkki](#)
+Sivun osoite: [Google Cloud linkki](#)
+<br>Sovelluksen esittelyvideo: [Youtube linkki](#)
 
 ![Sovelluksen etusivu](/client/src/images/frontpage.jpg "Climate Change Charts etusivu")
 KUVA 1. Näkymä sovelluksen aloitussivusta

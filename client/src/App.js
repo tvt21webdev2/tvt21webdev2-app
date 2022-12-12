@@ -12,8 +12,6 @@ import UserOptions from "./components/UserOptions";
 import './styles/App.css';
 import Util from "./util";
 
-// https://stackoverflow.com/questions/66289122/how-to-create-a-protected-route/66289280#66289280
-
 
 export default function App() {
 
@@ -41,9 +39,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Frontpage/>}/>
         <Route path="/n2" element={<N2/>}/>
+        <Route path="/customviews/:id" element={<N3/>}/>
         {currentUser ?
           <>
-            <Route path="/customviews" element={<N3/>}/>
             <Route path="/editor" element={<Editor/>}/>
           </>
           :
