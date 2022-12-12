@@ -114,11 +114,12 @@ export default function Editor() {
         <Grid item sx={{mb: 3}}>
           <TextField
             // required={true}
+            inputProps={{ maxLength: 30 }}
             value={viewName}
             sx={{width: 300}} 
             id="view-name" 
             name="name"
-            label="Näkymän nimi"
+            label="Näkymän nimi, maks. 30 merkkiä"
             variant="outlined" 
             size={"small"}
             autoFocus={true}
