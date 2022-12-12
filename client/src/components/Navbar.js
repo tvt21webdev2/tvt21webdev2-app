@@ -5,10 +5,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {cloneElement, useEffect, useRef, useState} from "react";
-import {ClickAwayListener, Menu, MenuItem, Popper} from "@mui/material";
+import {ClickAwayListener, Grid, Menu, MenuItem, Popper} from "@mui/material";
 import {Link} from 'react-router-dom';
 import ForestIcon from '@mui/icons-material/Forest';
 import axios from "axios";
+import { textAlign } from '@mui/system';
 
 export default function Navbar({children, currentUser}) {
   const [loginOpen, setLoginOpen] = useState(false);
@@ -25,8 +26,9 @@ export default function Navbar({children, currentUser}) {
     if (userViewsOpen) {
       (async function () {
         try {
-          const response = await axios.get("http://localhost:8080/view/USERNAME");
+          const response = await axios.get(`http://localhost:8080/view/search/${currentUser}`);
           setViews(response.data);
+          // console.log(response.data);
           setLoaded(true);
         } catch (err) {
           console.log(err)
@@ -36,12 +38,24 @@ export default function Navbar({children, currentUser}) {
   }, [userViewsOpen]);
 
   function renderUserViewMenuItems() {
+    const longestButtonText = views.reduce((longest, item) => {
+      return item.name.length > longest.length ? item.name : longest;
+    }, "");
+    
+    const buttonWidth = `${longestButtonText.length+6}ch`;
+
     return (views.map(item =>
-      <MenuItem key={item.url}>
-        <Link to={item.url}>
-          {item.title}
-        </Link>
-      </MenuItem>
+        <MenuItem key={item.url}>
+          <Link to={`/customviews/${item.url}`} reloadDocument={true}>
+            <Button
+              sx={{width: buttonWidth}}
+              onClick={() => setUserViewsOpen(false)}
+              variant="outlined" 
+              color="primary" 
+              >{item.name}
+            </Button> 
+          </Link>
+        </MenuItem>
     ))
   }
 
@@ -81,7 +95,7 @@ export default function Navbar({children, currentUser}) {
             }
           </Typography>
           <Menu open={userViewsOpen} onClose={() => setUserViewsOpen(false)} anchorEl={userViewsRef.current}>
-            {views.length && loaded ? renderUserViewMenuItems() : <Typography sx={{p: 2}}>Nothing here...</Typography>}
+            {views.length && loaded ? renderUserViewMenuItems() : <Typography sx={{p: 2}}>Sinulla ei ole vielä yhtään luotua näkymää</Typography>}
           </Menu>
 
           <ClickAwayListener onClickAway={() => currentUser ? setUserOptionsOpen(false) : setLoginOpen(false)}>
