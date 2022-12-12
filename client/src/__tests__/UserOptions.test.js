@@ -12,7 +12,7 @@ describe('Logout', () => {
     const deleteButton = screen.getByText("Poista tili");
 
     expect(logoutButton).toBeInTheDocument();
-    expect(deleteButton).toBeInTheDocument()
+    expect(deleteButton).toBeInTheDocument();
   });
 
   test('Delete button works', async () => {
