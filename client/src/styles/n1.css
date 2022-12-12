@@ -87,7 +87,7 @@
   }
   
   @media screen and (max-width: 600px) {
-    .content-n2 h1 {
+    .content-n1 h1 {
       font-size: 46px;
     }
   
@@ -98,7 +98,7 @@
   }
   
   @media screen and (min-width: 600px) {
-    .content-n2 h1 {
+    .content-n1 h1 {
       font-size: 48px;
     }
   
@@ -109,7 +109,7 @@
   }
   
   @media screen and (min-width: 900px) {
-    .content-n2 h1 {
+    .content-n1 h1 {
       font-size: 72px;
     }
   
@@ -120,7 +120,7 @@
   }
   
   @media screen and (min-width: 1280px) {
-    .content-n2 h1 {
+    .content-n1 h1 {
       font-size: 106px;
     }
   
@@ -131,7 +131,7 @@
   }
   
   @media screen and (min-width: 1920px) {
-    .content-n2 h1 {
+    .content-n1 h1 {
       font-size: 120px;
     }
   
