@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import {Link, Modal, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {cloneElement, useEffect, useRef, useState} from "react";
+import {cloneElement, isValidElement, useEffect, useRef, useState} from "react";
 import axios from "axios";
 import Util from "../util";
 
@@ -94,7 +94,9 @@ export default function Login({children, setLoginOpen, setCurrentUser, setSnackb
       </Link>
       <Modal open={signUpOpen} onClose={() => setSignUpOpen(false)}
              sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        {cloneElement(children, {setSignUpOpen})}
+        <div>
+          {isValidElement(children) && cloneElement(children, {setSignUpOpen})}
+        </div>
       </Modal>
     </Box>
   )
