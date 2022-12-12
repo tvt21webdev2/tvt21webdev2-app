@@ -69,6 +69,11 @@ export default function Navbar({children, currentUser}) {
             </Link>
           </Typography>
           <Typography sx={{ml: 3, flexGrow: 1}}>
+          <Link to="/n1">
+              <Button sx={{color: "#fff"}}>
+                N1
+              </Button>
+            </Link>
             <Link to="/n2">
               <Button sx={{color: "#fff"}}>
                 N2

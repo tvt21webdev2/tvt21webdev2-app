@@ -72,7 +72,7 @@ export default function V5() {
         },
       },
       title: {
-        display: true,
+        display: false,
         text: "V5 Vostok Ice Core CO2 measurement",
       },
       legend: {

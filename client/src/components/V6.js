@@ -37,7 +37,7 @@ function V6() {
     maintainAspectRatio: true,
     plugins: {
       title: {
-        display: true,
+        display: false,
         text: "Ice core 800k year CO2 measurements",
       }
     },
