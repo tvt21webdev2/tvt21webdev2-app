@@ -26,7 +26,7 @@ function N2() {
 
       <div id='v9'>
         <h2>Hiilidioksidipäästöt sektoreittain</h2>
-        <p>Piirakkakaavio co2 päästöistä toimialoittain.
+        <p>Piirakkakaavio hiilidioksidipäästöistä toimialoittain.
           Sektoria klikkaamalla voidaan tarkastella alasektoreita. <br />
           Painamalla kuvaajaa hiiren oikealla painikkeella voidaan palata edelliseen sektorinäkymään. <br />
           Tutkimuksen<a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector"> kuvaus.</a>

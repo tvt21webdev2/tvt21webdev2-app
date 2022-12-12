@@ -1,8 +1,9 @@
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Line} from "react-chartjs-2";
-import {Chart} from "chart.js/auto";
+import { useState, useEffect } from "react";
+import { Line } from "react-chartjs-2";
+import { Chart } from "chart.js/auto";
 import Util from "../util";
+import { LegendHover, LegendClick, LegendBottomMargin } from "chartjs-plugin-custom-legend"
 
 function V8() {
   const [data, setData] = useState({});
@@ -40,8 +41,7 @@ function V8() {
     maintainAspectRatio: true,
     plugins: {
       legend: {
-        position: "top",
-        // position: "right",
+        display: true,
       },
     },
     scales: {
@@ -56,7 +56,7 @@ function V8() {
   return (
     <div>
       {loaded &&
-        <Line data={data} options={options}/>
+        <Line data={data} options={options} />
       }
     </div>
   );
