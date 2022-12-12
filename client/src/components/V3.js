@@ -1,11 +1,12 @@
 import React from "react";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import { useEffect, useState, useRef} from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import 'chartjs-adapter-luxon';
 import ChartButtons from './ChartButtons';
 import zoomPlugin from 'chartjs-plugin-zoom';
+import '../styles/v3.css';
 
 Chart.register(zoomPlugin);
 
@@ -31,6 +32,7 @@ export default function V3() {
   const [isLoadingA3, setisLoadingA3] = useState(true);
   const [evolutionArray, setevolutionArray] = useState([]);
   const [isLoadingE1, setisLoadingE1] = useState(true);
+  const [a3DataVisible, setA3DataVisible] = useState(true)
 
   const chartRef = useRef();
 
@@ -205,19 +207,19 @@ export default function V3() {
     //maintainAspectRatio: false,
     animation: false,
     responsive: true,
-    plugins: { 
+    plugins: {
       zoom: {
         pan: {
           enabled: true,
           mode: 'xy',
         },
         limits: {
-          x: 
-          {          
-          min: new Date('1000-01-01T00:00:00').valueOf(),
-          max: new Date('2022-09-01T00:00:00').valueOf()
+          x:
+          {
+            min: new Date('1000-01-01T00:00:00').valueOf(),
+            max: new Date('2022-09-01T00:00:00').valueOf()
           },
-          y: {min: 240, max: 440}
+          y: { min: 240, max: 440 }
         },
         zoom: {
           pinch: {
@@ -229,22 +231,27 @@ export default function V3() {
           mode: 'x',
         },
       },
-      
+
       legend: {
-        onClick: function(e, legendItem, legend) {
+        onClick: function (e, legendItem, legend) {
           const index = legendItem.datasetIndex;
           const ci = legend.chart;
           if (ci.isDatasetVisible(index)) {
-              ci.hide(index);
-              legendItem.hidden = true;
+            ci.hide(index);
+            legendItem.hidden = true;
           } else {
-              ci.show(index);
-              legendItem.hidden = false;
+            ci.show(index);
+            legendItem.hidden = false;
+          }
+          if (index === 4 && ci.isDatasetVisible(4)) {
+            setA3DataVisible(true)
+          } else if (index === 6 && !ci.isDatasetVisible(4)) {
+            setA3DataVisible(false)
           }
           chartRef.current.resetZoom()
         }
       },
-      
+
       title: {
         display: false,
         text: "Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement",
@@ -256,27 +263,27 @@ export default function V3() {
 
         callbacks: {
 
-          beforeLabel: function (context){
+          beforeLabel: function (context) {
             var seeker = context.datasetIndex;
-            if(seeker === 5){
+            if (seeker === 5) {
               var event = context.dataset.label;
-              return "Event: "+event;
+              return "Event: " + event;
             }
           },
-          
+
 
           label: function (context) {
             var seeker = context.datasetIndex;
             var content;
             let label = context.dataset.label;
             if (seeker === 5) {
-              
+
               var chunks = [];
               var str = context.raw.event;
               str = str.match(/.{1,65}(?:\s|$)/g);
 
-              str.forEach(mdmg => 
-                {chunks.push(mdmg)
+              str.forEach(mdmg => {
+                chunks.push(mdmg)
               });
 
               content = chunks;
@@ -304,6 +311,10 @@ export default function V3() {
           unit: 'month',
         },
         position: 'bottom',
+        title:{
+          display: true,
+          text: "date",
+        }
 
       },
       y: {
@@ -320,13 +331,13 @@ export default function V3() {
     return <div>Loading.</div>
   }
   else {
-    return (     
-      <div className="chart3">
-      <Line ref={chartRef} options={options} data={data} />
-      <div id='buttons'>
-        <ChartButtons ref={chartRef} />
+    return (
+      <div id="chart3">
+        <Line ref={chartRef} options={options} data={data} />
+        <div id='buttons'>
+          <ChartButtons ref={chartRef} />
+        </div>
       </div>
-    </div>
     );
   }
 }
