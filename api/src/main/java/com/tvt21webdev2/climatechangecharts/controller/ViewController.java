@@ -59,4 +59,11 @@ public class ViewController {
   public List<View> getView(@PathVariable String url) {
     return service.findByUrl(url);
   }
+
+  @GetMapping("/view/search/{username}")
+  @ResponseBody
+  public List<View> getViewByUsername(@PathVariable String username) {
+    Long userId = userService.findByUsername(username).get(0).getId();
+    return service.findByUserId(userId);
+  }
 }
