@@ -19,7 +19,7 @@ public class View {
   @Column(name = "url")
   private String url;
   private boolean v1, v2, v3, v4, v5, v6, v7, v8, v9, v10;
-  private String v1description, v3description, v4description, v5description, v6description, v7description, v8description, v9description;
+  private String name, v1description, v3description, v4description, v5description, v6description, v7description, v8description, v9description;
   @Column(name = "description")
   private String description;
   @Column(name = "stacked")
@@ -47,10 +47,10 @@ public class View {
     this.stacked = stacked;
   }
 
-  public View(Long userId, boolean stacked, String description, boolean v1, boolean v3, boolean v4, boolean v5, boolean v6,
+  public View(String name, boolean stacked, String description, boolean v1, boolean v3, boolean v4, boolean v5, boolean v6,
               boolean v7, boolean v8, boolean v9, String v1Description, String v3Description, String v4Description, String v5Description, 
               String v6Description, String v7Description, String v8Description, String v9Description) {
-    this.userId = userId;
+    this.name = name;
     this.stacked = stacked;
     this.description = description;
     this.v1 = v1;
@@ -259,6 +259,14 @@ public class View {
 
   public void setV9description(String v9description) {
     this.v9description = v9description;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
 }

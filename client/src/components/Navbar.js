@@ -4,16 +4,46 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {cloneElement, useRef, useState} from "react";
-import {ClickAwayListener, Popper} from "@mui/material";
+import {cloneElement, useEffect, useRef, useState} from "react";
+import {ClickAwayListener, Menu, MenuItem, Popper} from "@mui/material";
 import {Link} from 'react-router-dom';
 import ForestIcon from '@mui/icons-material/Forest';
+import axios from "axios";
 
 export default function Navbar({children, currentUser}) {
   const [loginOpen, setLoginOpen] = useState(false);
   const [userOptionsOpen, setUserOptionsOpen] = useState(false);
+  const [userViewsOpen, setUserViewsOpen] = useState(false);
 
-  const anchorRef = useRef(null);
+  const [views, setViews] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+
+  const userMenuRef = useRef(null);
+  const userViewsRef = useRef(null);
+
+  useEffect(() => {
+    if (userViewsOpen) {
+      (async function () {
+        try {
+          const response = await axios.get("http://localhost:8080/view/USERNAME");
+          setViews(response.data);
+          setLoaded(true);
+        } catch (err) {
+          console.log(err)
+        }
+      })();
+    }
+  }, [userViewsOpen]);
+
+  function renderUserViewMenuItems() {
+    return (views.map(item =>
+      <MenuItem key={item.url}>
+        <Link to={item.url}>
+          {item.title}
+        </Link>
+      </MenuItem>
+    ))
+  }
 
   return (
     <Box sx={{flexGrow: 1}}>
@@ -37,31 +67,31 @@ export default function Navbar({children, currentUser}) {
             </Link>
             {currentUser ?
               <>
-                <Link to="/customviews">
-                  <Button sx={{color: "#fff"}}>
-                    Omat Näkymät
-                  </Button>
-                </Link>
+                <Button sx={{color: "#fff"}} onClick={() => setUserViewsOpen(true)} ref={userViewsRef}>
+                  Omat Näkymät
+                </Button>
                 <Link to="/editor">
                   <Button sx={{color: "#fff"}}>
                     Luo Näkymä
                   </Button>
                 </Link>
-
               </>
-
               :
               null
             }
           </Typography>
+          <Menu open={userViewsOpen} onClose={() => setUserViewsOpen(false)} anchorEl={userViewsRef.current}>
+            {views.length && loaded ? renderUserViewMenuItems() : <Typography sx={{p: 2}}>Nothing here...</Typography>}
+          </Menu>
+
           <ClickAwayListener onClickAway={() => currentUser ? setUserOptionsOpen(false) : setLoginOpen(false)}>
             <div>
               <Button color="inherit"
                       onClick={() => currentUser ? setUserOptionsOpen(!userOptionsOpen) : setLoginOpen(!loginOpen)}
-                      ref={anchorRef}>
+                      ref={userMenuRef}>
                 {currentUser ? currentUser : "Kirjaudu sisään"}
               </Button>
-              <Popper open={currentUser ? userOptionsOpen : loginOpen} anchorEl={anchorRef.current}>
+              <Popper open={currentUser ? userOptionsOpen : loginOpen} anchorEl={userMenuRef.current}>
                 {cloneElement(children, currentUser ? {setUserOptionsOpen} : {setLoginOpen})}
               </Popper>
             </div>

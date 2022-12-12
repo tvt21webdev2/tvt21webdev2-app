@@ -2,7 +2,6 @@ import React from 'react'
 import '../styles/frontpage.css'
 import video from '../images/cherry.mp4';
 import Timeline from '../components/Timeline';
-import MUITimeline from '../components/MUITimeline';
 
 
 export default function Frontpage() {
@@ -15,7 +14,6 @@ export default function Frontpage() {
       <div className="content-frontpage">
         <h1>Climate change charts</h1>
           <Timeline />
-        {/* <MUITimeline /> */}
       </div>
     </div>
   )

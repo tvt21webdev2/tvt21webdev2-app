@@ -38,11 +38,11 @@ export default function V3() {
 
   useEffect(() => {
 
-    console.log(addressA);
+    // console.log(addressA);
 
     axios.get(addressA)
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setmaunaArray(response.data.map(mauna => {
           return { id: mauna.id, year: mauna.year, co2: mauna.average }
         }))
@@ -55,7 +55,7 @@ export default function V3() {
 
     axios.get(addressM)
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setmaunaArrayM(response.data.map(maunaM => {
           return { id: maunaM.id, year: maunaM.year, co2: maunaM.average }
         }))
@@ -69,7 +69,7 @@ export default function V3() {
 
     axios.get(addressA1)
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setantSet1Array(response.data.map(Ant1 => {
           return { id: Ant1.id, year: Ant1.year, co2: Ant1.co2 }
         }))
@@ -81,11 +81,11 @@ export default function V3() {
     setisLoadingA1(false)
 
 
-    console.log(addressA2);
+    // console.log(addressA2);
 
     axios.get(addressA2)
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setantSet2Array(response.data.map(Ant2 => {
           return { id: Ant2.id, year: Ant2.year, co2: Ant2.co2 }
         }))
@@ -99,7 +99,7 @@ export default function V3() {
 
     axios.get(addressA3)
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setantSet3Array(response.data.map(Ant3 => {
           return { id: Ant3.id, year: Ant3.year, co2: Ant3.co2 }
         }))

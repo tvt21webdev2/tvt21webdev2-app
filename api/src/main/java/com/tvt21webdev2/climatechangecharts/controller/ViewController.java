@@ -3,6 +3,8 @@ package com.tvt21webdev2.climatechangecharts.controller;
 import java.util.List;
 
 import com.tvt21webdev2.climatechangecharts.service.SecurityService;
+import com.tvt21webdev2.climatechangecharts.service.UserService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +17,12 @@ import com.tvt21webdev2.climatechangecharts.service.ViewService;
 public class ViewController {
 
   private final ViewService service;
+  private final UserService userService;
   private final SecurityService securityService;
 
-  public ViewController(final ViewService service, final SecurityService securityService) {
+  public ViewController(final ViewService service, final UserService userService, final SecurityService securityService) {
     this.service = service;
+    this.userService = userService;
     this.securityService = securityService;
   }
 
@@ -35,6 +39,7 @@ public class ViewController {
     if (username == null) {
       return new ResponseEntity<>("Token not valid", HttpStatus.UNAUTHORIZED);
     }
+    view.setUserId(userService.findByUsername(username).get(0).getId());
     service.saveView(view);
     return new ResponseEntity<>(view.getUrl() + " created successfully", HttpStatus.OK);
   }
