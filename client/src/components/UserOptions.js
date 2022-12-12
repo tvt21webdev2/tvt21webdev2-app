@@ -39,9 +39,14 @@ export default function UserOptions({setUserOptionsOpen, setCurrentUser, setSnac
       p: 2,
       border: 1,
       borderRadius: "10px",
-      bgcolor: "pink",
+      bgcolor: "#FFFFFF",
       gap: 2
     }}>
+      <Button onClick={handleLogOut}
+              variant="contained"
+      >
+        Kirjaudu ulos
+      </Button>
       <Button onClick={() => setDeleteDialogOpen(true)}
               variant="contained"
               color="warning"
@@ -52,7 +57,7 @@ export default function UserOptions({setUserOptionsOpen, setCurrentUser, setSnac
         <DialogTitle>
           {"Oletko varma, että haluat poistaa tilin?"}
         </DialogTitle>
-        <DialogActions>
+        <DialogActions sx={{p: "16px 24px"}}>
           <Button variant="contained" onClick={() => setDeleteDialogOpen(false)}>
             Peruuta
           </Button>
@@ -61,11 +66,6 @@ export default function UserOptions({setUserOptionsOpen, setCurrentUser, setSnac
           </Button>
         </DialogActions>
       </Dialog>
-      <Button onClick={handleLogOut}
-              variant="contained"
-      >
-        Kirjaudu ulos
-      </Button>
     </Box>
   )
 }
