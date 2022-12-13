@@ -103,7 +103,7 @@ function V7() {
             var seeker = context.datasetIndex;
             if (seeker === 2) {
               var event = context.dataset.label;
-              return "Event: " + event;
+              return "Event:";
             }
           },
 
@@ -166,7 +166,7 @@ function V7() {
         position: 'left',
         title: {
           display: true,
-          text: "co2 ppm"
+          text: "CO2 ppm"
         }
       },
 

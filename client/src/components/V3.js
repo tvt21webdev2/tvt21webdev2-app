@@ -267,7 +267,7 @@ export default function V3() {
             var seeker = context.datasetIndex;
             if (seeker === 5) {
               var event = context.dataset.label;
-              return "Event: " + event;
+              return "Event: ";
             }
           },
 
@@ -322,7 +322,7 @@ export default function V3() {
         position: "left",
         title: {
           display: true,
-          text: "co2 levels",
+          text: "CO2 levels",
         },
       },
     }
