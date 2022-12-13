@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom'
 import Frontpage from './pages/Frontpage'
 import Navbar from './components/Navbar';
+import N1 from './pages/N1';
 import N2 from './pages/N2';
 import Editor from './pages/Editor';
 import N3 from './pages/N3';
@@ -38,6 +39,7 @@ export default function App() {
       </Navbar>
       <Routes>
         <Route path="/" element={<Frontpage/>}/>
+        <Route path="/n1" element={<N1/>}/>
         <Route path="/n2" element={<N2/>}/>
         <Route path="/customviews/:id" element={<N3/>}/>
         {currentUser ?

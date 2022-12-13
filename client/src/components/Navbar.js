@@ -10,7 +10,6 @@ import {Link} from 'react-router-dom';
 import ForestIcon from '@mui/icons-material/Forest';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
-import { textAlign } from '@mui/system';
 
 export default function Navbar({children, currentUser}) {
   const [loginOpen, setLoginOpen] = useState(false);
@@ -51,8 +50,8 @@ export default function Navbar({children, currentUser}) {
     const longestButtonText = views.reduce((longest, item) => {
       return item.name.length > longest.length ? item.name : longest;
     }, "");
-    
-    const buttonWidth = `${longestButtonText.length+6}ch`;
+
+    const buttonWidth = `${longestButtonText.length + 6}ch`;
 
     return (views.map(item =>
         <MenuItem key={item.url}>
@@ -86,6 +85,11 @@ export default function Navbar({children, currentUser}) {
             </Link>
           </Typography>
           <Typography sx={{ml: 3, flexGrow: 1}}>
+          <Link to="/n1">
+              <Button sx={{color: "#fff"}}>
+                N1
+              </Button>
+            </Link>
             <Link to="/n2">
               <Button sx={{color: "#fff"}}>
                 N2
@@ -107,9 +111,9 @@ export default function Navbar({children, currentUser}) {
             }
           </Typography>
           <Menu open={userViewsOpen} onClose={() => setUserViewsOpen(false)} anchorEl={userViewsRef.current}>
-            {views.length && loaded ? renderUserViewMenuItems() : <Typography sx={{p: 2}}>Sinulla ei ole vielä yhtään luotua näkymää</Typography>}
+            {views.length && loaded ? renderUserViewMenuItems() :
+              <Typography sx={{p: 2}}>Sinulla ei ole vielä yhtään luotua näkymää</Typography>}
           </Menu>
-
           <ClickAwayListener onClickAway={() => currentUser ? setUserOptionsOpen(false) : setLoginOpen(false)}>
             <div>
               <Button color="inherit"

@@ -1,11 +1,14 @@
 import React from "react";
-import { Chart } from "chart.js/auto";
+import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import 'chartjs-adapter-luxon';
-import Context from "@mui/base/TabsUnstyled/TabsContext";
+import ChartButtons from './ChartButtons';
+import zoomPlugin from 'chartjs-plugin-zoom';
+import '../styles/v3.css';
 
+Chart.register(zoomPlugin);
 
 const addressA = 'http://localhost:8080/v3?type=annual';
 const addressM = 'http://localhost:8080/v3?type=monthly';
@@ -15,7 +18,7 @@ const addressA3 = 'http://localhost:8080/v4?set=3';
 const addressE1 = 'http://localhost:8080/v10?year=1000';
 
 
-export default function V4() {
+export default function V3() {
 
   const [maunaArray, setmaunaArray] = useState([]);
   const [isLoading, setisLoading] = useState(true);
@@ -29,6 +32,9 @@ export default function V4() {
   const [isLoadingA3, setisLoadingA3] = useState(true);
   const [evolutionArray, setevolutionArray] = useState([]);
   const [isLoadingE1, setisLoadingE1] = useState(true);
+  const [a3DataVisible, setA3DataVisible] = useState(true)
+
+  const chartRef = useRef();
 
   useEffect(() => {
 
@@ -47,13 +53,6 @@ export default function V4() {
 
     setisLoading(false)
 
-  }, [])
-
-
-  useEffect(() => {
-
-    // console.log(addressM);
-
     axios.get(addressM)
       .then((response) => {
         // console.log(response.data)
@@ -67,11 +66,6 @@ export default function V4() {
 
     setisLoadingM(false)
 
-  }, [])
-
-  useEffect(() => {
-
-    // console.log(addressA1);
 
     axios.get(addressA1)
       .then((response) => {
@@ -86,10 +80,6 @@ export default function V4() {
 
     setisLoadingA1(false)
 
-  }, [])
-
-
-  useEffect(() => {
 
     // console.log(addressA2);
 
@@ -106,12 +96,6 @@ export default function V4() {
 
     setisLoadingA2(false)
 
-  }, [])
-
-
-  useEffect(() => {
-
-    // console.log(addressA3);
 
     axios.get(addressA3)
       .then((response) => {
@@ -125,13 +109,6 @@ export default function V4() {
       })
 
     setisLoadingA3(false)
-
-  }, [])
-
-
-  useEffect(() => {
-
-    // console.log(addressE1);
 
     axios.get(addressE1)
       .then(response => {
@@ -227,33 +204,100 @@ export default function V4() {
 
 
   const options = {
+    //maintainAspectRatio: false,
     animation: false,
     responsive: true,
     plugins: {
-      legend: {
-        position: "top",
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'xy',
+        },
+        limits: {
+          x:
+          {
+            min: new Date('1000-01-01T00:00:00').valueOf(),
+            max: new Date('2022-09-01T00:00:00').valueOf()
+          },
+          y: { min: 240, max: 440 }
+        },
+        zoom: {
+          pinch: {
+            enabled: true
+          },
+          wheel: {
+            enabled: true,
+          },
+          mode: 'x',
+        },
       },
+
+      legend: {
+        onClick: function (e, legendItem, legend) {
+          const index = legendItem.datasetIndex;
+          const ci = legend.chart;
+          if (ci.isDatasetVisible(index)) {
+            ci.hide(index);
+            legendItem.hidden = true;
+          } else {
+            ci.show(index);
+            legendItem.hidden = false;
+          }
+          if (index === 4 && ci.isDatasetVisible(4)) {
+            setA3DataVisible(true)
+          } else if (index === 6 && !ci.isDatasetVisible(4)) {
+            setA3DataVisible(false)
+          }
+          chartRef.current.resetZoom()
+        }
+      },
+
       title: {
-        display: true,
-        // text: "Co2 plot",
+        display: false,
         text: "Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement",
       },
       tooltip: {
 
+        tooltipCaretsize: 0,
+
+
         callbacks: {
+
+          beforeLabel: function (context) {
+            var seeker = context.datasetIndex;
+            if (seeker === 5) {
+              var event = context.dataset.label;
+              return "Event: " + event;
+            }
+          },
+
 
           label: function (context) {
             var seeker = context.datasetIndex;
             var content;
             let label = context.dataset.label;
             if (seeker === 5) {
-              content = context.raw.event;
+
+              var chunks = [];
+              var str = context.raw.event;
+              str = str.match(/.{1,75}(?:\s|$)/g);
+
+              str.forEach(mdmg => {
+                chunks.push(mdmg)
+              });
+
+              content = chunks;
+
+              return content;
+
             }
             else {
               content = context.parsed.y;
 
+              return label + ": " + content;
+
             }
-            return label + ": " + content;
+
           }
 
         }
@@ -267,6 +311,10 @@ export default function V4() {
           unit: 'month',
         },
         position: 'bottom',
+        title:{
+          display: true,
+          text: "date",
+        }
 
       },
       y: {
@@ -277,25 +325,18 @@ export default function V4() {
           text: "co2 levels",
         },
       },
-    },
+    }
   };
   if (isLoading || isLoadingM || isLoadingA1 || isLoadingA2 || isLoadingA3 || isLoadingE1) {
     return <div>Loading.</div>
   }
   else {
     return (
-      <div>
-        {/* <h2>Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurement</h2> */}
-        <Line options={options} data={data} />
-        {/* <p id="description">
-          The graph displays the mean amount of carbon dioxide mixed into the athmosphere over a time period from the year 1006 to 2022 and combines it with significants events of the human history. To cover the phenomenon adequately, the graph uses annual and monthly measurement data from an observatory at Mauna Loa, annual data from a research site in East-Antarctica, as well as the events of the human history presented by the University of Southampton.
-          <br></br>
-          <a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" rel="noreferrer">Mauna Loa data source</a> --- <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html" target="_blank" rel="noreferrer">description</a>
-          <br></br>
-          <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" rel="noreferrer">Antartic data source</a> --- <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html" target="_blank" rel="noreferrer">description</a>
-          <br></br>
-          <a href="https://www.southampton.ac.uk/~cpd/history.html" target="_blank" rel="noreferrer">Human evolution data source</a>
-        </p> */}
+      <div id="chart3">
+        <Line ref={chartRef} options={options} data={data} />
+        <div id='buttons'>
+          <ChartButtons ref={chartRef} />
+        </div>
       </div>
     );
   }

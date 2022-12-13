@@ -83,14 +83,16 @@ function V9() {
 
   return (
     <div>
-      {loaded &&
-        <Doughnut
-          data={data}
-          options={options}
-          ref={chartRef}
-          onClick={chartLevel < 3 ? handleLeftClick : null}
-          onContextMenu={chartLevel > 1 ? handleRightClick : null}
-        />}
+      <Doughnut
+        data={loaded ? data : {
+          labels: [],
+          datasets: []
+        }}
+        options={options}
+        ref={chartRef}
+        onClick={chartLevel < 3 ? handleLeftClick : null}
+        onContextMenu={chartLevel > 1 ? handleRightClick : null}
+      />
     </div>
   );
 }
