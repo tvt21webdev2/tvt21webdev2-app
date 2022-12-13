@@ -41,7 +41,7 @@ export default function App() {
         <Route path="/" element={<Frontpage/>}/>
         <Route path="/n1" element={<N1/>}/>
         <Route path="/n2" element={<N2/>}/>
-        <Route path="/customviews/:id" element={<N3/>}/>
+        <Route path="/userview/:id" element={<N3/>}/>
         {currentUser ?
           <>
             <Route path="/editor" element={<Editor/>}/>

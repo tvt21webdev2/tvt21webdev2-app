@@ -27,9 +27,11 @@ public class ViewController {
   }
 
   @GetMapping("/view")
-  public List<View> getData(@RequestParam(defaultValue = "empty") String userId) {
-    if (!userId.equals("empty"))
-      return service.findByUserId(Long.parseLong(userId));
+  public List<View> getUserViews(@RequestParam(defaultValue = "empty") String username) {
+    if (!username.equals("empty")) {
+      Long userId = userService.findByUsername(username).get(0).getId();
+      return service.findByUserId(userId);
+    }
     return service.findAll();
   }
 
@@ -54,16 +56,9 @@ public class ViewController {
     return new ResponseEntity<>("View deleted", HttpStatus.OK);
   }
 
-  @GetMapping("/{url}")
+  @GetMapping("/view/{url}")
   @ResponseBody
   public List<View> getView(@PathVariable String url) {
     return service.findByUrl(url);
-  }
-
-  @GetMapping("/view/search/{username}")
-  @ResponseBody
-  public List<View> getViewByUsername(@PathVariable String username) {
-    Long userId = userService.findByUsername(username).get(0).getId();
-    return service.findByUserId(userId);
   }
 }

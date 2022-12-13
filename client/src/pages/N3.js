@@ -54,8 +54,9 @@ export default function N3() {
   const params = useParams();
 
   const getData = async () => {
-    const { data } = await axios.get(`http://localhost:8080/${params.id}`);
-    // console.log(data);
+    console.log(params.id);
+    const { data } = await axios.get(`http://localhost:8080/view/${params.id}`);
+    console.log(data);
     if (data.length === 0)
       setEmptyData(true)
     else
@@ -65,7 +66,7 @@ export default function N3() {
 
   useEffect(() => { 
     getData()
-  }, [])
+  }, [params])
 
   function setValues(view) {
     const viewObject = view[0]
