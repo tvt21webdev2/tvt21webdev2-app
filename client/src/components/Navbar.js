@@ -26,7 +26,7 @@ export default function Navbar({children, currentUser, setSnackbarOpen}) {
     if (userViewsOpen) {
       (async function () {
         try {
-          const response = await axios.get(`http://localhost:8080/view/search/${currentUser}`);
+          const response = await axios.get(`http://localhost:8080/view?username=${currentUser}`);
           setViews(response.data);
           // console.log(response.data);
           setLoaded(true);
@@ -56,7 +56,7 @@ export default function Navbar({children, currentUser, setSnackbarOpen}) {
 
     return (views.map(item =>
       <MenuItem key={item.url}>
-        <Link to={`/customviews/${item.url}`} reloadDocument={true}>
+        <Link to={`/userview/${item.url}`}>
           <Button
             sx={{width: buttonWidth}}
             onClick={() => setUserViewsOpen(false)}

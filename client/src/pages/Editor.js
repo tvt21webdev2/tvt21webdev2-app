@@ -16,7 +16,7 @@ export default function Editor() {
   const [url, setUrl] = useState("")
   const [posted, setPosted] = useState(false)
 
-  const base = "http://localhost:3000/customviews/"
+  const base = "http://localhost:3000/userview/"
 
   function copyToClipboard() {
     const copyText = document.getElementById("view-url");
@@ -101,7 +101,7 @@ export default function Editor() {
           // control={<Switch onChange={event => console.log(!event.target.checked)} />} 
           label="Allekkain / Vierekkäin" />
         <Button variant="outlined" onClick={postView} disabled={posted || !check()}>Luo näkymä</Button>
-        <Link to={`/customviews/${url}`} hidden={!posted}>
+        <Link to={`/userview/${url}`} hidden={!posted}>
           <Button
             sx={{ml: 2}} 
             variant="contained" 
