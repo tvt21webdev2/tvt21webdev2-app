@@ -40,10 +40,7 @@ export default function Navbar({children, currentUser}) {
 
   async function deleteView(id) {
     try {
-      const response = await axios.post(`http://localhost:8080/view/delete?id=${id}`, {username: localStorage.getItem('user')}, {withCredentials: true})
-      if (response.data.status.code === 200) {
-        // wip re render dropdown when deleting a view
-      }
+      await axios.post(`http://localhost:8080/view/delete?id=${id}`, {username: localStorage.getItem('user')}, {withCredentials: true})
     } catch (err) {
       console.log(err)
     }
