@@ -1,12 +1,9 @@
 package com.tvt21webdev2.climatechangecharts.data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "user_account")
 public class User {
 
   @Id
