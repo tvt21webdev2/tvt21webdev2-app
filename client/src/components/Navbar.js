@@ -88,12 +88,12 @@ export default function Navbar({children, currentUser, setSnackbarOpen}) {
           <Typography sx={{ml: 3, flexGrow: 1}}>
             <Link to="/n1">
               <Button sx={{color: "#fff"}}>
-                N1
+                Lämpötilatiedot ja CO2-pitoisuudet
               </Button>
             </Link>
             <Link to="/n2">
               <Button sx={{color: "#fff"}}>
-                N2
+                Päästölähteet
               </Button>
             </Link>
             {currentUser ?
