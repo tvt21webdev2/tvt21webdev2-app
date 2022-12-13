@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <div>
-      <Navbar currentUser={currentUser}>
+      <Navbar currentUser={currentUser} setSnackbarOpen={setSnackbarOpen}>
         {currentUser ?
           <UserOptions setCurrentUser={setCurrentUser} setSnackbarOpen={setSnackbarOpen}/>
           :

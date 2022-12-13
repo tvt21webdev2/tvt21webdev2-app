@@ -5,13 +5,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {cloneElement, useEffect, useRef, useState} from "react";
-import {ClickAwayListener, Grid, IconButton, Menu, MenuItem, Popper} from "@mui/material";
+import {ClickAwayListener, Menu, MenuItem, Popper} from "@mui/material";
 import {Link} from 'react-router-dom';
 import ForestIcon from '@mui/icons-material/Forest';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
 
-export default function Navbar({children, currentUser}) {
+export default function Navbar({children, currentUser, setSnackbarOpen}) {
   const [loginOpen, setLoginOpen] = useState(false);
   const [userOptionsOpen, setUserOptionsOpen] = useState(false);
   const [userViewsOpen, setUserViewsOpen] = useState(false);
@@ -37,16 +37,17 @@ export default function Navbar({children, currentUser}) {
     }
   }, [userViewsOpen]);
 
-  async function deleteView(id) {
+  async function handleDeleteView(id) {
     try {
-      await axios.post(`http://localhost:8080/view/delete?id=${id}`, {username: localStorage.getItem('user')}, {withCredentials: true})
+      await axios.post(`http://localhost:8080/view/delete?id=${id}`, {username: currentUser}, {withCredentials: true})
+      setViews(views.filter(v => v.id !== id));
+      setSnackbarOpen("deleteview");
     } catch (err) {
       console.log(err)
     }
   }
 
   function renderUserViewMenuItems() {
-    // console.log(views);
     const longestButtonText = views.reduce((longest, item) => {
       return item.name.length > longest.length ? item.name : longest;
     }, "");
@@ -54,24 +55,24 @@ export default function Navbar({children, currentUser}) {
     const buttonWidth = `${longestButtonText.length + 6}ch`;
 
     return (views.map(item =>
-        <MenuItem key={item.url}>
-          <Link to={`/customviews/${item.url}`} reloadDocument={true}>
-            <Button
-              sx={{width: buttonWidth}}
-              onClick={() => setUserViewsOpen(false)}
-              variant="outlined" 
-              color="primary" 
-              >{item.name}
-            </Button> 
-          </Link>
+      <MenuItem key={item.url}>
+        <Link to={`/customviews/${item.url}`} reloadDocument={true}>
           <Button
-            sx={{ml: 2, textAlign: 'center'}}
-            onClick={() => deleteView(item.id)}
-            variant="contained" 
-            color="error"
-            ><DeleteIcon />
-          </Button> 
-        </MenuItem>
+            sx={{width: buttonWidth}}
+            onClick={() => setUserViewsOpen(false)}
+            variant="outlined"
+            color="primary"
+          >{item.name}
+          </Button>
+        </Link>
+        <Button
+          sx={{ml: 2, textAlign: 'center'}}
+          onClick={() => handleDeleteView(item.id)}
+          variant="contained"
+          color="error"
+        ><DeleteIcon/>
+        </Button>
+      </MenuItem>
     ))
   }
 
@@ -85,7 +86,7 @@ export default function Navbar({children, currentUser}) {
             </Link>
           </Typography>
           <Typography sx={{ml: 3, flexGrow: 1}}>
-          <Link to="/n1">
+            <Link to="/n1">
               <Button sx={{color: "#fff"}}>
                 N1
               </Button>

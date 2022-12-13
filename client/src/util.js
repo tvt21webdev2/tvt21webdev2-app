@@ -34,6 +34,8 @@ class Util {
         return "Uloskirjautuminen onnistui!"
       case "deleteuser":
         return "Käyttäjän poisto onnistui!"
+      case "deleteview":
+        return "Näkymän poisto onnistui!"
     }
   }
 }
