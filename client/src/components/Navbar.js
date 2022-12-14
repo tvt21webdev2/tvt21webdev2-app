@@ -26,7 +26,7 @@ export default function Navbar({children, currentUser, setSnackbarOpen}) {
     if (userViewsOpen) {
       (async function () {
         try {
-          const response = await axios.get(`http://localhost:8080/view?username=${currentUser}`);
+          const response = await axios.get(`/view?username=${currentUser}`);
           setViews(response.data);
           // console.log(response.data);
           setLoaded(true);
@@ -39,7 +39,7 @@ export default function Navbar({children, currentUser, setSnackbarOpen}) {
 
   async function handleDeleteView(id) {
     try {
-      await axios.post(`http://localhost:8080/view/delete?id=${id}`, {username: currentUser}, {withCredentials: true})
+      await axios.post(`/view/delete?id=${id}`, {username: currentUser}, {withCredentials: true})
       setViews(views.filter(v => v.id !== id));
       setSnackbarOpen("deleteview");
     } catch (err) {

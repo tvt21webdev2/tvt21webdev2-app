@@ -10,7 +10,7 @@ import {LoadingContext} from "../context.js";
 
 export default function Login({children, setLoginOpen, setCurrentUser, setSnackbarOpen}) {
 
-  const URL = "http://localhost:8080/login"
+  const URL = "/login"
 
   const [login, setLogin] = useState({username: "", password: ""});
   const [signUpOpen, setSignUpOpen] = useState(false);

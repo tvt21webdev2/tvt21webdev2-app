@@ -10,7 +10,7 @@ import {LoadingContext} from "../context.js";
 
 const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
 
-  const URL = "http://localhost:8080/register";
+  const URL = "/register";
 
   const [signUp, setSignUp] = useState({username: "", password: "", passwordAgain: ""});
   const [errorMessage, setErrorMessage] = useState("");

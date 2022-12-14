@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
-import { Chart } from "chart.js/auto";
+import {useState, useEffect} from "react";
+import {Line} from "react-chartjs-2";
+import {Chart} from "chart.js/auto";
 import Util from "../util";
 
 function V8() {
@@ -10,7 +10,7 @@ function V8() {
 
   useEffect(() => {
     (async function () {
-      const response = await axios.get("http://localhost:8080/v8");
+      const response = await axios.get("/v8");
       setData(formatData(response.data));
       setLoaded(true);
     })();
@@ -55,7 +55,7 @@ function V8() {
   return (
     <div>
       {loaded &&
-        <Line data={data} options={options} />
+        <Line data={data} options={options}/>
       }
     </div>
   );

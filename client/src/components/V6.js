@@ -9,10 +9,10 @@ function V6() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/v6")
-    .then(response => {
-      setV6Data(response.data)
-    }).catch(err => {
+    axios.get("/v6")
+      .then(response => {
+        setV6Data(response.data)
+      }).catch(err => {
       console.log(err);
     })
     setLoaded(true)
@@ -48,21 +48,21 @@ function V6() {
           display: true,
           position: 'left',
           text: "years (bp)"
-        } 
+        }
       },
       y: {
         title: {
           type: 'linear',
           display: true,
           text: "CO2"
-        } 
+        }
       },
-  }
-};
+    }
+  };
 
   return (
     <div>
-      {loaded && <Line options={options} data={data} />}
+      {loaded && <Line options={options} data={data}/>}
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function UserOptions({setUserOptionsOpen, setCurrentUser, setSnac
     loading(true);
 
     try {
-      await axios.get("http://localhost:8080/logout", {withCredentials: true});
+      await axios.get("/logout", {withCredentials: true});
       localStorage.removeItem("user");
       setCurrentUser(null);
       setUserOptionsOpen(false);
@@ -27,11 +27,11 @@ export default function UserOptions({setUserOptionsOpen, setCurrentUser, setSnac
       loading(false);
     }
   }
-  
+
   async function handleDeleteAccount() {
     loading(true);
     try {
-      await axios.delete("http://localhost:8080/user/delete", {withCredentials: true});
+      await axios.delete("/user/delete", {withCredentials: true});
       await handleLogOut();
       setSnackbarOpen("deleteuser");
       loading(false);

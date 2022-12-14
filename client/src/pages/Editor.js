@@ -41,7 +41,7 @@ export default function Editor() {
     setLoaded(true);
   }, []);
 
-  const base = "http://localhost:3000/userview/"
+  const base = "http://dashboard.render.com/userview/"
 
   function copyToClipboard() {
     const copyText = document.getElementById("view-url");
@@ -81,7 +81,7 @@ export default function Editor() {
   }
 
   function postView() {
-    axios.post("http://localhost:8080/view/create", createView(), {withCredentials: true})
+    axios.post("/view/create", createView(), {withCredentials: true})
       .then(response => {
         setUrl(response.data.split(" ")[0])
         setPosted(true)

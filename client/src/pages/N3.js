@@ -36,7 +36,7 @@ export default function N3() {
   }, [params])
 
   const getData = async () => {
-    const {data} = await axios.get(`http://localhost:8080/view/${params.id}`);
+    const {data} = await axios.get(`/view/${params.id}`);
     if (data.length === 0) {
       setEmptyData(true);
     } else {

@@ -6,7 +6,7 @@ import Util from "../util";
 
 function V9() {
 
-  const baseUrl = "http://localhost:8080/";
+  const baseUrl = "/";
 
   const [data, setData] = useState({});
   const [loaded, setLoaded] = useState(false);

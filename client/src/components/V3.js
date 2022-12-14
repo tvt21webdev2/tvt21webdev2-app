@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "chart.js/auto";
-import { Line } from "react-chartjs-2";
-import { useEffect, useState, useRef } from 'react';
+import {Line} from "react-chartjs-2";
+import {useEffect, useState, useRef} from 'react';
 import axios from 'axios';
 import 'chartjs-adapter-luxon';
 import ChartButtons from './ChartButtons';
@@ -10,12 +10,12 @@ import '../styles/v3.css';
 
 Chart.register(zoomPlugin);
 
-const addressA = 'http://localhost:8080/v3?type=annual';
-const addressM = 'http://localhost:8080/v3?type=monthly';
-const addressA1 = 'http://localhost:8080/v4?set=1';
-const addressA2 = 'http://localhost:8080/v4?set=2';
-const addressA3 = 'http://localhost:8080/v4?set=3';
-const addressE1 = 'http://localhost:8080/v10?year=1000';
+const addressA = '/v3?type=annual';
+const addressM = '/v3?type=monthly';
+const addressA1 = '/v4?set=1';
+const addressA2 = '/v4?set=2';
+const addressA3 = '/v4?set=3';
+const addressE1 = '/v10?year=1000';
 
 
 export default function V3() {
@@ -44,12 +44,12 @@ export default function V3() {
       .then((response) => {
         // console.log(response.data)
         setmaunaArray(response.data.map(mauna => {
-          return { id: mauna.id, year: mauna.year, co2: mauna.average }
+          return {id: mauna.id, year: mauna.year, co2: mauna.average}
         }))
       }).catch(error => {
-        alert(error.response.data.error)
+      alert(error.response.data.error)
 
-      })
+    })
 
     setisLoading(false)
 
@@ -57,12 +57,12 @@ export default function V3() {
       .then((response) => {
         // console.log(response.data)
         setmaunaArrayM(response.data.map(maunaM => {
-          return { id: maunaM.id, year: maunaM.year, co2: maunaM.average }
+          return {id: maunaM.id, year: maunaM.year, co2: maunaM.average}
         }))
       }).catch(error => {
-        alert(error.response.data.error)
+      alert(error.response.data.error)
 
-      })
+    })
 
     setisLoadingM(false)
 
@@ -71,12 +71,12 @@ export default function V3() {
       .then((response) => {
         // console.log(response.data)
         setantSet1Array(response.data.map(Ant1 => {
-          return { id: Ant1.id, year: Ant1.year, co2: Ant1.co2 }
+          return {id: Ant1.id, year: Ant1.year, co2: Ant1.co2}
         }))
       }).catch(error => {
-        alert(error.response.data.error)
+      alert(error.response.data.error)
 
-      })
+    })
 
     setisLoadingA1(false)
 
@@ -87,12 +87,12 @@ export default function V3() {
       .then((response) => {
         // console.log(response.data)
         setantSet2Array(response.data.map(Ant2 => {
-          return { id: Ant2.id, year: Ant2.year, co2: Ant2.co2 }
+          return {id: Ant2.id, year: Ant2.year, co2: Ant2.co2}
         }))
       }).catch(error => {
-        alert(error.response.data.error)
+      alert(error.response.data.error)
 
-      })
+    })
 
     setisLoadingA2(false)
 
@@ -101,29 +101,28 @@ export default function V3() {
       .then((response) => {
         // console.log(response.data)
         setantSet3Array(response.data.map(Ant3 => {
-          return { id: Ant3.id, year: Ant3.year, co2: Ant3.co2 }
+          return {id: Ant3.id, year: Ant3.year, co2: Ant3.co2}
         }))
       }).catch(error => {
-        alert(error.response.data.error)
+      alert(error.response.data.error)
 
-      })
+    })
 
     setisLoadingA3(false)
 
     axios.get(addressE1)
       .then(response => {
         setevolutionArray(response.data.map(evo => {
-          return { id: evo.id, year: String(evo.year), co2: 240, event: evo.event }
+          return {id: evo.id, year: String(evo.year), co2: 240, event: evo.event}
         }))
 
       }).catch(error => {
-        alert(error.response.data.error)
-      })
+      alert(error.response.data.error)
+    })
 
     setisLoadingE1(false)
 
   }, [])
-
 
 
   const data = {
@@ -139,64 +138,63 @@ export default function V3() {
       },
       pointRadius: 2,
     },
-    {
-      label: 'Annual Mauna Loa',
-      data: maunaArray,
-      borderColor: "rgb(204, 0, 204)",
-      backgroundColor: "rgba(204, 0, 204, 0.5)",
-      parsing: {
-        xAxisKey: "year",
-        yAxisKey: "co2",
+      {
+        label: 'Annual Mauna Loa',
+        data: maunaArray,
+        borderColor: "rgb(204, 0, 204)",
+        backgroundColor: "rgba(204, 0, 204, 0.5)",
+        parsing: {
+          xAxisKey: "year",
+          yAxisKey: "co2",
+        },
+        pointRadius: 2,
       },
-      pointRadius: 2,
-    },
-    {
-      label: 'Antarctic Ice core set 1',
-      data: antSet1Array,
-      borderColor: "rgb(102, 0, 51)",
-      backgroundColor: "rgba(102, 0, 51, 0.5)",
-      parsing: {
-        xAxisKey: "year",
-        yAxisKey: "co2",
+      {
+        label: 'Antarctic Ice core set 1',
+        data: antSet1Array,
+        borderColor: "rgb(102, 0, 51)",
+        backgroundColor: "rgba(102, 0, 51, 0.5)",
+        parsing: {
+          xAxisKey: "year",
+          yAxisKey: "co2",
+        },
+        pointRadius: 2,
       },
-      pointRadius: 2,
-    },
-    {
-      label: 'Antarctic Ice core set 2',
-      data: antSet2Array,
-      borderColor: "rgb(51, 51, 153)",
-      backgroundColor: "rgba(51, 51, 153, 0.5)",
-      parsing: {
-        xAxisKey: "year",
-        yAxisKey: "co2",
+      {
+        label: 'Antarctic Ice core set 2',
+        data: antSet2Array,
+        borderColor: "rgb(51, 51, 153)",
+        backgroundColor: "rgba(51, 51, 153, 0.5)",
+        parsing: {
+          xAxisKey: "year",
+          yAxisKey: "co2",
+        },
+        pointRadius: 2,
       },
-      pointRadius: 2,
-    },
-    {
-      label: 'Antarctic Ice core set 3',
-      data: antSet3Array,
-      borderColor: "rgb(0, 102, 204)",
-      backgroundColor: "rgba(0, 102, 204, 0.5)",
-      parsing: {
-        xAxisKey: "year",
-        yAxisKey: "co2",
+      {
+        label: 'Antarctic Ice core set 3',
+        data: antSet3Array,
+        borderColor: "rgb(0, 102, 204)",
+        backgroundColor: "rgba(0, 102, 204, 0.5)",
+        parsing: {
+          xAxisKey: "year",
+          yAxisKey: "co2",
+        },
+        pointRadius: 2,
       },
-      pointRadius: 2,
-    },
 
-    {
-      label: 'Human evolution and activities',
-      data: evolutionArray,
-      borderColor: "rgb(0, 102, 204)",
-      backgroundColor: "rgba(0, 102, 204, 0.5)",
-      showLine: false,
-      parsing: {
-        xAxisKey: "year",
-        yAxisKey: "co2",
+      {
+        label: 'Human evolution and activities',
+        data: evolutionArray,
+        borderColor: "rgb(0, 102, 204)",
+        backgroundColor: "rgba(0, 102, 204, 0.5)",
+        showLine: false,
+        parsing: {
+          xAxisKey: "year",
+          yAxisKey: "co2",
+        },
+        pointRadius: 4,
       },
-      pointRadius: 4,
-    },
-
 
 
     ],
@@ -215,11 +213,11 @@ export default function V3() {
         },
         limits: {
           x:
-          {
-            min: new Date('1000-01-01T00:00:00').valueOf(),
-            max: new Date('2022-09-01T00:00:00').valueOf()
-          },
-          y: { min: 240, max: 440 }
+            {
+              min: new Date('1000-01-01T00:00:00').valueOf(),
+              max: new Date('2022-09-01T00:00:00').valueOf()
+            },
+          y: {min: 240, max: 440}
         },
         zoom: {
           pinch: {
@@ -290,8 +288,7 @@ export default function V3() {
 
               return content;
 
-            }
-            else {
+            } else {
               content = context.parsed.y;
 
               return label + ": " + content;
@@ -311,7 +308,7 @@ export default function V3() {
           unit: 'month',
         },
         position: 'bottom',
-        title:{
+        title: {
           display: true,
           text: "date",
         }
@@ -329,13 +326,12 @@ export default function V3() {
   };
   if (isLoading || isLoadingM || isLoadingA1 || isLoadingA2 || isLoadingA3 || isLoadingE1) {
     return <div>Loading.</div>
-  }
-  else {
+  } else {
     return (
       <div id="chart3">
-        <Line ref={chartRef} options={options} data={data} />
+        <Line ref={chartRef} options={options} data={data}/>
         <div id='buttons'>
-          <ChartButtons ref={chartRef} />
+          <ChartButtons ref={chartRef}/>
         </div>
       </div>
     );

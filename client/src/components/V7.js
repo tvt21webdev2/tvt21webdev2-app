@@ -1,8 +1,8 @@
 import React from "react";
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import { Chart, Tooltip } from 'chart.js/auto';
+import {useEffect, useState} from 'react';
+import {Line} from 'react-chartjs-2';
+import {Chart, Tooltip} from 'chart.js/auto';
 
 import 'chartjs-adapter-luxon';
 import Context from "@mui/base/TabsUnstyled/TabsContext";
@@ -14,32 +14,32 @@ function V7() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/v6")
+    axios.get("/v6")
       .then(response => {
         setV6Data(response.data.map(six => {
-          return { id: six.id, gasAge: six.gasAge, co2: six.co2 }
+          return {id: six.id, gasAge: six.gasAge, co2: six.co2}
         }))
       }).catch(err => {
-        console.log(err);
-      })
+      console.log(err);
+    })
 
-    axios.get("http://localhost:8080/v7")
+    axios.get("/v7")
       .then(response => {
         setV7Data(response.data.map(seven => {
-          return { id: seven.id, yearBp: seven.yearBp, tempChange: seven.tempChange }
+          return {id: seven.id, yearBp: seven.yearBp, tempChange: seven.tempChange}
         }))
       }).catch(err => {
-        console.log(err);
-      })
+      console.log(err);
+    })
 
-    axios.get("http://localhost:8080/v10")
+    axios.get("/v10")
       .then(response => {
         setV10Data(response.data.map(evo => {
-          return { id: evo.id, year: evo.year, co2: 0, event: evo.event }
+          return {id: evo.id, year: evo.year, co2: 0, event: evo.event}
         }))
       }).catch(err => {
-        console.log(err);
-      })
+      console.log(err);
+    })
 
     setLoaded(true)
 
@@ -126,8 +126,7 @@ function V7() {
 
               return content;
 
-            }
-            else {
+            } else {
               content = context.parsed.y;
 
               return label + ": " + content;
@@ -178,7 +177,7 @@ function V7() {
 
   return (
     <div>
-      {loaded && <Line options={options} data={data} />}
+      {loaded && <Line options={options} data={data}/>}
     </div>
   );
 }

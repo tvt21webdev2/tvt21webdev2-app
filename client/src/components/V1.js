@@ -1,22 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import Chart from "chart.js/auto";
-import { Line } from "react-chartjs-2";
+import {Line} from "react-chartjs-2";
 import "chartjs-adapter-luxon";
 import zoomPlugin from 'chartjs-plugin-zoom';
-import { DateTime } from 'luxon';
+import {DateTime} from 'luxon';
 import '../styles/v1.css';
 import ChartButtons from './ChartButtons';
 
 Chart.register(zoomPlugin);
 
-const urlAnnualGlobal = 'http://localhost:8080/v1?type=annual&location=global'
-const urlAnnualNorthern = 'http://localhost:8080/v1?type=annual&location=northern'
-const urlAnnualSouthern = 'http://localhost:8080/v1?type=annual&location=southern'
-const urlMonthlyGlobal = 'http://localhost:8080/v1?type=monthly&location=global'
-const urlMonthlyNorthern = 'http://localhost:8080/v1?type=monthly&location=northern'
-const urlMonthlySouthern = 'http://localhost:8080/v1?type=monthly&location=southern'
-const urlV2Data = 'http://localhost:8080/v2'
+const urlAnnualGlobal = '/v1?type=annual&location=global'
+const urlAnnualNorthern = '/v1?type=annual&location=northern'
+const urlAnnualSouthern = '/v1?type=annual&location=southern'
+const urlMonthlyGlobal = '/v1?type=monthly&location=global'
+const urlMonthlyNorthern = '/v1?type=monthly&location=northern'
+const urlMonthlySouthern = '/v1?type=monthly&location=southern'
+const urlV2Data = '/v2'
 
 export default function V1() {
   const [v1DataAnnualGlobal, setV1DataAnnualGlobal] = useState([])
@@ -28,76 +28,76 @@ export default function V1() {
   const [v2Data, setV2Data] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
   const [v2DataVisible, setV2DataVisible] = useState(true)
-  
+
   const chartRef = useRef();
 
   useEffect(() => {
     if (!isLoaded) {
       axios.get(urlAnnualGlobal)
-      .then(response => {
-        setV1DataAnnualGlobal(response.data)
-      }).catch(err => {
+        .then(response => {
+          setV1DataAnnualGlobal(response.data)
+        }).catch(err => {
         console.log(err);
       })
 
       axios.get(urlAnnualNorthern)
-      .then(response => {
-        setV1DataAnnualNorthern(response.data)
-      }).catch(err => {
+        .then(response => {
+          setV1DataAnnualNorthern(response.data)
+        }).catch(err => {
         console.log(err);
       })
 
       axios.get(urlAnnualSouthern)
-      .then(response => {
-        setV1DataAnnualSouthern(response.data)
-      }).catch(err => {
+        .then(response => {
+          setV1DataAnnualSouthern(response.data)
+        }).catch(err => {
         console.log(err);
       })
-  
+
       axios.get(urlMonthlyGlobal)
-      .then(response => {
-        setV1DataMonthlyGlobal(response.data)
-      }).catch(err => {
+        .then(response => {
+          setV1DataMonthlyGlobal(response.data)
+        }).catch(err => {
         console.log(err);
       })
 
       axios.get(urlMonthlyNorthern)
-      .then(response => {
-        setV1DataMonthlyNorthern(response.data)
-      }).catch(err => {
+        .then(response => {
+          setV1DataMonthlyNorthern(response.data)
+        }).catch(err => {
         console.log(err);
       })
 
       axios.get(urlMonthlySouthern)
-      .then(response => {
-        setV1DataMonthlySouthern(response.data)
-      }).catch(err => {
+        .then(response => {
+          setV1DataMonthlySouthern(response.data)
+        }).catch(err => {
         console.log(err);
       })
 
       axios.get(urlV2Data)
-      .then(response => {
-        let temp = []
-        response.data.forEach(element => {
-          if (element.year < 10)
-            element.year = "000" + element.year
-          else if (element.year < 100)
-            element.year = "00" + element.year
-          else if (element.year < 1000)
-            element.year = "0" + element.year
+        .then(response => {
+          let temp = []
+          response.data.forEach(element => {
+            if (element.year < 10)
+              element.year = "000" + element.year
+            else if (element.year < 100)
+              element.year = "00" + element.year
+            else if (element.year < 1000)
+              element.year = "0" + element.year
 
-          element.year = element.year + "-01"
-          temp.push(element)
-        });
-        setV2Data(temp)
-      }).catch(err => {
+            element.year = element.year + "-01"
+            temp.push(element)
+          });
+          setV2Data(temp)
+        }).catch(err => {
         console.log(err);
       })
-      
+
       setIsLoaded(true)
     }
   }, [])
-  
+
   const data = {
     datasets: [
       {
@@ -193,7 +193,7 @@ export default function V1() {
             min: v2DataVisible ? new Date('0001-01-01T00:00:00').valueOf() : new Date('1850-01-01T00:00:00').valueOf(),
             max: new Date('2022-09-01T00:00:00').valueOf()
           },
-          y: {min:-2, max: 2}
+          y: {min: -2, max: 2}
         },
         zoom: {
           wheel: {
@@ -210,7 +210,7 @@ export default function V1() {
         text: "Global historical surface temperature anomalies from January 1850 onwards and Northern Hemisphere 2,000-year temperature reconstruction",
       },
       legend: {
-        onClick: function(e, legendItem, legend) {
+        onClick: function (e, legendItem, legend) {
           const index = legendItem.datasetIndex;
           const ci = legend.chart;
           if (ci.isDatasetVisible(index)) {
@@ -261,9 +261,9 @@ export default function V1() {
   } else {
     return (
       <div id='container'>
-        <Line ref={chartRef} options={options} data={data} />
+        <Line ref={chartRef} options={options} data={data}/>
         <div id='buttons'>
-          <ChartButtons ref={chartRef} />
+          <ChartButtons ref={chartRef}/>
         </div>
       </div>
     )
