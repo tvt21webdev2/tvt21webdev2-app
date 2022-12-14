@@ -29,4 +29,12 @@ public class UserService {
     return repository.findById(id);
   }
 
+  public boolean existsByUsername(String username) {
+    return repository.existsByUsername(username);
+  }
+
+  public void deleteByUsername(String username) {
+    repository.deleteByUsername(username);
+  }
+
 }

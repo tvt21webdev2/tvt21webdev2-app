@@ -10,12 +10,12 @@ import com.tvt21webdev2.climatechangecharts.data.V9SubSub;
 
 @Repository
 public interface V9SubSubRepository extends JpaRepository<V9SubSub, Long> {
-  
-  @Override
-  @Query("SELECT v FROM V9SubSub v ORDER BY v.subSectorId")
-  List <V9SubSub> findAll();
 
-  @Query("SELECT v FROM V9SubSub v WHERE v.subSectorId =?1 ORDER BY v.subSectorId")
-  List<V9SubSub> findBySubSecId(int subSectorId);
+  @Override
+  @Query("SELECT v FROM V9SubSub v ORDER BY v.belongsTo")
+  List<V9SubSub> findAll();
+
+  @Query("SELECT v FROM V9SubSub v WHERE v.belongsTo =?1 ORDER BY v.belongsTo")
+  List<V9SubSub> findByBelongsTo(Long belongsTo);
 
 }

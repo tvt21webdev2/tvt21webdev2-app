@@ -13,22 +13,15 @@ public class V9SubSub {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "sub_sub_sector_id")
   private Long id;
-  @Column(name = "sub_sector_id")
-  private int subSectorId;
-  @Column(name = "sub_sub_sector")
-  private String subSubSector;
+  @Column(name = "belongs_to")
+  private Long belongsTo;
+  @Column(name = "label")
+  private String label;
   @Column(name = "share_of_global_greenhouse_gas_emissions_perc")
-  private double greenhouseEmissions;
+  private double emissionsPercentage;
 
   public V9SubSub() {
-  }
-
-  public V9SubSub(int subSectorId, String subSubSector, double greenhouseEmissions) {
-    this.subSectorId = subSectorId;
-    this.subSubSector = subSubSector;
-    this.greenhouseEmissions = greenhouseEmissions;
   }
 
   public Long getId() {
@@ -39,28 +32,28 @@ public class V9SubSub {
     this.id = id;
   }
 
-  public int getSubSectorId() {
-    return this.subSectorId;
+  public Long getBelongsTo() {
+    return this.belongsTo;
   }
 
-  public void setSubSectorId(int subSectorId) {
-    this.subSectorId = subSectorId;
+  public void setBelongsTo(Long belongsTo) {
+    this.belongsTo = belongsTo;
   }
 
-  public String getSubSubSector() {
-    return this.subSubSector;
+  public String getLabel() {
+    return this.label;
   }
 
-  public void setSubSubSector(String subSubSector) {
-    this.subSubSector = subSubSector;
+  public void setLabel(String label) {
+    this.label = label;
   }
 
-  public double getGreenhouseEmissions() {
-    return this.greenhouseEmissions;
+  public double getEmissionsPercentage() {
+    return this.emissionsPercentage;
   }
 
-  public void setGreenhouseEmissions(double greenhouseEmissions) {
-    this.greenhouseEmissions = greenhouseEmissions;
+  public void setEmissionsPercentage(double emissionsPercentage) {
+    this.emissionsPercentage = emissionsPercentage;
   }
-  
+
 }

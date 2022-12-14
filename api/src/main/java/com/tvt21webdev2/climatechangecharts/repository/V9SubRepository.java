@@ -11,6 +11,7 @@ import com.tvt21webdev2.climatechangecharts.data.V9Sub;
 public interface V9SubRepository extends JpaRepository<V9Sub, Long> {
 
   List<V9Sub> findAll();
-  List<V9Sub> findBySectorId(Long sectorId);
+
+  List<V9Sub> findByBelongsTo(Long belongsTo);
 
 }

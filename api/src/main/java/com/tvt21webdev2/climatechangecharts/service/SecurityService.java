@@ -27,31 +27,25 @@ public class SecurityService {
     this.service = service;
   }
 
-  public User register(String username, String password) {
-    if (repository.existsByUsername(username))
-      return null;
-
-    User u = new User(username, service.encode(password));
-    repository.save(u);
-    return u;
+  public void saveUser(User user) {
+    user.setPassword(service.encode(user.getPassword()));
+    repository.save(user);
   }
 
-  public User checkIfUserExists(String username) {
-    List<User> users = repository.findByUsername(username);
+  public boolean checkIfUserExists(User user) {
+    return repository.existsByUsername(user.getUsername());
+  }
+
+  public boolean validateUser(User user) {
+
+    List<User> users = repository.findByUsername(user.getUsername());
     try {
-      User user = users.size() > 0 ? users.get(0) : null;
-      return user;
+      User userFromRepo = users.size() > 0 ? users.get(0) : null;
+      return userFromRepo != null && service.matches(user.getPassword(), userFromRepo.getPassword());
     } catch (IndexOutOfBoundsException e) {
       e.printStackTrace();
-      return null;
-    }
-  }
-
-  public boolean validateUser(User user, String password) {
-    if (!service.matches(password, user.getPassword())) {
       return false;
     }
-    return true;
   }
 
   public String generateJwt(User user) {
@@ -59,17 +53,15 @@ public class SecurityService {
     return JWT.create().withSubject(user.getUsername()).sign(alg);
   }
 
-  public String validateJwt(String jwtToken) {
+  public String validateJwt(String token) {
     Algorithm alg = Algorithm.HMAC256(jwtKey);
     JWTVerifier verifier = JWT.require(alg).build();
-
     try {
-      DecodedJWT jwt = verifier.verify(jwtToken);
+      DecodedJWT jwt = verifier.verify(token);
       return jwt.getSubject();
     } catch (JWTVerificationException e) {
       e.printStackTrace();
+      return null;
     }
-
-    return null;
   }
 }

@@ -1,0 +1,35 @@
+#view-url {
+  /* width: 500px; */
+  text-align: center;
+}
+
+#switch {
+  margin-left: 10px;
+}
+
+#controls {
+  margin-top: 50px;
+}
+
+#chart-card {
+  text-align: center;
+}
+
+#text-area {
+  min-height: 85px;
+  max-height: 170px;
+}
+
+@media only screen and (min-width: 600px) {
+  #text-area {
+    min-width: 575px;
+    max-width: 575px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  #text-area {
+    min-width: 875px;
+    max-width: 875px;
+  }
+}
