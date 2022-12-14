@@ -12,43 +12,21 @@ import V9 from '../components/V9'
 import '../styles/N3.css'
 import video from '../images/cherry.mp4';
 
-
 export default function N3() {
-  // const [id, setId] = useState(null)
-  // const [viewData, setViewData] = useState([])
+
+  const defaultDescriptions = {
+    v1: 'Viivagraafi Hadcrut lämpötilatiedoista',
+    v3: 'Viivagraafi Havaijin Mauna Loalla tehdyt ilmakehän hiilidioksidipitoisuuksista. Aikajakso ~65 vuotta.',
+    v5: 'Viivagraafi ilmakehän hiilidioksidipitoisuuksista perustuen Neuvostoliiton etelämantereen Vostok asemalla tehtyihin jääkairauksiin. Aikajakso ~400000 vuotta.',
+    v6: 'Viivagraafi ilmakehän hiilidioksidipitoisuuksista perustuen yhdistelmätutkimukseen etelmäntereen jääkairauksista. Aikajakso ~800000 vuotta.',
+    v7: 'Moniakselinen viivagraafi lämpötilan ja hiilidioksidipitoisuuksien muutoksista 2 miljoonan vuoden aikana.',
+    v8: 'Pinottu viivagraafi ajan suhteen maakohtaisista co2 päästöistä.',
+    v9: 'Piirakkakaavio hiilidioksidipäästöistä toimialoittain.'
+  }
+
   const [isLoaded, setLoaded] = useState(false)
   const [isEmptyData, setEmptyData] = useState(false)
-
-  const [stackedSelected, setStackedSelected] = useState(true)
-  const [description, setDescription] = useState(null)
-  const [name, setName] = useState(null)
-
-  const [v1Desc, setV1Desc] = useState(null)
-  const [v3Desc, setV3Desc] = useState(null)
-  // const [v4Desc, setV4Desc] = useState(null)
-  const [v5Desc, setV5Desc] = useState(null)
-  const [v6Desc, setV6Desc] = useState(null)
-  const [v7Desc, setV7Desc] = useState(null)
-  const [v8Desc, setV8Desc] = useState(null)
-  const [v9Desc, setV9Desc] = useState(null)
-
-  const [v1Selected, setV1Selected] = useState(false)
-  const [v3Selected, setV3Selected] = useState(false)
-  // const [v4Selected, setV4Selected] = useState(false)
-  const [v5Selected, setV5Selected] = useState(false)
-  const [v6Selected, setV6Selected] = useState(false)
-  const [v7Selected, setV7Selected] = useState(false)
-  const [v8Selected, setV8Selected] = useState(false)
-  const [v9Selected, setV9Selected] = useState(false)
-
-  const [v1DescDefault] = useState('Viivagraafi Hadcrut lämpötilatiedoista')
-  const [v3DescDefault] = useState('Viivagraafi Havaijin Mauna Loalla tehdyt ilmakehän hiilidioksidipitoisuuksista. Aikajakso ~65 vuotta.')
-  // const [v4DescDefault] = useState('Ilmakehän hiilidioksidipitoisuudet perustuen etelämantereen jääkairauksiin. Aikajakso ~1000 vuotta')
-  const [v5DescDefault] = useState('Viivagraafi ilmakehän hiilidioksidipitoisuuksista perustuen Neuvostoliiton etelämantereen Vostok asemalla tehtyihin jääkairauksiin. Aikajakso ~400000 vuotta.')
-  const [v6DescDefault] = useState('Viivagraafi ilmakehän hiilidioksidipitoisuuksista perustuen yhdistelmätutkimukseen etelmäntereen jääkairauksista. Aikajakso ~800000 vuotta.')
-  const [v7DescDefault] = useState('Moniakselinen viivagraafi lämpötilan ja hiilidioksidipitoisuuksien muutoksista 2 miljoonan vuoden aikana.')
-  const [v8DescDefault] = useState('Pinottu viivagraafi ajan suhteen maakohtaisista co2 päästöistä.')
-  const [v9DescDefault] = useState('Piirakkakaavio hiilidioksidipäästöistä toimialoittain.')
+  const [viewData, setViewData] = useState({});
 
   const params = useParams();
 
@@ -60,39 +38,12 @@ export default function N3() {
   const getData = async () => {
     const {data} = await axios.get(`http://localhost:8080/view/${params.id}`);
     if (data.length === 0) {
-      setEmptyData(true)
+      setEmptyData(true);
     } else {
-      setValues(data)
+      setViewData(data[0]);
+      setLoaded(true);
     }
   };
-
-  function setValues(view) {
-    const viewObject = view[0]
-
-    setStackedSelected(viewObject.stacked)
-    setDescription(viewObject.description)
-    setName(viewObject.name)
-
-    setV1Selected(viewObject.v1)
-    setV3Selected(viewObject.v3)
-    // setV4Selected(viewObject.v4)
-    setV5Selected(viewObject.v5)
-    setV6Selected(viewObject.v6)
-    setV7Selected(viewObject.v7)
-    setV8Selected(viewObject.v8)
-    setV9Selected(viewObject.v9)
-
-    setV1Desc(viewObject.v1description)
-    setV3Desc(viewObject.v3description)
-    // setV4Desc(viewObject.v4description)
-    setV5Desc(viewObject.v5description)
-    setV6Desc(viewObject.v6description)
-    setV7Desc(viewObject.v7description)
-    setV8Desc(viewObject.v8description)
-    setV9Desc(viewObject.v9description)
-
-    setLoaded(true)
-  }
 
   if (isEmptyData) {
     return (
@@ -112,58 +63,86 @@ export default function N3() {
           <source src={video} type="video/mp4"></source>
         </video>
         {!isLoaded && <LinearProgress color="secondary" sx={{height: 15}}/>}
-        <h1 id="n3-title">{name}</h1>
+        <h1 id="n3-title">{viewData.name}</h1>
         {isLoaded &&
           <Grid container spacing={6} sx={{mb: 6}}
-                direction={{xs: 'column', sm: 'column', md: 'column', lg: stackedSelected ? "column" : "row"}}
+                direction={{xs: 'column', sm: 'column', md: 'column', lg: viewData.stacked ? "column" : "row"}}
                 alignItems="center" justifyContent="center">
             <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v1Selected}>
+                  hidden={!viewData.v1}>
               <Card raised={true} sx={{p: 3}}>
                 <V1/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v1Desc ?? v1DescDefault}</Typography>
+                <Typography sx={{
+                  mt: 2,
+                  minHeight: 50,
+                  wordWrap: 'break-word'
+                }}>{viewData.v1description ?? defaultDescriptions.v1}</Typography>
               </Card>
             </Grid>
             <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v3Selected}>
+                  hidden={!viewData.v3}>
               <Card raised={true} sx={{p: 3}}>
                 <V3/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v3Desc ?? v3DescDefault}</Typography>
+                <Typography sx={{
+                  mt: 2,
+                  minHeight: 50,
+                  wordWrap: 'break-word'
+                }}>{viewData.v3description ?? defaultDescriptions.v3}</Typography>
               </Card>
             </Grid>
             <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v5Selected}>
+                  hidden={!viewData.v5}>
               <Card raised={true} sx={{p: 3}}>
                 <V5/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v5Desc ?? v5DescDefault}</Typography>
+                <Typography sx={{
+                  mt: 2,
+                  minHeight: 50,
+                  wordWrap: 'break-word'
+                }}>{viewData.v5description ?? defaultDescriptions.v5}</Typography>
               </Card>
             </Grid>
             <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v6Selected}>
+                  hidden={!viewData.v6}>
               <Card raised={true} sx={{p: 3}}>
                 <V6/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v6Desc ?? v6DescDefault}</Typography>
+                <Typography sx={{
+                  mt: 2,
+                  minHeight: 50,
+                  wordWrap: 'break-word'
+                }}>{viewData.v6description ?? defaultDescriptions.v6}</Typography>
               </Card>
             </Grid>
             <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v7Selected}>
+                  hidden={!viewData.v7}>
               <Card raised={true} sx={{p: 3}}>
                 <V7/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v7Desc ?? v7DescDefault}</Typography>
+                <Typography sx={{
+                  mt: 2,
+                  minHeight: 50,
+                  wordWrap: 'break-word'
+                }}>{viewData.v7description ?? defaultDescriptions.v7}</Typography>
               </Card>
             </Grid>
             <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v8Selected}>
+                  hidden={!viewData.v8}>
               <Card raised={true} sx={{p: 3}}>
                 <V8/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v8Desc ?? v8DescDefault}</Typography>
+                <Typography sx={{
+                  mt: 2,
+                  minHeight: 50,
+                  wordWrap: 'break-word'
+                }}>{viewData.v8description ?? defaultDescriptions.v8}</Typography>
               </Card>
             </Grid>
             <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v9Selected}>
+                  hidden={!viewData.v9}>
               <Card raised={true} sx={{p: 3}}>
                 <V9/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v9Desc ?? v9DescDefault}</Typography>
+                <Typography sx={{
+                  mt: 2,
+                  minHeight: 50,
+                  wordWrap: 'break-word'
+                }}>{viewData.v9description ?? defaultDescriptions.v9}</Typography>
               </Card>
             </Grid>
           </Grid>
