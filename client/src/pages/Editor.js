@@ -41,7 +41,7 @@ export default function Editor() {
     setLoaded(true);
   }, []);
 
-  const base = "http://dashboard.render.com/userview/"
+  const base = "http://climatechangecharts.onrender.com/userview/"
 
   function copyToClipboard() {
     const copyText = document.getElementById("view-url");

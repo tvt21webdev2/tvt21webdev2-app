@@ -30,6 +30,8 @@ export default function N3() {
 
   const params = useParams();
 
+  console.log(viewData.stacked);
+
   useEffect(() => {
     setLoaded(false);
     getData()
