@@ -108,70 +108,68 @@ export default function N3() {
       </Grid>
     )
   } else {
-    if (!isLoaded) {
-      return <LinearProgress color="secondary" sx={{height: 15}}/>
-    } else {
-      return (
-        <>
-          <video autoPlay loop muted playsInline className="back-video">
-            <source src={video} type="video/mp4"></source>
-          </video>
-          <h1 id="n3-title">{name}</h1>
-          <Grid container spacing={6} sx={{mb: 6}}
-                direction={{xs: 'column', sm: 'column', md: 'column', lg: stackedSelected ? "column" : "row"}}
-                alignItems="center" justifyContent="center">
-            <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v1Selected}>
-              <Card raised={true} sx={{p: 3}}>
-                <V1/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v1Desc ?? v1DescDefault}</Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v3Selected}>
-              <Card raised={true} sx={{p: 3}}>
-                <V3/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v3Desc ?? v3DescDefault}</Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v5Selected}>
-              <Card raised={true} sx={{p: 3}}>
-                <V5/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v5Desc ?? v5DescDefault}</Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v6Selected}>
-              <Card raised={true} sx={{p: 3}}>
-                <V6/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v6Desc ?? v6DescDefault}</Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v7Selected}>
-              <Card raised={true} sx={{p: 3}}>
-                <V7/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v7Desc ?? v7DescDefault}</Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v8Selected}>
-              <Card raised={true} sx={{p: 3}}>
-                <V8/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v8Desc ?? v8DescDefault}</Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
-                  hidden={!v9Selected}>
-              <Card raised={true} sx={{p: 3}}>
-                <V9/>
-                <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v9Desc ?? v9DescDefault}</Typography>
-              </Card>
-            </Grid>
+    return (
+      <>
+        <video autoPlay loop muted playsInline className="back-video">
+          <source src={video} type="video/mp4"></source>
+        </video>
+        {!isLoaded && <LinearProgress color="secondary" sx={{height: 15}}/>}
+        <h1 id="n3-title">{name}</h1>
+        <Grid container spacing={6} sx={{mb: 6}}
+              direction={{xs: 'column', sm: 'column', md: 'column', lg: stackedSelected ? "column" : "row"}}
+              alignItems="center" justifyContent="center">
+          <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
+                hidden={!v1Selected}>
+            <Card raised={true} sx={{p: 3}}>
+              <V1/>
+              <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v1Desc ?? v1DescDefault}</Typography>
+            </Card>
           </Grid>
-        </>
-      )
-    }
+          <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
+                hidden={!v3Selected}>
+            <Card raised={true} sx={{p: 3}}>
+              <V3/>
+              <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v3Desc ?? v3DescDefault}</Typography>
+            </Card>
+          </Grid>
+          <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
+                hidden={!v5Selected}>
+            <Card raised={true} sx={{p: 3}}>
+              <V5/>
+              <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v5Desc ?? v5DescDefault}</Typography>
+            </Card>
+          </Grid>
+          <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
+                hidden={!v6Selected}>
+            <Card raised={true} sx={{p: 3}}>
+              <V6/>
+              <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v6Desc ?? v6DescDefault}</Typography>
+            </Card>
+          </Grid>
+          <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
+                hidden={!v7Selected}>
+            <Card raised={true} sx={{p: 3}}>
+              <V7/>
+              <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v7Desc ?? v7DescDefault}</Typography>
+            </Card>
+          </Grid>
+          <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
+                hidden={!v8Selected}>
+            <Card raised={true} sx={{p: 3}}>
+              <V8/>
+              <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v8Desc ?? v8DescDefault}</Typography>
+            </Card>
+          </Grid>
+          <Grid item xs={5} sx={{width: {xs: 400, sm: 600, md: 800, lg: 1175, xl: 1500}, minHeight: 500}}
+                hidden={!v9Selected}>
+            <Card raised={true} sx={{p: 3}}>
+              <V9/>
+              <Typography sx={{mt: 2, minHeight: 50, wordWrap: 'break-word'}}>{v9Desc ?? v9DescDefault}</Typography>
+            </Card>
+          </Grid>
+        </Grid>
+      </>
+    )
   }
+
 }

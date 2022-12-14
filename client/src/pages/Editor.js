@@ -6,13 +6,13 @@ import {
   CardMedia,
   FormControlLabel,
   Grid,
-  IconButton,
+  IconButton, LinearProgress,
   Switch,
   TextareaAutosize,
   TextField
 } from '@mui/material'
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from "react-router-dom";
 import axios from 'axios'
 import '../styles/Editor.css'
@@ -35,6 +35,11 @@ export default function Editor() {
   const [description, setDescription] = useState(null)
   const [url, setUrl] = useState("")
   const [posted, setPosted] = useState(false)
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
 
   const base = "http://localhost:3000/userview/"
 
@@ -95,6 +100,7 @@ export default function Editor() {
 
   return (
     <Grid>
+      {!loaded && <LinearProgress color="secondary" sx={{height: 15}}/>}
       <Grid container item id="controls" sx={{mb: 6}} xs={12} direction={{xs: "column", md: "row"}} alignItems="center"
             justifyContent="center">
         <TextField
