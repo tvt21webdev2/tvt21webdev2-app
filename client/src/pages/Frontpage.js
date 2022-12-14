@@ -10,10 +10,9 @@ export default function Frontpage() {
       <video autoPlay loop muted playsInline className="back-video">
         <source src={video} type="video/mp4"></source>
       </video>
-      {/* <div className="background"></div> */}
       <div className="content-frontpage">
         <h1>Climate change charts</h1>
-          <Timeline />
+        <Timeline/>
       </div>
     </div>
   )

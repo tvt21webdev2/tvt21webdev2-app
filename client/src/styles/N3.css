@@ -1,0 +1,43 @@
+
+#n3-title {
+  font-size: 120px;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.5s;
+  text-align: center;
+}
+
+#n3-title:hover {
+  -webkit-text-stroke: 2px #fff;
+  color: transparent;
+}
+
+@media screen and (max-width: 600px) {
+  #n3-title {
+    font-size: 46px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #n3-title {
+    font-size: 48px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  #n3-title {
+    font-size: 72px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  #n3-title {
+    font-size: 106px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  #n3-title {
+    font-size: 120px;
+  }
+}
