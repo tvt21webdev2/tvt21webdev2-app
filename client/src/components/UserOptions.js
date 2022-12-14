@@ -3,31 +3,41 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import {Dialog, DialogActions, DialogTitle} from "@mui/material";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {LoadingContext} from "../context.js";
 
 export default function UserOptions({setUserOptionsOpen, setCurrentUser, setSnackbarOpen}) {
 
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
+  const loading = useContext(LoadingContext);
+
   async function handleLogOut() {
+    loading(true);
+
     try {
       await axios.get("http://localhost:8080/logout", {withCredentials: true});
       localStorage.removeItem("user");
       setCurrentUser(null);
       setUserOptionsOpen(false);
       setSnackbarOpen("logout");
+      loading(false);
     } catch (err) {
       console.log(err);
+      loading(false);
     }
   }
-
+  
   async function handleDeleteAccount() {
+    loading(true);
     try {
       await axios.delete("http://localhost:8080/user/delete", {withCredentials: true});
       await handleLogOut();
       setSnackbarOpen("deleteuser");
+      loading(false);
     } catch (err) {
       console.log(err);
+      loading(false);
     }
   }
 

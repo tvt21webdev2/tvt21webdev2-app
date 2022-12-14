@@ -36,6 +36,8 @@ class Util {
         return "Käyttäjän poisto onnistui!"
       case "deleteview":
         return "Näkymän poisto onnistui!"
+      case "postview":
+        return "Näkymän luonti onnistui!"
     }
   }
 }

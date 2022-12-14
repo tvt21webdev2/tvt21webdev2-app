@@ -3,9 +3,10 @@ import {TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {forwardRef, useEffect, useRef, useState} from "react";
+import {forwardRef, useContext, useEffect, useRef, useState} from "react";
 import axios from "axios";
 import Util from "../util";
+import {LoadingContext} from "../context.js";
 
 const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
 
@@ -15,6 +16,8 @@ const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const inputRef = useRef();
+
+  const loading = useContext(LoadingContext);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -27,8 +30,10 @@ const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
       await axios.post(URL, signUp);
       setSnackbarOpen("signup");
       setSignUpOpen(false);
+      loading(false);
     } catch (err) {
       setErrorMessage(err.response.data);
+      loading(false);
     }
   }
 
@@ -90,6 +95,7 @@ const SignUp = forwardRef(({setSnackbarOpen, setSignUpOpen}, ref) => {
         type="submit"
         variant="contained"
         sx={{mt: 2, mb: 2}}
+        onClick={() => loading(true)}
       >
         Luo tili
       </Button>
