@@ -8,8 +8,8 @@ Tämän projektin ovat toteuttaneet Oulun ammattikorkeakoulun tietotekniikan tut
 
 Sovellukseen (kuva 1) on mahdollista luoda käyttäjätunnus. Rekisteröityneellä ja kirjautuneella käyttäjällä on sovelluksen käyttöliittymän sisältämän editorin avulla mahdollisuus luoda itse määrittelemiään, vapaavalintaisia näkymäkokonaisuuksia edellä mainituista kuvaajakomponenteista. Käyttäjän luomat ja määrittelemät näkymät ovat edelleen jaettavissa yksilöllisellä URL-osoitteella. 
 
-- Sivun osoite: [Google Cloud linkki](#)
-- Sovelluksen esittelyvideo: [Youtube linkki](#)
+- Sivun osoite: [ClimateChangeCharts](https://climatechangecharts.onrender.com/)
+- Sovelluksen esittelyvideo: [ClimateChangeCharts esittelyvideo](https://youtu.be/saSLQG67pmQ) 
 
 ![Sovelluksen etusivu](/client/src/images/frontpage.jpg "Climate Change Charts etusivu")
 KUVA 1. Näkymä sovelluksen aloitussivusta
@@ -36,7 +36,18 @@ Kloonaa git-repositorio: `git clone https://github.com/tvt21webdev2/tvt21webdev2
 
 ### Backendin käynnistys
 
-Tietokantatallenne löytyy hakemistosta `api/dumps/cccdb13.sql`. Käynnistä tietokantapalvelin haluamallasi tavalla. Määritä Java-projektin application.properties -tiedostoon tarvittavat tiedot tietokantayhteyden muodostamiseksi. Käynnistä Java-palvelin haluamallasi tavalla. 
+Tietokantatallenne löytyy hakemistosta `api/dumps/cccdb14.sql`. Käynnistä tietokantapalvelin haluamallasi tavalla. Määritä Java-projektin application.properties -tiedostoon tarvittavat tiedot tietokantayhteyden muodostamiseksi. Käynnistä Java-palvelin haluamallasi tavalla.
+
+application.properties:
+
+- spring.datasource.url = jdbc:mysql://localhost:3306/cccdb
+- spring.datasource.username =
+- spring.datasource.password =
+- spring.datasource.driver-class-name = com.mysql.cj.jdbc.Driver
+- spring.jpa.show-sql = true
+- spring.jpa.properties.hibernate.format_sql = true
+- spring.jpa.open-in-view = false
+- jwt.secret = 
 
 Tietokantapalvelin toimii oletuksena osoitteessa https://localhost:3006. 
 
